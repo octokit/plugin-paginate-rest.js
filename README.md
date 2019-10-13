@@ -52,6 +52,68 @@ const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
 });
 ```
 
+## `octokit.paginate(route, parameters, mapFunction)` or `octokit.paginate(options, mapFunction)`
+
+The `paginateRest` plugin adds a new `octokit.paginate()` method which accepts the same parameters as [`octokit.request`](https://github.com/octokit/request.js#request). Only "List ..." endpoints such as [List issues for a repository](https://developer.github.com/v3/issues/#list-issues-for-a-repository) are supporting pagination. Their [response includes a Link header](https://developer.github.com/v3/issues/#response-1). For other endpoints, `octokit.paginate()` behaves the same as `octokit.request()`.
+
+The `per_page` parameter is usually defaulting to `30`, and can be set to up to `100`, which helps retrieving a big amount of data without hitting the rate limits too soon.
+
+An optional `mapFunction` can be passed to map each page response to a new value, usually an array with only the data you need. This can help to reduce memory usage, as only the relevant data has to be kept in memory until the pagination is complete.
+
+```js
+const issueTitles = await octokit.paginate(
+  "GET /repos/:owner/:repo/issues",
+  {
+    owner: "octocat",
+    repo: "hello-world",
+    since: "2010-10-01",
+    per_page: 100
+  },
+  response => response.data.map(issue => issue.title)
+);
+```
+
+The `mapFunction` gets a 2nd argument `done` which can be called to end the pagination early.
+
+```js
+const issues = await octokit.paginate(
+  "GET /repos/:owner/:repo/issues",
+  {
+    owner: "octocat",
+    repo: "hello-world",
+    since: "2010-10-01",
+    per_page: 100
+  },
+  (response, done) => {
+    if (response.data.find(issues => issue.title.includes("something"))) {
+      done();
+    }
+    return response.data;
+  }
+);
+```
+
+## `octokit.paginate.iterator(route, parameters)` or `octokit.paginate.iterator(options)`
+
+If your target runtime environments supports async iterators (such as most modern browsers and Node 10+), you can iterate through each response
+
+```js
+const parameters = {
+    owner: "octocat",
+    repo: "hello-world",
+    since: "2010-10-01",
+    per_page: 100
+  }
+for await (const response of octokit.paginate.iterator("GET /repos/:owner/:repo/issues", parameters)) {
+  // do whatever you want with each response, break out of the loop, etc.
+  console.log(response.data.title)
+}
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## License
 
 [MIT](LICENSE)
