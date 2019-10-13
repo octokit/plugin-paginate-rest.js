@@ -47,7 +47,8 @@ const octokit = new MyOctokit({ auth: "secret123" });
 const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
   owner: "octocat",
   repo: "hello-world",
-  since: "2010-10-01"
+  since: "2010-10-01",
+  per_page: 100
 });
 ```
 
