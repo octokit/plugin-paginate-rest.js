@@ -110,6 +110,22 @@ for await (const response of octokit.paginate.iterator("GET /repos/:owner/:repo/
 }
 ```
 
+## How it works
+
+`octokit.paginate()` wraps `octokit.request()`. As long as a `rel="next"` link value is present in the response's `Link` header, it sends another request for that URL, and so on.
+
+Most of GitHub's paginating REST API endpoints return an array, but there are a few exceptions which return an object with a key that includes the items array.
+
+- [Search repositories](https://developer.github.com/v3/search/#example) (key `items`)
+- [List check runs for a specific ref](https://developer.github.com/v3/checks/runs/#response-3) (key: `check_runs`)
+- [List check suites for a specific ref](https://developer.github.com/v3/checks/suites/#response-1) (key: `check_suites`)
+- [List repositories](https://developer.github.com/v3/apps/installations/#list-repositories) for an installation (key: `repositories`)
+- [List installations for a user](https://developer.github.com/v3/apps/installations/#response-1) (key `installations`)
+
+`octokit.paginate()` is working around these inconsistencies so you don't have to worry about it.
+
+If a response is lacking the `Link` header, `octokit.paginate()` still resolves with an array, even if the response returns a single object.
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
