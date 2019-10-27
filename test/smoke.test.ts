@@ -12,9 +12,8 @@ describe("Smoke test", () => {
   });
 
   it("Loads plugin", () => {
-    expect(() => {
-      const TestOctokit = Octokit.plugin(paginateRest);
-      new TestOctokit();
-    }).not.toThrow();
+    const TestOctokit = Octokit.plugin(paginateRest);
+    const testOctokit = new TestOctokit();
+    expect(testOctokit).toHaveProperty("paginate");
   });
 });
