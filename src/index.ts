@@ -1,13 +1,22 @@
 import { VERSION } from "./version";
 
-type Octokit = any;
-type Options = {
-  [option: string]: any;
-};
+import { paginate } from "./paginate";
+import { iterator } from "./iterator";
+import { PaginateInterface } from "./types";
+
+import { Octokit } from "@octokit/core";
 
 /**
  * @param octokit Octokit instance
  * @param options Options passed to Octokit constructor
  */
-export function paginateRest(octokit: Octokit, options: Options) {}
+export function paginateRest(octokit: Octokit) {
+  return {
+    paginate: Object.assign(paginate.bind(null, octokit), {
+      iterator: iterator.bind(null, octokit)
+    }) as PaginateInterface
+  };
+}
 paginateRest.VERSION = VERSION;
+
+export type PaginateInterface = PaginateInterface;
