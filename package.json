@@ -1,5 +1,8 @@
 {
   "name": "@octokit/plugin-paginate-rest",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.0-development",
   "description": "Octokit plugin to paginate REST API endpoint responses",
   "scripts": {
@@ -83,8 +86,5 @@
         }
       ]
     ]
-  },
-  "publishConfig": {
-    "access": "public"
   }
 }
