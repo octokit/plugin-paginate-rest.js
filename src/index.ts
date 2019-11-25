@@ -3,6 +3,7 @@ import { VERSION } from "./version";
 import { paginate } from "./paginate";
 import { iterator } from "./iterator";
 import { PaginateInterface } from "./types";
+export { PaginateInterface } from "./types";
 
 import { Octokit } from "@octokit/core";
 
@@ -18,5 +19,3 @@ export function paginateRest(octokit: Octokit) {
   };
 }
 paginateRest.VERSION = VERSION;
-
-export type PaginateInterface = PaginateInterface;
