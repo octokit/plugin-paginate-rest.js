@@ -7,7 +7,7 @@ describe("Smoke test", () => {
     expect(paginateRest).toBeInstanceOf(Function);
   });
 
-  it("${answers.exportName}.VERSION is set", () => {
+  it("paginateRest.VERSION is set", () => {
     expect(paginateRest.VERSION).toEqual("0.0.0-development");
   });
 
