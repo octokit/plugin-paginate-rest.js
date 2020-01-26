@@ -56,8 +56,8 @@ export function normalizePaginatedListResponse(
   delete response.data.total_count;
 
   const namespaceKey = Object.keys(response.data)[0];
-
-  response.data = response.data[namespaceKey];
+  const data = response.data[namespaceKey];
+  response.data = data;
 
   if (typeof incompleteResults !== "undefined") {
     response.data.incomplete_results = incompleteResults;
@@ -68,4 +68,13 @@ export function normalizePaginatedListResponse(
   }
 
   response.data.total_count = totalCount;
+
+  Object.defineProperty(response.data, namespaceKey, {
+    get() {
+      octokit.log.warn(
+        `[@octokit/paginate-rest] "response.data.${namespaceKey}" is deprecated for "GET ${path}". Get the results directly from "response.data"`
+      );
+      return Array.from(data);
+    }
+  });
 }
