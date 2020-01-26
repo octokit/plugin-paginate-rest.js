@@ -453,6 +453,49 @@ describe("pagination", () => {
       });
   });
 
+  it(".paginate() sets response[namespacekey] for map function when results are namespaced", () => {
+    const result = {
+      total_count: 1,
+      incomplete_results: false,
+      items: [
+        {
+          id: "123"
+        }
+      ]
+    };
+
+    const query = encodeURIComponent(
+      "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26"
+    );
+    const mock = fetchMock
+      .sandbox()
+      .get(`https://api.github.com/search/issues?q=${query}&per_page=1`, {
+        body: result
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock
+      }
+    });
+
+    return octokit.paginate<typeof result, undefined>(
+      "GET /search/issues",
+      {
+        q: "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26",
+        per_page: 1,
+        headers: {
+          "accept-encoding": ""
+        }
+      },
+      response => {
+        // @ts-ignore
+        expect(response.data.items).toStrictEqual([{ id: "123" }]);
+        return [];
+      }
+    );
+  });
+
   it("does not paginate non-paginated response with total_count property", () => {
     const result = {
       state: "success",
