@@ -40,9 +40,6 @@ export function normalizePaginatedListResponse(
     !REGEX_IS_INSTALLATION_REPOSITORIES_PATH.test(path) &&
     !REGEX_IS_USER_INSTALLATIONS_PATH.test(path)
   ) {
-    if (!Array.isArray(response.data)) {
-      response.data = [response.data];
-    }
     return;
   }
 
