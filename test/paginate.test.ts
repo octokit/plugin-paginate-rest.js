@@ -215,7 +215,7 @@ describe("pagination", () => {
       [Symbol.asyncIterator]();
 
     return iterator.next().then(result => {
-      expect(result.value.data).toStrictEqual([ORG1]);
+      expect(result.value.data).toStrictEqual(ORG1);
     });
   });
 
@@ -237,7 +237,7 @@ describe("pagination", () => {
       [Symbol.asyncIterator]();
 
     return iterator.next().then(result => {
-      expect(result.value.data).toStrictEqual([ORG1]);
+      expect(result.value.data).toStrictEqual(ORG1);
     });
   });
 
