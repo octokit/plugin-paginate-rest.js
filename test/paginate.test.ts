@@ -420,6 +420,25 @@ describe("pagination", () => {
       });
   });
 
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/artifacts)"
+  );
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/secrets)"
+  );
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows)"
+  );
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/jobs)"
+  );
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows/:workflow_id/runs)"
+  );
+  it.todo(
+    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs)"
+  );
+
   it(".paginate() with results namespace (GET /installation/repositories, single page response)", () => {
     const result = {
       total_count: 2,
