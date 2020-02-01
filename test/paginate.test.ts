@@ -485,7 +485,7 @@ describe("pagination", () => {
       });
   });
 
-  it.only(".paginate() with results namespace (GET /repos/:owner/:repo/actions/secrets)", () => {
+  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/secrets)", () => {
     const result1 = {
       total_count: 2,
       secrets: [
@@ -546,9 +546,69 @@ describe("pagination", () => {
       });
   });
 
-  it.todo(
-    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows)"
-  );
+  it.only(".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows)", () => {
+    const result1 = {
+      total_count: 2,
+      workflows: [
+        {
+          id: "123"
+        }
+      ]
+    };
+    const result2 = {
+      total_count: 2,
+      repository_selection: "all",
+      workflows: [
+        {
+          id: "456"
+        }
+      ]
+    };
+
+    const mock = fetchMock
+      .sandbox()
+      .get(
+        `https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1`,
+        {
+          body: result1,
+          headers: {
+            link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1&page=2>; rel="next"`,
+            "X-GitHub-Media-Type": "github.v3; format=json"
+          }
+        }
+      )
+      .get(
+        `https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1&page=2`,
+        {
+          body: result2,
+          headers: {
+            link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="first"`,
+            "X-GitHub-Media-Type": "github.v3; format=json"
+          }
+        }
+      );
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock
+      }
+    });
+
+    return octokit
+      .paginate({
+        method: "GET",
+        url: "/repos/:owner/:repo/actions/workflows",
+        owner: "octocat",
+        repo: "hello-world",
+        per_page: 1
+      })
+      .then(results => {
+        expect(results).toStrictEqual([
+          ...result1.workflows,
+          ...result2.workflows
+        ]);
+      });
+  });
   it.todo(
     ".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/jobs)"
   );
