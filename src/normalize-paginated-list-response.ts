@@ -31,6 +31,7 @@ const REGEX_IS_ACTIONS_ARTIFACTS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs\/
 const REGEX_IS_ACTIONS_SECRETS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/secrets/;
 const REGEX_IS_ACTIONS_WORKFLOWS_OR_RUNS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/workflows/;
 const REGEX_IS_ACTIONS_JOBS_FOR_WORKFLOW_RUN_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs\/[^/]+\/jobs/;
+const REGEX_IS_ACTIONS_WORKFLOW_RUNS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs/;
 
 export function normalizePaginatedListResponse(
   octokit: Octokit,
@@ -46,7 +47,8 @@ export function normalizePaginatedListResponse(
     !REGEX_IS_ACTIONS_ARTIFACTS_PATH.test(path) &&
     !REGEX_IS_ACTIONS_SECRETS_PATH.test(path) &&
     !REGEX_IS_ACTIONS_WORKFLOWS_OR_RUNS_PATH.test(path) &&
-    !REGEX_IS_ACTIONS_JOBS_FOR_WORKFLOW_RUN_PATH.test(path)
+    !REGEX_IS_ACTIONS_JOBS_FOR_WORKFLOW_RUN_PATH.test(path) &&
+    !REGEX_IS_ACTIONS_WORKFLOW_RUNS_PATH.test(path)
   ) {
     return;
   }
