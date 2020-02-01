@@ -28,6 +28,7 @@ const REGEX_IS_CHECKS_PATH = /^\/repos\/[^/]+\/[^/]+\/commits\/[^/]+\/(check-run
 const REGEX_IS_INSTALLATION_REPOSITORIES_PATH = /^\/installation\/repositories/;
 const REGEX_IS_USER_INSTALLATIONS_PATH = /^\/user\/installations/;
 const REGEX_IS_ACTIONS_ARTIFACTS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs\/[^/]+\/artifacts/;
+const REGEX_IS_ACTIONS_SECRETS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs\/[^/]+\/artifacts/;
 
 export function normalizePaginatedListResponse(
   octokit: Octokit,
@@ -40,7 +41,8 @@ export function normalizePaginatedListResponse(
     !REGEX_IS_CHECKS_PATH.test(path) &&
     !REGEX_IS_INSTALLATION_REPOSITORIES_PATH.test(path) &&
     !REGEX_IS_USER_INSTALLATIONS_PATH.test(path) &&
-    !REGEX_IS_ACTIONS_ARTIFACTS_PATH.test(path)
+    !REGEX_IS_ACTIONS_ARTIFACTS_PATH.test(path) &&
+    !REGEX_IS_ACTIONS_SECRETS_PATH.test(path)
   ) {
     return;
   }
