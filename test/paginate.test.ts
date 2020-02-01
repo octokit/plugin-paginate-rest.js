@@ -420,9 +420,70 @@ describe("pagination", () => {
       });
   });
 
-  it.todo(
-    ".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/artifacts)"
-  );
+  it.only(".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/artifacts)", () => {
+    const result1 = {
+      total_count: 2,
+      artifacts: [
+        {
+          id: "123"
+        }
+      ]
+    };
+    const result2 = {
+      total_count: 2,
+      repository_selection: "all",
+      artifacts: [
+        {
+          id: "456"
+        }
+      ]
+    };
+
+    const mock = fetchMock
+      .sandbox()
+      .get(
+        `https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1`,
+        {
+          body: result1,
+          headers: {
+            link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1&page=2>; rel="next"`,
+            "X-GitHub-Media-Type": "github.v3; format=json"
+          }
+        }
+      )
+      .get(
+        `https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1&page=2`,
+        {
+          body: result2,
+          headers: {
+            link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="first"`,
+            "X-GitHub-Media-Type": "github.v3; format=json"
+          }
+        }
+      );
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock
+      }
+    });
+
+    return octokit
+      .paginate({
+        method: "GET",
+        url: "/repos/:owner/:repo/actions/runs/:run_id/artifacts",
+        owner: "octocat",
+        repo: "hello-world",
+        run_id: 123,
+        per_page: 1
+      })
+      .then(results => {
+        expect(results).toStrictEqual([
+          ...result1.artifacts,
+          ...result2.artifacts
+        ]);
+      });
+  });
   it.todo(
     ".paginate() with results namespace (GET /repos/:owner/:repo/actions/secrets)"
   );
