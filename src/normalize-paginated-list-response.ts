@@ -65,13 +65,4 @@ export function normalizePaginatedListResponse(
   }
 
   response.data.total_count = totalCount;
-
-  Object.defineProperty(response.data, namespaceKey, {
-    get() {
-      octokit.log.warn(
-        `[@octokit/paginate-rest] "response.data.${namespaceKey}" is deprecated for "GET ${path}". Get the results directly from "response.data"`
-      );
-      return Array.from(data);
-    }
-  });
 }
