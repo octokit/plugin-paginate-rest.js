@@ -2,7 +2,10 @@ name: Release
 on:
   push:
     branches:
-      - v1.x
+      - master
+      - next
+      - beta
+      - "*.x"
 
 jobs:
   release:
