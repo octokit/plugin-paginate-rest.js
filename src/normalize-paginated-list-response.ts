@@ -23,13 +23,15 @@ import { Octokit } from "@octokit/core";
 
 import { OctokitResponse } from "./types";
 
-const REGEX_IS_SEARCH_PATH = /^\/search\//;
-const REGEX_IS_CHECKS_PATH = /^\/repos\/[^/]+\/[^/]+\/commits\/[^/]+\/(check-runs|check-suites)([^/]|$)/;
-const REGEX_IS_INSTALLATION_REPOSITORIES_PATH = /^\/installation\/repositories([^/]|$)/;
-const REGEX_IS_USER_INSTALLATIONS_PATH = /^\/user\/installations([^/]|$)/;
-const REGEX_IS_ACTIONS_SECRETS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/secrets([^/]|$)/;
-const REGEX_IS_ACTIONS_WORKFLOWS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/workflows(\/[^/]+\/runs)?([^/]|$)/;
-const REGEX_IS_ACTIONS_WORKFLOW_RUNS_PATH = /^\/repos\/[^/]+\/[^/]+\/actions\/runs(\/[^/]+\/(artifacts|jobs))?([^/]|$)/;
+const REGEX = [
+  /^\/search\//,
+  /^\/repos\/[^/]+\/[^/]+\/commits\/[^/]+\/(check-runs|check-suites)([^/]|$)/,
+  /^\/installation\/repositories([^/]|$)/,
+  /^\/user\/installations([^/]|$)/,
+  /^\/repos\/[^/]+\/[^/]+\/actions\/secrets([^/]|$)/,
+  /^\/repos\/[^/]+\/[^/]+\/actions\/workflows(\/[^/]+\/runs)?([^/]|$)/,
+  /^\/repos\/[^/]+\/[^/]+\/actions\/runs(\/[^/]+\/(artifacts|jobs))?([^/]|$)/
+];
 
 export function normalizePaginatedListResponse(
   octokit: Octokit,
@@ -37,17 +39,8 @@ export function normalizePaginatedListResponse(
   response: OctokitResponse<any>
 ) {
   const path = url.replace(octokit.request.endpoint.DEFAULTS.baseUrl, "");
-  if (
-    !REGEX_IS_SEARCH_PATH.test(path) &&
-    !REGEX_IS_CHECKS_PATH.test(path) &&
-    !REGEX_IS_INSTALLATION_REPOSITORIES_PATH.test(path) &&
-    !REGEX_IS_USER_INSTALLATIONS_PATH.test(path) &&
-    !REGEX_IS_ACTIONS_SECRETS_PATH.test(path) &&
-    !REGEX_IS_ACTIONS_WORKFLOWS_PATH.test(path) &&
-    !REGEX_IS_ACTIONS_WORKFLOW_RUNS_PATH.test(path)
-  ) {
-    return;
-  }
+  const responseNeedsNormalization = REGEX.find(regex => regex.test(path));
+  if (!responseNeedsNormalization) return;
 
   // keep the additional properties intact as there is currently no other way
   // to retrieve the same information.
