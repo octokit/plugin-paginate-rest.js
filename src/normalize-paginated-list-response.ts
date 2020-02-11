@@ -3,7 +3,7 @@
  *
  * They have a `total_count` key in the response (search also has `incomplete_results`,
  * /installation/repositories also has `repository_selection`), as well as a key with
- * the list of the items which name varies from endpoint to endpoint:
+ * the list of the items which name varies from endpoint to endpoint. For example:
  *
  * - https://developer.github.com/v3/search/#example (key `items`)
  * - https://developer.github.com/v3/checks/runs/#response-3 (key: `check_runs`)
@@ -24,13 +24,32 @@ import { Octokit } from "@octokit/core";
 import { OctokitResponse } from "./types";
 
 const REGEX = [
+  // all search endpoints: https://developer.github.com/v3/search/
   /^\/search\//,
+
+  // All list endpoints for check suites and check runs
+  // - https://developer.github.com/v3/checks/runs/#list-check-runs-for-a-specific-ref
+  // - https://developer.github.com/v3/checks/runs/#list-check-runs-in-a-check-suite
+  // - https://developer.github.com/v3/checks/suites/#list-check-suites-for-a-specific-ref
   /^\/repos\/[^/]+\/[^/]+\/commits\/[^/]+\/(check-runs|check-suites)([^/]|$)/,
-  /^\/installation\/repositories([^/]|$)/,
+
+  // List installation repositories
+  // - https://developer.github.com/v3/apps/installations/#list-repositories
+  // - https://developer.github.com/v3/apps/installations/#list-installations-for-a-user
+  // - https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation
+  /^\/installation\/repositories$/,
   /^\/user\/installations([^/]|$)/,
-  /^\/repos\/[^/]+\/[^/]+\/actions\/secrets([^/]|$)/,
-  /^\/repos\/[^/]+\/[^/]+\/actions\/workflows(\/[^/]+\/runs)?([^/]|$)/,
-  /^\/repos\/[^/]+\/[^/]+\/actions\/runs(\/[^/]+\/(artifacts|jobs))?([^/]|$)/
+
+  // - https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository
+  /^\/repos\/[^/]+\/[^/]+\/actions\/secrets$/,
+
+  // - https://developer.github.com/v3/actions/workflows/#list-repository-workflows
+  // - https://developer.github.com/v3/actions/workflow_runs/#list-workflow-runs
+  /^\/repos\/[^/]+\/[^/]+\/actions\/workflows(\/[^/]+\/runs)?$/,
+
+  // - https://developer.github.com/v3/actions/artifacts/#list-workflow-run-artifacts
+  // - https://developer.github.com/v3/actions/workflow_jobs/#list-jobs-for-a-workflow-run
+  /^\/repos\/[^/]+\/[^/]+\/actions\/runs(\/[^/]+\/(artifacts|jobs))?$/
 ];
 
 export function normalizePaginatedListResponse(
@@ -38,7 +57,9 @@ export function normalizePaginatedListResponse(
   url: string,
   response: OctokitResponse<any>
 ) {
-  const path = url.replace(octokit.request.endpoint.DEFAULTS.baseUrl, "");
+  const path = url
+    .replace(octokit.request.endpoint.DEFAULTS.baseUrl, "")
+    .replace(/\?.*$/, "");
   const responseNeedsNormalization = REGEX.find(regex => regex.test(path));
   if (!responseNeedsNormalization) return;
 
