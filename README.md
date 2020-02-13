@@ -99,14 +99,17 @@ If your target runtime environments supports async iterators (such as most moder
 
 ```js
 const parameters = {
-    owner: "octocat",
-    repo: "hello-world",
-    since: "2010-10-01",
-    per_page: 100
-  }
-for await (const response of octokit.paginate.iterator("GET /repos/:owner/:repo/issues", parameters)) {
+  owner: "octocat",
+  repo: "hello-world",
+  since: "2010-10-01",
+  per_page: 100
+};
+for await (const response of octokit.paginate.iterator(
+  "GET /repos/:owner/:repo/issues",
+  parameters
+)) {
   // do whatever you want with each response, break out of the loop, etc.
-  console.log(response.data.title)
+  console.log(response.data.title);
 }
 ```
 
