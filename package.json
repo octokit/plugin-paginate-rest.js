@@ -32,7 +32,7 @@
     "@types/fetch-mock": "^7.3.1",
     "@types/jest": "^25.1.0",
     "@types/node": "^13.1.0",
-    "fetch-mock": "^8.0.0",
+    "fetch-mock": "^9.0.0",
     "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "semantic-release": "^17.0.0",
