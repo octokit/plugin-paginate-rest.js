@@ -835,7 +835,11 @@ describe("pagination", () => {
     const result = {
       state: "success",
       total_count: 2,
-      statuses: [{ id: 1 }, { id: 2 }]
+      statuses: [{ id: 1 }, { id: 2 }],
+      commit_url: "https://api.github.com/...",
+      url: "https://api.github.com/...",
+      repository: {},
+      sha: "sha123"
     };
     const mock = fetchMock
       .sandbox()
