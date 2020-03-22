@@ -16,22 +16,22 @@ describe("pagination", () => {
         headers: {
           link:
             '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get("https://pagination-test.com/organizations?page=2&per_page=1", {
         body: [ORG2],
-        headers: {}
+        headers: {},
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     const organizations = await octokit.paginate("GET /organizations", {
-      per_page: 1
+      per_page: 1,
     });
     expect(organizations).toStrictEqual([ORG1, ORG2]);
 
@@ -47,11 +47,11 @@ describe("pagination", () => {
         {
           method: "GET",
           url: "/organizations",
-          per_page: 1
+          per_page: 1,
         },
-        response => response.data.map(org => org.id)
+        (response) => response.data.map((org) => org.id)
       )
-      .then(organizations => {
+      .then((organizations) => {
         expect(organizations).toStrictEqual([1, 2]);
       });
   });
@@ -64,18 +64,18 @@ describe("pagination", () => {
         headers: {
           link:
             '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get("https://pagination-test.com/organizations?page=2&per_page=1", {
         body: [ORG2],
-        headers: {}
+        headers: {},
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -84,7 +84,7 @@ describe("pagination", () => {
         { per_page: 1 },
         () => [undefined]
       )
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([undefined, undefined]);
       });
   });
@@ -97,18 +97,18 @@ describe("pagination", () => {
         headers: {
           link:
             '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get("https://pagination-test.com/organizations?page=2&per_page=1", {
         body: [ORG2],
-        headers: {}
+        headers: {},
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -117,10 +117,10 @@ describe("pagination", () => {
         { per_page: 1 },
         (response, done) => {
           done();
-          return response.data.map(org => org.id);
+          return response.data.map((org) => org.id);
         }
       )
-      .then(organizations => {
+      .then((organizations) => {
         expect(organizations).toStrictEqual([1]);
       });
   });
@@ -133,23 +133,23 @@ describe("pagination", () => {
         headers: {
           link:
             '<https://pagination-test.com/foobar?page=2&per_page=1>; rel="next"',
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get("https://pagination-test.com/foobar?page=2&per_page=1", {
         body: [ORG2],
-        headers: {}
+        headers: {},
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
       .paginate("GET /organizations", { per_page: 1 })
-      .then(organizations => {
+      .then((organizations) => {
         expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
   });
@@ -162,18 +162,18 @@ describe("pagination", () => {
         headers: {
           link:
             '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get("https://pagination-test.com/organizations?page=2&per_page=1", {
         body: [ORG2],
-        headers: {}
+        headers: {},
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     octokit.hook.wrap("request", (request, options) => {
@@ -188,55 +188,55 @@ describe("pagination", () => {
     return octokit
       .request("GET /organizations", {
         per_page: 1,
-        request: { paginate: true }
+        request: { paginate: true },
       })
-      .then(organizations => {
+      .then((organizations) => {
         expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
   });
 
   it(".paginate.iterator for endpoints that don’t paginate", () => {
     const mock = fetchMock.sandbox().get("https://api.github.com/orgs/myorg", {
-      body: ORG1
+      body: ORG1,
     });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     const iterator = octokit.paginate
       .iterator({
         method: "GET",
         url: "/orgs/:org",
-        org: "myorg"
+        org: "myorg",
       })
       [Symbol.asyncIterator]();
 
-    return iterator.next().then(result => {
+    return iterator.next().then((result) => {
       expect(result.value.data).toStrictEqual(ORG1);
     });
   });
 
   it("paginate.iterator(route, parameters)", () => {
     const mock = fetchMock.sandbox().get("https://api.github.com/orgs/myorg", {
-      body: ORG1
+      body: ORG1,
     });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     const iterator = octokit.paginate
       .iterator("GET /orgs/:org", {
-        org: "myorg"
+        org: "myorg",
       })
       [Symbol.asyncIterator]();
 
-    return iterator.next().then(result => {
+    return iterator.next().then((result) => {
       expect(result.value.data).toStrictEqual(ORG1);
     });
   });
@@ -247,18 +247,18 @@ describe("pagination", () => {
       incomplete_results: false,
       items: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       incomplete_results: false,
       items: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const query = encodeURIComponent(
@@ -270,8 +270,8 @@ describe("pagination", () => {
         body: result1,
         headers: {
           link: `<https://api.github.com/search/issues?q=${query}&per_page=1&page=2>; rel="next"`,
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get(
         `https://api.github.com/search/issues?q=${query}&per_page=1&page=2`,
@@ -279,15 +279,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/search/issues?q=${query}&per_page=1&page=1>; rel="prev", <https://api.github.com/search/issues?q=${query}&per_page=1&page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -297,10 +297,10 @@ describe("pagination", () => {
         q: "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26",
         per_page: 1,
         headers: {
-          "accept-encoding": ""
-        }
+          "accept-encoding": "",
+        },
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([...result1.items, ...result2.items]);
       });
   });
@@ -310,18 +310,18 @@ describe("pagination", () => {
       total_count: 2,
       repositories: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       repositories: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -330,8 +330,8 @@ describe("pagination", () => {
         body: result1,
         headers: {
           link: `<https://api.github.com/installation/repositories?per_page=1&page=2>; rel="next"`,
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get(
         `https://api.github.com/installation/repositories?per_page=1&page=2`,
@@ -339,27 +339,27 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/installation/repositories?per_page=1>; rel="prev", <https://api.github.com/installation/repositories?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
       .paginate({
         method: "GET",
         url: "/installation/repositories",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.repositories,
-          ...result2.repositories
+          ...result2.repositories,
         ]);
       });
   });
@@ -369,18 +369,18 @@ describe("pagination", () => {
       total_count: 2,
       repositories: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       repositories: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -389,33 +389,33 @@ describe("pagination", () => {
         body: result1,
         headers: {
           link: `<https://api.github.com/user/installations?per_page=1&page=2>; rel="next"`,
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       })
       .get(`https://api.github.com/user/installations?per_page=1&page=2`, {
         body: result2,
         headers: {
           link: `<https://api.github.com/user/installations?per_page=1>; rel="prev", <https://api.github.com/user/installations?per_page=1>; rel="first"`,
-          "X-GitHub-Media-Type": "github.v3; format=json"
-        }
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
       .paginate({
         method: "GET",
         url: "/user/installations",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.repositories,
-          ...result2.repositories
+          ...result2.repositories,
         ]);
       });
   });
@@ -425,18 +425,18 @@ describe("pagination", () => {
       total_count: 2,
       artifacts: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       artifacts: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -447,8 +447,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -457,15 +457,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -475,12 +475,12 @@ describe("pagination", () => {
         owner: "octocat",
         repo: "hello-world",
         run_id: 123,
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.artifacts,
-          ...result2.artifacts
+          ...result2.artifacts,
         ]);
       });
   });
@@ -490,18 +490,18 @@ describe("pagination", () => {
       total_count: 2,
       secrets: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       secrets: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -512,8 +512,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -522,15 +522,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -539,9 +539,9 @@ describe("pagination", () => {
         url: "/repos/:owner/:repo/actions/secrets",
         owner: "octocat",
         repo: "hello-world",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([...result1.secrets, ...result2.secrets]);
       });
   });
@@ -551,18 +551,18 @@ describe("pagination", () => {
       total_count: 2,
       workflows: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       workflows: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -573,8 +573,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -583,15 +583,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -600,12 +600,12 @@ describe("pagination", () => {
         url: "/repos/:owner/:repo/actions/workflows",
         owner: "octocat",
         repo: "hello-world",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.workflows,
-          ...result2.workflows
+          ...result2.workflows,
         ]);
       });
   });
@@ -614,18 +614,18 @@ describe("pagination", () => {
       total_count: 2,
       jobs: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       jobs: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -636,8 +636,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -646,15 +646,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -664,9 +664,9 @@ describe("pagination", () => {
         owner: "octocat",
         repo: "hello-world",
         run_id: 123,
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([...result1.jobs, ...result2.jobs]);
       });
   });
@@ -675,18 +675,18 @@ describe("pagination", () => {
       total_count: 2,
       workflow_runs: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       workflow_runs: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -697,8 +697,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -707,15 +707,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -725,12 +725,12 @@ describe("pagination", () => {
         owner: "octocat",
         repo: "hello-world",
         workflow_id: 123,
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.workflow_runs,
-          ...result2.workflow_runs
+          ...result2.workflow_runs,
         ]);
       });
   });
@@ -739,18 +739,18 @@ describe("pagination", () => {
       total_count: 2,
       workflow_runs: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       workflow_runs: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -761,8 +761,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -771,15 +771,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -788,12 +788,12 @@ describe("pagination", () => {
         url: "/repos/:owner/:repo/actions/runs",
         owner: "octocat",
         repo: "hello-world",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.workflow_runs,
-          ...result2.workflow_runs
+          ...result2.workflow_runs,
         ]);
       });
   });
@@ -803,30 +803,30 @@ describe("pagination", () => {
       total_count: 2,
       repositories: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
 
     const mock = fetchMock
       .sandbox()
       .get(`https://api.github.com/installation/repositories?per_page=1`, {
-        body: result
+        body: result,
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
       .paginate({
         method: "GET",
         url: "/installation/repositories",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([...result.repositories]);
       });
   });
@@ -839,21 +839,21 @@ describe("pagination", () => {
       commit_url: "https://api.github.com/...",
       url: "https://api.github.com/...",
       repository: {},
-      sha: "sha123"
+      sha: "sha123",
     };
     const mock = fetchMock
       .sandbox()
       .get(
         "https://api.github.com/repos/octokit/rest.js/commits/abc4567/status",
         {
-          body: result
+          body: result,
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -862,9 +862,9 @@ describe("pagination", () => {
         url: "/repos/:owner/:repo/commits/:ref/status",
         owner: "octokit",
         repo: "rest.js",
-        ref: "abc4567"
+        ref: "abc4567",
       })
-      .then(results => {
+      .then((results) => {
         expect(results[0].state).toEqual("success");
       });
   });
@@ -874,18 +874,18 @@ describe("pagination", () => {
       total_count: 2,
       workflow_runs: [
         {
-          id: "123"
-        }
-      ]
+          id: "123",
+        },
+      ],
     };
     const result2 = {
       total_count: 2,
       repository_selection: "all",
       workflow_runs: [
         {
-          id: "456"
-        }
-      ]
+          id: "456",
+        },
+      ],
     };
 
     const mock = fetchMock
@@ -896,8 +896,8 @@ describe("pagination", () => {
           body: result1,
           headers: {
             link: `<https://api.github.com/repositories/1/actions/runs?per_page=1&page=2>; rel="next"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       )
       .get(
@@ -906,15 +906,15 @@ describe("pagination", () => {
           body: result2,
           headers: {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
-            "X-GitHub-Media-Type": "github.v3; format=json"
-          }
+            "X-GitHub-Media-Type": "github.v3; format=json",
+          },
         }
       );
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock
-      }
+        fetch: mock,
+      },
     });
 
     return octokit
@@ -923,12 +923,12 @@ describe("pagination", () => {
         url: "/repos/:owner/:repo/actions/runs",
         owner: "octocat",
         repo: "hello-world",
-        per_page: 1
+        per_page: 1,
       })
-      .then(results => {
+      .then((results) => {
         expect(results).toStrictEqual([
           ...result1.workflow_runs,
-          ...result2.workflow_runs
+          ...result2.workflow_runs,
         ]);
       });
   });

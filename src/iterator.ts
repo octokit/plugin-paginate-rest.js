@@ -35,7 +35,7 @@ export function iterator(
 
             return { value: response };
           });
-      }
-    })
+      },
+    }),
   };
 }

@@ -48,7 +48,7 @@ const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
   owner: "octocat",
   repo: "hello-world",
   since: "2010-10-01",
-  per_page: 100
+  per_page: 100,
 });
 ```
 
@@ -67,9 +67,9 @@ const issueTitles = await octokit.paginate(
     owner: "octocat",
     repo: "hello-world",
     since: "2010-10-01",
-    per_page: 100
+    per_page: 100,
   },
-  response => response.data.map(issue => issue.title)
+  (response) => response.data.map((issue) => issue.title)
 );
 ```
 
@@ -82,10 +82,10 @@ const issues = await octokit.paginate(
     owner: "octocat",
     repo: "hello-world",
     since: "2010-10-01",
-    per_page: 100
+    per_page: 100,
   },
   (response, done) => {
-    if (response.data.find(issues => issue.title.includes("something"))) {
+    if (response.data.find((issues) => issue.title.includes("something"))) {
       done();
     }
     return response.data;
@@ -102,7 +102,7 @@ const parameters = {
   owner: "octocat",
   repo: "hello-world",
   since: "2010-10-01",
-  per_page: 100
+  per_page: 100,
 };
 for await (const response of octokit.paginate.iterator(
   "GET /repos/:owner/:repo/issues",

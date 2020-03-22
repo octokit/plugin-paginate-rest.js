@@ -5,7 +5,7 @@ import {
   MapFunction,
   PaginationResults,
   RequestParameters,
-  Route
+  Route,
 } from "./types";
 
 export function paginate(
@@ -35,7 +35,7 @@ function gather(
   iterator: AsyncIterableIterator<any>,
   mapFn?: MapFunction
 ): Promise<PaginationResults> {
-  return iterator.next().then(result => {
+  return iterator.next().then((result) => {
     if (result.done) {
       return results;
     }
