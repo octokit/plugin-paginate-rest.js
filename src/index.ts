@@ -13,10 +13,9 @@ import { Octokit } from "@octokit/core";
  */
 export function paginateRest(octokit: Octokit) {
   return {
-    paginate:
-      Object.assign(paginate.bind(null, octokit), {
-        iterator: iterator.bind(null, octokit),
-      }) as PaginateInterface,
+    paginate: Object.assign(paginate.bind(null, octokit), {
+      iterator: iterator.bind(null, octokit),
+    }) as PaginateInterface,
   };
 }
 paginateRest.VERSION = VERSION;

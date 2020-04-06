@@ -22,8 +22,9 @@ export function paginate(
   return gather(
     octokit,
     [],
-    iterator(octokit, route, parameters)[Symbol.asyncIterator]() as
-      AsyncIterableIterator<any>,
+    iterator(octokit, route, parameters)[
+      Symbol.asyncIterator
+    ]() as AsyncIterableIterator<any>,
     mapFn
   );
 }
