@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@octokit/types": "^2.0.1"
+    "@octokit/types": "^2.8.2"
   },
   "devDependencies": {
     "@octokit/core": "^2.0.0",
