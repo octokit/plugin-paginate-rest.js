@@ -7,7 +7,7 @@ export { Route } from "@octokit/types";
 
 export interface PaginateInterface {
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using endpoint options and map each response to a custom array
    *
    * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
@@ -18,14 +18,14 @@ export interface PaginateInterface {
   ): Promise<PaginationResults<R>>;
 
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using endpoint options
    *
    * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <T>(options: OctokitTypes.EndpointOptions): Promise<PaginationResults<T>>;
 
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using an endpoint route string and map each response to a custom array
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    * @param {function} mapFn Optional method to map each response to a custom array
@@ -35,7 +35,7 @@ export interface PaginateInterface {
   >;
 
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using an endpoint route string and parameters, and map each response to a custom array
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
@@ -48,7 +48,7 @@ export interface PaginateInterface {
   ): Promise<PaginationResults<R>>;
 
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using an endpoint route string and parameters
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
@@ -59,7 +59,7 @@ export interface PaginateInterface {
   ): Promise<PaginationResults<T>>;
 
   /**
-   * Sends a request based on endpoint options
+   * Paginate a request using an endpoint route string
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    */
@@ -67,7 +67,7 @@ export interface PaginateInterface {
 
   iterator: {
     /**
-     * Get an asynchronous iterator for use with `for await()`,
+     * Get an async iterator to paginate a request using endpoint options
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
@@ -77,7 +77,7 @@ export interface PaginateInterface {
     >;
 
     /**
-     * Get an asynchronous iterator for use with `for await()`,
+     * Get an async iterator to paginate a request using an endpoint route string and optional parameters
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`

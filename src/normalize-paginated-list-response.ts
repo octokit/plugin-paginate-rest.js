@@ -20,13 +20,11 @@ import { Octokit } from "@octokit/core";
 import { OctokitResponse } from "./types";
 
 export function normalizePaginatedListResponse(
-  octokit: Octokit,
-  url: string,
   response: OctokitResponse<any>
-) {
+): OctokitResponse<any> {
   const responseNeedsNormalization =
     "total_count" in response.data && !("url" in response.data);
-  if (!responseNeedsNormalization) return;
+  if (!responseNeedsNormalization) return response;
 
   // keep the additional properties intact as there is currently no other way
   // to retrieve the same information.
@@ -50,4 +48,5 @@ export function normalizePaginatedListResponse(
   }
 
   response.data.total_count = totalCount;
+  return response;
 }
