@@ -1,5 +1,6 @@
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
+import { Endpoints } from "@octokit/types";
 
 import { paginateRest } from "../src";
 
@@ -54,6 +55,43 @@ describe("pagination", () => {
       .then((organizations) => {
         expect(organizations).toStrictEqual([1, 2]);
       });
+  });
+
+  it.only(".paginate(endpointMethod, options)", async () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations?per_page=1", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2&per_page=1", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    type listOrganizationsType = (
+      options: Endpoints["GET /organizations"]["parameters"]
+    ) => Promise<Endpoints["GET /organizations"]["response"]>;
+
+    const listOrganizations: listOrganizationsType = octokit.request.defaults({
+      method: "GET",
+      url: "/organizations",
+    });
+
+    const organizations = await octokit.paginate(listOrganizations, {
+      per_page: 1,
+    });
+    expect(organizations).toStrictEqual([ORG1, ORG2]);
   });
 
   it(".paginate() with map function returning undefined", () => {
