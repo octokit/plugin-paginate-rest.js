@@ -52,7 +52,7 @@ const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
 });
 ```
 
-## `octokit.paginate(route, parameters, mapFunction)` or `octokit.paginate(options, mapFunction)`
+## `octokit.paginate()`
 
 The `paginateRest` plugin adds a new `octokit.paginate()` method which accepts the same parameters as [`octokit.request`](https://github.com/octokit/request.js#request). Only "List ..." endpoints such as [List issues for a repository](https://developer.github.com/v3/issues/#list-issues-for-a-repository) are supporting pagination. Their [response includes a Link header](https://developer.github.com/v3/issues/#response-1). For other endpoints, `octokit.paginate()` behaves the same as `octokit.request()`.
 
@@ -93,7 +93,18 @@ const issues = await octokit.paginate(
 );
 ```
 
-## `octokit.paginate.iterator(route, parameters)` or `octokit.paginate.iterator(options)`
+Alternatively you can pass a `request` method as first argument. This is great when using in combination with [`@octokit/plugin-rest-endpoint-methods`](https://github.com/octokit/plugin-rest-endpoint-methods.js/):
+
+```js
+const issues = await octokit.paginate(octokit.issues.listForRepo, {
+  owner: "octocat",
+  repo: "hello-world",
+  since: "2010-10-01",
+  per_page: 100,
+});
+```
+
+## `octokit.paginate.iterator()`
 
 If your target runtime environments supports async iterators (such as most modern browsers and Node 10+), you can iterate through each response
 
@@ -106,6 +117,24 @@ const parameters = {
 };
 for await (const response of octokit.paginate.iterator(
   "GET /repos/:owner/:repo/issues",
+  parameters
+)) {
+  // do whatever you want with each response, break out of the loop, etc.
+  console.log(response.data.title);
+}
+```
+
+Alternatively you can pass a `request` method as first argument. This is great when using in combination with [`@octokit/plugin-rest-endpoint-methods`](https://github.com/octokit/plugin-rest-endpoint-methods.js/):
+
+```js
+const parameters = {
+  owner: "octocat",
+  repo: "hello-world",
+  since: "2010-10-01",
+  per_page: 100,
+};
+for await (const response of octokit.paginate.iterator(
+  octokit.issues.listForRepo,
   parameters
 )) {
   // do whatever you want with each response, break out of the loop, etc.
