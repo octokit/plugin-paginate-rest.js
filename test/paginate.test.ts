@@ -1,6 +1,6 @@
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
-import { Endpoints } from "@octokit/types";
+import { Endpoints, RequestOptions } from "@octokit/types";
 
 import { paginateRest } from "../src";
 
@@ -57,7 +57,48 @@ describe("pagination", () => {
       });
   });
 
-  it.only(".paginate(endpointMethod, options)", async () => {
+  it(".paginate(request)", async () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    const listOrganizations = octokit.request.defaults({
+      method: "GET",
+      url: "/organizations",
+    });
+
+    let callCount = 0;
+    const wrapListOrganizations: typeof listOrganizations = Object.assign(
+      (options: RequestOptions) => {
+        callCount++;
+        return listOrganizations(options);
+      },
+      listOrganizations
+    );
+
+    const organizations = await octokit.paginate(wrapListOrganizations);
+    expect(organizations).toStrictEqual([ORG1, ORG2]);
+    expect(callCount).toEqual(2);
+  });
+
+  it(".paginate(request, options)", async () => {
     const mock = fetchMock
       .sandbox()
       .getOnce("https://api.github.com/organizations?per_page=1", {
@@ -79,11 +120,7 @@ describe("pagination", () => {
       },
     });
 
-    type listOrganizationsType = (
-      options: Endpoints["GET /organizations"]["parameters"]
-    ) => Promise<Endpoints["GET /organizations"]["response"]>;
-
-    const listOrganizations: listOrganizationsType = octokit.request.defaults({
+    const listOrganizations = octokit.request.defaults({
       method: "GET",
       url: "/organizations",
     });
@@ -92,6 +129,43 @@ describe("pagination", () => {
       per_page: 1,
     });
     expect(organizations).toStrictEqual([ORG1, ORG2]);
+  });
+
+  it(".paginate(request, options, mapFunction)", async () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations?per_page=1", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2&per_page=1", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    const listOrganizations = octokit.request.defaults({
+      method: "GET",
+      url: "/organizations",
+    });
+
+    const organizations = await octokit.paginate<typeof ORG1, number>(
+      listOrganizations,
+      {
+        per_page: 1,
+      },
+      (response) => response.data.map((org) => org.id)
+    );
+    expect(organizations).toStrictEqual([1, 2]);
   });
 
   it(".paginate() with map function returning undefined", () => {
@@ -257,10 +331,21 @@ describe("pagination", () => {
     });
   });
 
-  it("paginate.iterator(route, parameters)", () => {
-    const mock = fetchMock.sandbox().get("https://api.github.com/orgs/myorg", {
-      body: ORG1,
-    });
+  it("paginate.iterator(route)", () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2", {
+        body: [ORG2],
+        headers: {},
+      });
 
     const octokit = new TestOctokit({
       request: {
@@ -269,14 +354,154 @@ describe("pagination", () => {
     });
 
     const iterator = octokit.paginate
-      .iterator("GET /orgs/:org", {
-        org: "myorg",
+      .iterator("GET /organizations")
+      [Symbol.asyncIterator]();
+
+    return iterator
+      .next()
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(1);
+
+        return iterator.next();
+      })
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(2);
+      });
+  });
+
+  it("paginate.iterator(route, parameters)", () => {
+    const mock = fetchMock
+      .sandbox()
+      .get("https://api.github.com/organizations?per_page=1", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    const iterator = octokit.paginate
+      .iterator("GET /organizations", {
+        per_page: 1,
       })
       [Symbol.asyncIterator]();
 
-    return iterator.next().then((result) => {
-      expect(result.value.data).toStrictEqual(ORG1);
+    return iterator
+      .next()
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(1);
+
+        return iterator.next();
+      })
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(2);
+      });
+  });
+
+  it("paginate.iterator(options)", () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
     });
+
+    const iterator = octokit.paginate
+      .iterator({
+        method: "GET",
+        url: "/organizations",
+      })
+      [Symbol.asyncIterator]();
+
+    return iterator
+      .next()
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(1);
+
+        return iterator.next();
+      })
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(2);
+      });
+  });
+
+  it("paginate.iterator(request)", () => {
+    const mock = fetchMock
+      .sandbox()
+      .getOnce("https://api.github.com/organizations", {
+        body: [ORG1],
+        headers: {
+          link:
+            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+          "X-GitHub-Media-Type": "github.v3; format=json",
+        },
+      })
+      .getOnce("https://pagination-test.com/organizations?page=2", {
+        body: [ORG2],
+        headers: {},
+      });
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    const listOrganizations = octokit.request.defaults({
+      method: "GET",
+      url: "/organizations",
+    });
+
+    let callCount = 0;
+    const wrapListOrganizations: typeof listOrganizations = Object.assign(
+      (options: RequestOptions) => {
+        callCount++;
+        return listOrganizations(options);
+      },
+      listOrganizations
+    );
+
+    const iterator = octokit.paginate
+      .iterator(wrapListOrganizations)
+      [Symbol.asyncIterator]();
+
+    return iterator
+      .next()
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(1);
+        expect(callCount).toEqual(1);
+
+        return iterator.next();
+      })
+      .then((result) => {
+        expect(result.value.data[0].id).toEqual(2);
+        expect(callCount).toEqual(2);
+      });
   });
 
   it(".paginate() with results namespace (search)", () => {
