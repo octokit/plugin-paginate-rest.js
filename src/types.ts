@@ -1,9 +1,12 @@
 import * as OctokitTypes from "@octokit/types";
 
-export { EndpointOptions } from "@octokit/types";
-export { OctokitResponse } from "@octokit/types";
-export { RequestParameters } from "@octokit/types";
-export { Route } from "@octokit/types";
+export {
+  EndpointOptions,
+  RequestInterface,
+  OctokitResponse,
+  RequestParameters,
+  Route,
+} from "@octokit/types";
 
 export interface PaginateInterface {
   /**
@@ -65,6 +68,37 @@ export interface PaginateInterface {
    */
   <T>(route: OctokitTypes.Route): Promise<PaginationResults<T>>;
 
+  /**
+   * Paginate a request using an endpoint route string and parameters
+   *
+   * @param {string} request Request method (`octokit.request` or `@octokit/request`)
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {function} mapFn Optional method to map each response to a custom array
+   */
+  <T, R>(
+    request: OctokitTypes.RequestInterface,
+    parameters: OctokitTypes.RequestParameters,
+    mapFn: MapFunction<T>
+  ): Promise<PaginationResults<R>>;
+
+  /**
+   * Paginate a request using an endpoint route string and parameters
+   *
+   * @param {string} request Request method (`octokit.request` or `@octokit/request`)
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   */
+  <T>(
+    request: OctokitTypes.RequestInterface,
+    parameters: OctokitTypes.RequestParameters
+  ): Promise<PaginationResults<T>>;
+
+  /**
+   * Paginate a request using an endpoint function
+   *
+   * @param {function} request `octokit.endpoint` or `@octokit/endpoint` compatible method
+   */
+  <T>(request: OctokitTypes.RequestInterface): Promise<PaginationResults<T>>;
+
   iterator: {
     /**
      * Get an async iterator to paginate a request using endpoint options
@@ -85,6 +119,20 @@ export interface PaginateInterface {
      */
     <T>(
       route: OctokitTypes.Route,
+      parameters?: OctokitTypes.RequestParameters
+    ): AsyncIterableIterator<
+      OctokitTypes.OctokitResponse<PaginationResults<T>>
+    >;
+
+    /**
+     * Get an async iterator to paginate a request using a request method and optional parameters
+     *
+     * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
+     * @param {string} request `@octokit/request` or `octokit.request` method
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     */
+    <T>(
+      request: OctokitTypes.RequestInterface,
       parameters?: OctokitTypes.RequestParameters
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>

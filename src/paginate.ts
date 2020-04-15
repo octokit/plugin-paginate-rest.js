@@ -6,11 +6,12 @@ import {
   PaginationResults,
   RequestParameters,
   Route,
+  RequestInterface,
 } from "./types";
 
 export function paginate(
   octokit: Octokit,
-  route: Route,
+  route: Route | RequestInterface,
   parameters?: RequestParameters,
   mapFn?: MapFunction
 ) {

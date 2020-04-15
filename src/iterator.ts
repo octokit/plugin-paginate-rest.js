@@ -1,14 +1,24 @@
 import { Octokit } from "@octokit/core";
 
 import { normalizePaginatedListResponse } from "./normalize-paginated-list-response";
-import { OctokitResponse, RequestParameters, Route } from "./types";
+import {
+  EndpointOptions,
+  RequestInterface,
+  OctokitResponse,
+  RequestParameters,
+  Route,
+} from "./types";
 
 export function iterator(
   octokit: Octokit,
-  route: Route,
+  route: Route | RequestInterface,
   parameters?: RequestParameters
 ) {
-  const options = octokit.request.endpoint(route, parameters);
+  const options =
+    typeof route === "function"
+      ? route.endpoint(parameters as EndpointOptions)
+      : octokit.request.endpoint(route, parameters);
+  const requestMethod = typeof route === "function" ? route : octokit.request;
   const method = options.method;
   const headers = options.headers;
   let url = options.url;
@@ -20,9 +30,7 @@ export function iterator(
           return Promise.resolve({ done: true });
         }
 
-        return octokit
-          .request({ method, url, headers })
-
+        return requestMethod({ method, url, headers })
           .then(normalizePaginatedListResponse)
 
           .then((response: OctokitResponse<any>) => {
