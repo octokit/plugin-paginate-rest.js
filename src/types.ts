@@ -1,4 +1,8 @@
 import * as OctokitTypes from "@octokit/types";
+import {
+  GetResponseTypeFromEndpointMethod,
+  GetResponseDataTypeFromEndpointMethod,
+} from "@octokit/types";
 
 export {
   EndpointOptions,
@@ -7,6 +11,21 @@ export {
   RequestParameters,
   Route,
 } from "@octokit/types";
+
+// https://stackoverflow.com/a/52991061/206879
+type RequiredKeys<T> = {
+  [K in keyof T]-?: string extends K
+    ? never
+    : number extends K
+    ? never
+    : {} extends Pick<T, K>
+    ? never
+    : K;
+} extends { [_ in keyof T]-?: infer U }
+  ? U extends keyof T
+    ? U
+    : never
+  : never;
 
 export interface PaginateInterface {
   /**
@@ -72,32 +91,40 @@ export interface PaginateInterface {
    * Paginate a request using an endpoint route string and parameters
    *
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
-   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
-   * @param {function} mapFn Optional method to map each response to a custom array
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
-  <T, R>(
-    request: OctokitTypes.RequestInterface,
-    parameters: OctokitTypes.RequestParameters,
-    mapFn: MapFunction<T>
-  ): Promise<PaginationResults<R>>;
+  <R extends OctokitTypes.RequestInterface>(
+    request: R,
+    ...args: RequiredKeys<Parameters<R>[0]> extends never
+      ? [Parameters<R>[0]?]
+      : [Parameters<R>[0]]
+  ): Promise<GetResponseDataTypeFromEndpointMethod<R>>;
+
+  /**
+   * Paginate a request using an endpoint route string and parameters
+   *
+   * @param {string} request Request method (`octokit.request` or `@octokit/request`)
+   * @param {function} mapFn? Optional method to map each response to a custom array
+   */
+  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+    request: R,
+    mapFn: RequiredKeys<Parameters<R>[0]> extends never
+      ? (response: GetResponseTypeFromEndpointMethod<R>) => MR
+      : never // endpoint has required parameters
+  ): Promise<MR>;
 
   /**
    * Paginate a request using an endpoint route string and parameters
    *
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {function} mapFn? Optional method to map each response to a custom array
    */
-  <T>(
-    request: OctokitTypes.RequestInterface,
-    parameters: OctokitTypes.RequestParameters
-  ): Promise<PaginationResults<T>>;
-
-  /**
-   * Paginate a request using an endpoint function
-   *
-   * @param {function} request `octokit.endpoint` or `@octokit/endpoint` compatible method
-   */
-  <T>(request: OctokitTypes.RequestInterface): Promise<PaginationResults<T>>;
+  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+    request: R,
+    parameters: Parameters<R>[0],
+    mapFn: (response: GetResponseTypeFromEndpointMethod<R>) => MR
+  ): Promise<MR>;
 
   iterator: {
     /**
