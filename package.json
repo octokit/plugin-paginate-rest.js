@@ -10,7 +10,8 @@
     "lint": "prettier --check '{src,test}/**/*' README.md package.json",
     "lint:fix": "prettier --write '{src,test}/**/*' README.md package.json",
     "pretest": "npm run -s lint",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "test:ts": "npx tsc --noEmit --declaration --noUnusedLocals test/validate-typescript.ts"
   },
   "repository": "https://github.com/octokit/plugin-paginate-rest.js",
   "keywords": [
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "@octokit/core": "^2.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^3.7.1",
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.9.0",
     "@pika/plugin-build-web": "^0.9.0",
