@@ -2,6 +2,7 @@
 
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
+import { GetResponseTypeFromEndpointMethod } from "@octokit/types";
 
 import { paginateRest } from "../src";
 
@@ -15,10 +16,65 @@ export async function knownRoute() {
   }
 }
 
-export async function unknownRoute() {
+export async function knownRouteWithParameters() {
+  const results = await octokit.paginate("GET /orgs/:org/repos", {
+    org: "octorg",
+  });
+  for (const result of results) {
+    console.log(result.owner.login);
+  }
+}
+
+export async function knownRouteWithMapFunction() {
+  const results = await octokit.paginate("GET /repositories", (response) => {
+    return response.data.map((repository) => {
+      return {
+        foo: {
+          bar: repository.id,
+        },
+      };
+    });
+  });
+  for (const result of results) {
+    console.log(result.foo.bar);
+  }
+}
+export async function knownRouteWithParametersAndMapFunction() {
+  const results = await octokit.paginate(
+    "GET /organizations",
+    { per_page: 1 },
+    (response, done) => {
+      done();
+      return response.data.map((org) => {
+        return {
+          foo: {
+            bar: org.id,
+          },
+        };
+      });
+    }
+  );
+  for (const result of results) {
+    console.log(result.foo.bar);
+  }
+}
+
+export async function unknownRouteWithResultType() {
   const results = await octokit.paginate<{ id: number }>("GET /unknown");
   for (const result of results) {
     console.log(result.id);
+  }
+}
+
+export async function unknownRouteWitParameters() {
+  const results = await octokit.paginate<{ foo: { bar: number } }>(
+    "GET /foo/bar/:baz",
+    {
+      baz: "daz",
+    }
+  );
+  for (const result of results) {
+    console.log(result.foo.bar);
   }
 }
 
@@ -49,20 +105,30 @@ export async function requestMethodWithParameters() {
 }
 
 export async function requestMethodWithParametersAndMapFunction() {
-  const results = await octokit.paginate(
-    octokit.issues.listLabelsForRepo,
-    {
-      owner: "owner",
-      repo: "repo",
-    },
-    (response) =>
-      response.data.map((data) => ({
+  // const results = await octokit.paginate(
+  //   octokit.issues.listLabelsForRepo,
+  //   {
+  //     owner: "owner",
+  //     repo: "repo",
+  //   },
+  //   (response) =>
+  //     response.data.map((data) => ({
+  //       foo: {
+  //         bar: data.id,
+  //       },
+  //     }))
+  // );
+
+  const results = await octokit.paginate(octokit.orgs.list, (response) =>
+    response.data.map((org) => {
+      return {
         foo: {
-          bar: data.id,
+          bar: org.id,
         },
-      }))
+      };
+    })
   );
   for (const result of results) {
-    console.log(result.foo.bar);
+    console.log(result.foo);
   }
 }

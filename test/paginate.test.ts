@@ -1,13 +1,14 @@
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 import { RequestOptions } from "@octokit/types";
+import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
 import { paginateRest } from "../src";
 
 const ORG1 = { id: 1 };
 const ORG2 = { id: 2 };
 
-const TestOctokit = Octokit.plugin(paginateRest);
+const TestOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
 describe("pagination", () => {
   it(".paginate()", async () => {
     const mock = fetchMock
@@ -79,23 +80,8 @@ describe("pagination", () => {
       },
     });
 
-    const listOrganizations = octokit.request.defaults({
-      method: "GET",
-      url: "/organizations",
-    });
-
-    let callCount = 0;
-    const wrapListOrganizations: typeof listOrganizations = Object.assign(
-      (options: RequestOptions) => {
-        callCount++;
-        return listOrganizations(options);
-      },
-      listOrganizations
-    );
-
-    const organizations = await octokit.paginate(wrapListOrganizations);
+    const organizations = await octokit.paginate(octokit.orgs.list);
     expect(organizations).toStrictEqual([ORG1, ORG2]);
-    expect(callCount).toEqual(2);
   });
 
   it(".paginate(request, options)", async () => {
@@ -120,12 +106,7 @@ describe("pagination", () => {
       },
     });
 
-    const listOrganizations = octokit.request.defaults({
-      method: "GET",
-      url: "/organizations",
-    });
-
-    const organizations = await octokit.paginate(listOrganizations, {
+    const organizations = await octokit.paginate(octokit.orgs.list, {
       per_page: 1,
     });
     expect(organizations).toStrictEqual([ORG1, ORG2]);
@@ -153,13 +134,8 @@ describe("pagination", () => {
       },
     });
 
-    const listOrganizations = octokit.request.defaults({
-      method: "GET",
-      url: "/organizations",
-    });
-
-    const organizations = await octokit.paginate<typeof ORG1, number>(
-      listOrganizations,
+    const organizations = await octokit.paginate(
+      octokit.orgs.list,
       {
         per_page: 1,
       },
@@ -191,11 +167,7 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate<typeof ORG1, undefined>(
-        "GET /organizations",
-        { per_page: 1 },
-        () => [undefined]
-      )
+      .paginate("GET /organizations", { per_page: 1 }, () => [undefined])
       .then((results) => {
         expect(results).toStrictEqual([undefined, undefined]);
       });
@@ -224,14 +196,10 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate<typeof ORG1, number>(
-        "GET /organizations",
-        { per_page: 1 },
-        (response, done) => {
-          done();
-          return response.data.map((org) => org.id);
-        }
-      )
+      .paginate("GET /organizations", { per_page: 1 }, (response, done) => {
+        done();
+        return response.data.map((org) => org.id);
+      })
       .then((organizations) => {
         expect(organizations).toStrictEqual([1]);
       });
@@ -472,35 +440,19 @@ describe("pagination", () => {
       },
     });
 
-    const listOrganizations = octokit.request.defaults({
-      method: "GET",
-      url: "/organizations",
-    });
-
-    let callCount = 0;
-    const wrapListOrganizations: typeof listOrganizations = Object.assign(
-      (options: RequestOptions) => {
-        callCount++;
-        return listOrganizations(options);
-      },
-      listOrganizations
-    );
-
     const iterator = octokit.paginate
-      .iterator(wrapListOrganizations)
+      .iterator(octokit.orgs.list)
       [Symbol.asyncIterator]();
 
     return iterator
       .next()
       .then((result) => {
         expect(result.value.data[0].id).toEqual(1);
-        expect(callCount).toEqual(1);
 
         return iterator.next();
       })
       .then((result) => {
         expect(result.value.data[0].id).toEqual(2);
-        expect(callCount).toEqual(2);
       });
   });
 
