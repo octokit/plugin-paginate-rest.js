@@ -65,7 +65,7 @@ export async function unknownRouteWithResultType() {
   }
 }
 
-export async function unknownRouteWitParameters() {
+export async function unknownRouteWithParameters() {
   const results = await octokit.paginate<{ foo: { bar: number } }>(
     "GET /foo/bar/:baz",
     {
@@ -115,5 +115,53 @@ export async function requestMethodWithParametersAndMapFunction() {
   );
   for (const result of results) {
     console.log(result.foo);
+  }
+}
+
+export async function knownRouteIterator() {
+  for await (const response of octokit.paginate.iterator("GET /repositories")) {
+    console.log(response.data[0].owner.login);
+  }
+}
+
+export async function unknownRouteIterator() {
+  for await (const response of octokit.paginate.iterator<{ id: number }>(
+    "GET /unknown"
+  )) {
+    console.log(response.data[0].id);
+  }
+}
+
+export async function knownRouteWithParametersIterator() {
+  for await (const response of octokit.paginate.iterator(
+    "GET /orgs/:org/repos",
+    {
+      org: "yo",
+    }
+  )) {
+    console.log(response.data[0].owner.login);
+  }
+}
+
+export async function unknownRouteWithParametersIterator() {
+  for await (const response of octokit.paginate.iterator<{ id: number }>(
+    "GET /foo/bar/:baz",
+    {
+      baz: "daz",
+    }
+  )) {
+    console.log(response.data[0].id);
+  }
+}
+
+export async function requestMethodWithParametersIterator() {
+  for await (const response of octokit.paginate.iterator(
+    octokit.issues.listLabelsForRepo,
+    {
+      owner: "owner",
+      repo: "repo",
+    }
+  )) {
+    console.log(response.data[0].id);
   }
 }
