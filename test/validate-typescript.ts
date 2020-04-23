@@ -2,7 +2,6 @@
 
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
-import { GetResponseTypeFromEndpointMethod } from "@octokit/types";
 
 import { paginateRest } from "../src";
 
@@ -105,20 +104,6 @@ export async function requestMethodWithParameters() {
 }
 
 export async function requestMethodWithParametersAndMapFunction() {
-  // const results = await octokit.paginate(
-  //   octokit.issues.listLabelsForRepo,
-  //   {
-  //     owner: "owner",
-  //     repo: "repo",
-  //   },
-  //   (response) =>
-  //     response.data.map((data) => ({
-  //       foo: {
-  //         bar: data.id,
-  //       },
-  //     }))
-  // );
-
   const results = await octokit.paginate(octokit.orgs.list, (response) =>
     response.data.map((org) => {
       return {
