@@ -11,7 +11,10 @@
     "lint:fix": "prettier --write '{src,test}/**/*' README.md package.json",
     "pretest": "npm run -s lint",
     "test": "jest --coverage",
-    "test:ts": "npx tsc --noEmit --declaration --noUnusedLocals test/validate-typescript.ts"
+    "test:ts": "npx tsc --noEmit --declaration --noUnusedLocals test/validate-typescript.ts",
+    "update-endpoints": "npm-run-all update-endpoints:*",
+    "update-endpoints:fetch-json": "node scripts/update-endpoints/fetch-json",
+    "update-endpoints:typescript": "node scripts/update-endpoints/typescript"
   },
   "repository": "https://github.com/octokit/plugin-paginate-rest.js",
   "keywords": [

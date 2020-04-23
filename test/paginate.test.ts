@@ -1,6 +1,5 @@
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
-import { RequestOptions } from "@octokit/types";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
 import { paginateRest } from "../src";

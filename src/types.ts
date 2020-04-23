@@ -1,8 +1,4 @@
 import * as OctokitTypes from "@octokit/types";
-import {
-  GetResponseTypeFromEndpointMethod,
-  GetResponseDataTypeFromEndpointMethod,
-} from "@octokit/types";
 
 export {
   EndpointOptions,
@@ -11,6 +7,8 @@ export {
   RequestParameters,
   Route,
 } from "@octokit/types";
+
+import { PaginatingEndpoints } from "./generated/paginating-endpoints";
 
 // // https://stackoverflow.com/a/52991061/206879
 // type RequiredKeys<T> = {
@@ -65,10 +63,10 @@ export interface PaginateInterface {
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof OctokitTypes.Endpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
     route: R,
     mapFn: (
-      response: OctokitTypes.Endpoints[R]["response"],
+      response: PaginatingEndpoints[R]["response"],
       done: () => void
     ) => MR
   ): Promise<MR>;
@@ -80,11 +78,11 @@ export interface PaginateInterface {
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof OctokitTypes.Endpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
     route: R,
-    parameters: OctokitTypes.Endpoints[R]["parameters"],
+    parameters: PaginatingEndpoints[R]["parameters"],
     mapFn: (
-      response: OctokitTypes.Endpoints[R]["response"],
+      response: PaginatingEndpoints[R]["response"],
       done: () => void
     ) => MR
   ): Promise<MR>;
@@ -95,19 +93,19 @@ export interface PaginateInterface {
    * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
    * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
-  <R extends keyof OctokitTypes.Endpoints>(
+  <R extends keyof PaginatingEndpoints>(
     route: R,
-    parameters?: OctokitTypes.Endpoints[R]["parameters"]
-  ): Promise<OctokitTypes.Endpoints[R]["response"]["data"]>;
+    parameters?: PaginatingEndpoints[R]["parameters"]
+  ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
 
   // I tried this version which would make the `parameters` argument required if the route has required parameters
   // but it caused some weird errors
-  // <R extends keyof OctokitTypes.Endpoints>(
+  // <R extends keyof PaginatingEndpoints>(
   //   route: R,
-  //   ...args: RequiredKeys<OctokitTypes.Endpoints[R]["parameters"]> extends never
-  //     ? [OctokitTypes.Endpoints[R]["parameters"]?]
-  //     : [OctokitTypes.Endpoints[R]["parameters"]]
-  // ): Promise<OctokitTypes.Endpoints[R]["response"]["data"]>;
+  //   ...args: RequiredKeys<PaginatingEndpoints[R]["parameters"]> extends never
+  //     ? [PaginatingEndpoints[R]["parameters"]?]
+  //     : [PaginatingEndpoints[R]["parameters"]]
+  // ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
 
   /**
    * Paginate a request using an unknown endpoint route string
@@ -117,8 +115,8 @@ export interface PaginateInterface {
    */
   <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
     route: R,
-    parameters?: R extends keyof OctokitTypes.Endpoints
-      ? OctokitTypes.Endpoints[R]["parameters"]
+    parameters?: R extends keyof PaginatingEndpoints
+      ? PaginatingEndpoints[R]["parameters"]
       : OctokitTypes.RequestParameters
   ): Promise<T[]>;
 
@@ -133,7 +131,7 @@ export interface PaginateInterface {
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     request: R,
     mapFn: (
-      response: GetResponseTypeFromEndpointMethod<R>,
+      response: OctokitTypes.GetResponseTypeFromEndpointMethod<R>,
       done: () => void
     ) => MR
   ): Promise<MR>;
@@ -149,7 +147,7 @@ export interface PaginateInterface {
     request: R,
     parameters: Parameters<R>[0],
     mapFn: (
-      response: GetResponseTypeFromEndpointMethod<R>,
+      response: OctokitTypes.GetResponseTypeFromEndpointMethod<R>,
       done?: () => void
     ) => MR
   ): Promise<MR>;
@@ -163,7 +161,7 @@ export interface PaginateInterface {
   <R extends OctokitTypes.RequestInterface>(
     request: R,
     parameters?: Parameters<R>[0]
-  ): Promise<GetResponseDataTypeFromEndpointMethod<R>>;
+  ): Promise<OctokitTypes.GetResponseDataTypeFromEndpointMethod<R>>;
 
   iterator: {
     // Using object as first parameter
@@ -187,13 +185,11 @@ export interface PaginateInterface {
      * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
      * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
-    <R extends keyof OctokitTypes.Endpoints>(
+    <R extends keyof PaginatingEndpoints>(
       route: R,
-      parameters?: OctokitTypes.Endpoints[R]["parameters"]
+      parameters?: PaginatingEndpoints[R]["parameters"]
     ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<
-        OctokitTypes.Endpoints[R]["response"]["data"]
-      >
+      OctokitTypes.OctokitResponse<PaginatingEndpoints[R]["response"]["data"]>
     >;
 
     /**
@@ -205,8 +201,8 @@ export interface PaginateInterface {
      */
     <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
       route: R,
-      parameters?: R extends keyof OctokitTypes.Endpoints
-        ? OctokitTypes.Endpoints[R]["parameters"]
+      parameters?: R extends keyof PaginatingEndpoints
+        ? PaginatingEndpoints[R]["parameters"]
         : OctokitTypes.RequestParameters
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
@@ -225,7 +221,9 @@ export interface PaginateInterface {
       request: R,
       parameters?: Parameters<R>[0]
     ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<GetResponseDataTypeFromEndpointMethod<R>>
+      OctokitTypes.OctokitResponse<
+        OctokitTypes.GetResponseDataTypeFromEndpointMethod<R>
+      >
     >;
   };
 }
