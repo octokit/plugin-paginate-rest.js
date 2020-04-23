@@ -166,10 +166,24 @@ export async function requestMethodWithParametersIterator() {
   }
 }
 
+// https://developer.github.com/v3/apps/installations/#list-repositories
 export async function knownRouteWithNamespacedResponse() {
-  const results = await octokit.paginate("GET /orgs/:org/repos", {
-    org: "octorg",
-  });
+  const results = await octokit.paginate("GET /installation/repositories");
+  for (const result of results) {
+    console.log(result.owner.login);
+  }
+}
+
+export async function knownRouteWithNamespacedResponseIterator() {
+  for await (const response of octokit.paginate.iterator(
+    "GET /installation/repositories"
+  )) {
+    console.log(response.data[0].owner.login);
+  }
+}
+
+export async function requestMethodWithNamespacedResponse() {
+  const results = await octokit.paginate(octokit.apps.listRepos);
   for (const result of results) {
     console.log(result.owner.login);
   }

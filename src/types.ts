@@ -25,6 +25,30 @@ import { PaginatingEndpoints } from "./generated/paginating-endpoints";
 //     : never
 //   : never;
 
+// https://stackoverflow.com/a/58980331/206879
+type KnownKeys<T> = Extract<
+  {
+    [K in keyof T]: string extends K ? never : number extends K ? never : K;
+  } extends { [_ in keyof T]: infer U }
+    ? U
+    : never,
+  keyof T
+>;
+type KeysMatching<T, V> = {
+  [K in keyof T]: T[K] extends V ? K : never;
+}[keyof T];
+type KnownKeysMatching<T, V> = KeysMatching<Pick<T, KnownKeys<T>>, V>;
+
+// For endpoints that respond with a namespaced response, we need to return the normalized
+// response the same way we do via src/normalize-paginated-list-response
+type GetResultsType<T> = T extends { data: any[] }
+  ? T["data"]
+  : T extends { data: object }
+  ? T["data"][KnownKeysMatching<T["data"], any[]>]
+  : never;
+
+type NormalizeResponse<T> = T & { data: GetResultsType<T> };
+
 export interface MapFunction<T = unknown, R = unknown> {
   (
     response: OctokitTypes.OctokitResponse<PaginationResults<T>>,
@@ -131,7 +155,9 @@ export interface PaginateInterface {
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     request: R,
     mapFn: (
-      response: OctokitTypes.GetResponseTypeFromEndpointMethod<R>,
+      response: NormalizeResponse<
+        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
+      >,
       done: () => void
     ) => MR
   ): Promise<MR>;
@@ -147,7 +173,9 @@ export interface PaginateInterface {
     request: R,
     parameters: Parameters<R>[0],
     mapFn: (
-      response: OctokitTypes.GetResponseTypeFromEndpointMethod<R>,
+      response: NormalizeResponse<
+        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
+      >,
       done?: () => void
     ) => MR
   ): Promise<MR>;
@@ -161,7 +189,9 @@ export interface PaginateInterface {
   <R extends OctokitTypes.RequestInterface>(
     request: R,
     parameters?: Parameters<R>[0]
-  ): Promise<OctokitTypes.GetResponseDataTypeFromEndpointMethod<R>>;
+  ): Promise<
+    NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>["data"]
+  >;
 
   iterator: {
     // Using object as first parameter
@@ -221,9 +251,7 @@ export interface PaginateInterface {
       request: R,
       parameters?: Parameters<R>[0]
     ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<
-        OctokitTypes.GetResponseDataTypeFromEndpointMethod<R>
-      >
+      NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
   };
 }
