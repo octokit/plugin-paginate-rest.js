@@ -12,20 +12,20 @@ export {
   Route,
 } from "@octokit/types";
 
-// https://stackoverflow.com/a/52991061/206879
-type RequiredKeys<T> = {
-  [K in keyof T]-?: string extends K
-    ? never
-    : number extends K
-    ? never
-    : {} extends Pick<T, K>
-    ? never
-    : K;
-} extends { [_ in keyof T]-?: infer U }
-  ? U extends keyof T
-    ? U
-    : never
-  : never;
+// // https://stackoverflow.com/a/52991061/206879
+// type RequiredKeys<T> = {
+//   [K in keyof T]-?: string extends K
+//     ? never
+//     : number extends K
+//     ? never
+//     : {} extends Pick<T, K>
+//     ? never
+//     : K;
+// } extends { [_ in keyof T]-?: infer U }
+//   ? U extends keyof T
+//     ? U
+//     : never
+//   : never;
 
 export interface MapFunction<T = unknown, R = unknown> {
   (
@@ -57,7 +57,7 @@ export interface PaginateInterface {
    */
   <T>(options: OctokitTypes.EndpointOptions): Promise<PaginationResults<T>>;
 
-  // Using string as first parameter
+  // Using route string as first parameter
 
   /**
    * Paginate a request using a known endpoint route string and map each response to a custom array
@@ -67,12 +67,10 @@ export interface PaginateInterface {
    */
   <R extends keyof OctokitTypes.Endpoints, MR extends unknown[]>(
     route: R,
-    mapFn: RequiredKeys<OctokitTypes.Endpoints[R]["parameters"]> extends never
-      ? (
-          response: OctokitTypes.Endpoints[R]["response"],
-          done: () => void
-        ) => MR
-      : never // endpoint has required parameters
+    mapFn: (
+      response: OctokitTypes.Endpoints[R]["response"],
+      done: () => void
+    ) => MR
   ): Promise<MR>;
 
   /**
@@ -134,9 +132,10 @@ export interface PaginateInterface {
    */
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     request: R,
-    mapFn: RequiredKeys<Parameters<R>[0]> extends never
-      ? (response: GetResponseTypeFromEndpointMethod<R>, done: () => void) => MR
-      : never // endpoint has required parameters
+    mapFn: (
+      response: GetResponseTypeFromEndpointMethod<R>,
+      done: () => void
+    ) => MR
   ): Promise<MR>;
 
   /**

@@ -41,7 +41,7 @@ export async function knownRouteWithMapFunction() {
 export async function knownRouteWithParametersAndMapFunction() {
   const results = await octokit.paginate(
     "GET /organizations",
-    { per_page: 1 },
+    { since: 123 },
     (response, done) => {
       done();
       return response.data.map((org) => {
@@ -163,5 +163,14 @@ export async function requestMethodWithParametersIterator() {
     }
   )) {
     console.log(response.data[0].id);
+  }
+}
+
+export async function knownRouteWithNamespacedResponse() {
+  const results = await octokit.paginate("GET /orgs/:org/repos", {
+    org: "octorg",
+  });
+  for (const result of results) {
+    console.log(result.owner.login);
   }
 }

@@ -13,15 +13,15 @@ describe("pagination", () => {
   it(".paginate()", async () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+      .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
         body: [ORG2],
         headers: {},
       });
@@ -32,14 +32,17 @@ describe("pagination", () => {
       },
     });
 
-    const organizations = await octokit.paginate("GET /organizations", {
+    const organizations = await octokit.paginate("GET /orgs/:org/repos", {
+      org: "octokit",
       per_page: 1,
     });
     expect(organizations).toStrictEqual([ORG1, ORG2]);
 
     await octokit
-      .paginate("GET /organizations", { per_page: 1 }, (response: any) =>
-        response.data.map((org: any) => org.id)
+      .paginate(
+        "GET /orgs/:org/repos",
+        { org: "octokit", per_page: 1 },
+        (response: any) => response.data.map((org: any) => org.id)
       )
       .then((organizations: any) => {
         expect(organizations).toStrictEqual([1, 2]);
@@ -48,7 +51,8 @@ describe("pagination", () => {
       .paginate<typeof ORG1, number>(
         {
           method: "GET",
-          url: "/organizations",
+          url: "/orgs/:org/repos",
+          org: "octokit",
           per_page: 1,
         },
         (response) => response.data.map((org) => org.id)
@@ -65,11 +69,11 @@ describe("pagination", () => {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2", {
+      .getOnce("https://pagination-test.com/orgs/octokit/repos?page=2", {
         body: [ORG2],
         headers: {},
       });
@@ -87,18 +91,21 @@ describe("pagination", () => {
   it(".paginate(request, options)", async () => {
     const mock = fetchMock
       .sandbox()
-      .getOnce("https://api.github.com/organizations?per_page=1", {
+      .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2&per_page=1", {
-        body: [ORG2],
-        headers: {},
-      });
+      .getOnce(
+        "https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1",
+        {
+          body: [ORG2],
+          headers: {},
+        }
+      );
 
     const octokit = new TestOctokit({
       request: {
@@ -106,7 +113,8 @@ describe("pagination", () => {
       },
     });
 
-    const organizations = await octokit.paginate(octokit.orgs.list, {
+    const organizations = await octokit.paginate(octokit.repos.listForOrg, {
+      org: "octokit",
       per_page: 1,
     });
     expect(organizations).toStrictEqual([ORG1, ORG2]);
@@ -115,18 +123,21 @@ describe("pagination", () => {
   it(".paginate(request, options, mapFunction)", async () => {
     const mock = fetchMock
       .sandbox()
-      .getOnce("https://api.github.com/organizations?per_page=1", {
+      .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2&per_page=1", {
-        body: [ORG2],
-        headers: {},
-      });
+      .getOnce(
+        "https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1",
+        {
+          body: [ORG2],
+          headers: {},
+        }
+      );
 
     const octokit = new TestOctokit({
       request: {
@@ -135,8 +146,9 @@ describe("pagination", () => {
     });
 
     const organizations = await octokit.paginate(
-      octokit.orgs.list,
+      octokit.repos.listForOrg,
       {
+        org: "octokit",
         per_page: 1,
       },
       (response) => response.data.map((org) => org.id)
@@ -147,15 +159,15 @@ describe("pagination", () => {
   it(".paginate() with map function returning undefined", () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+      .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
         body: [ORG2],
         headers: {},
       });
@@ -167,7 +179,9 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate("GET /organizations", { per_page: 1 }, () => [undefined])
+      .paginate("GET /orgs/:org/repos", { org: "octokit", per_page: 1 }, () => [
+        undefined,
+      ])
       .then((results) => {
         expect(results).toStrictEqual([undefined, undefined]);
       });
@@ -176,15 +190,15 @@ describe("pagination", () => {
   it(".paginate() with early exit", () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+      .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
         body: [ORG2],
         headers: {},
       });
@@ -196,10 +210,14 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate("GET /organizations", { per_page: 1 }, (response, done) => {
-        done();
-        return response.data.map((org) => org.id);
-      })
+      .paginate(
+        "GET /orgs/:org/repos",
+        { org: "octokit", per_page: 1 },
+        (response, done) => {
+          done();
+          return response.data.map((org) => org.id);
+        }
+      )
       .then((organizations) => {
         expect(organizations).toStrictEqual([1]);
       });
@@ -208,7 +226,7 @@ describe("pagination", () => {
   it(".paginate() with Link header pointing to different path", () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
@@ -228,7 +246,7 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate("GET /organizations", { per_page: 1 })
+      .paginate("GET /orgs/:org/repos", { org: "octokit", per_page: 1 })
       .then((organizations) => {
         expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
@@ -237,15 +255,15 @@ describe("pagination", () => {
   it("autopagination", () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+      .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
         body: [ORG2],
         headers: {},
       });
@@ -266,7 +284,8 @@ describe("pagination", () => {
     });
 
     return octokit
-      .request("GET /organizations", {
+      .request("GET /orgs/:org/repos", {
+        org: "octokit",
         per_page: 1,
         request: { paginate: true },
       })
@@ -306,11 +325,11 @@ describe("pagination", () => {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+            '<https://pagination-test.com/organizations?since=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2", {
+      .getOnce("https://pagination-test.com/organizations?since=2", {
         body: [ORG2],
         headers: {},
       });
@@ -340,15 +359,15 @@ describe("pagination", () => {
   it("paginate.iterator(route, parameters)", () => {
     const mock = fetchMock
       .sandbox()
-      .get("https://api.github.com/organizations?per_page=1", {
+      .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2&per_page=1>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .get("https://pagination-test.com/organizations?page=2&per_page=1", {
+      .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
         body: [ORG2],
         headers: {},
       });
@@ -360,7 +379,8 @@ describe("pagination", () => {
     });
 
     const iterator = octokit.paginate
-      .iterator("GET /organizations", {
+      .iterator("GET /orgs/:org/repos", {
+        org: "octokit",
         per_page: 1,
       })
       [Symbol.asyncIterator]();
@@ -384,11 +404,11 @@ describe("pagination", () => {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2", {
+      .getOnce("https://pagination-test.com/orgs/octokit/repos?page=2", {
         body: [ORG2],
         headers: {},
       });
@@ -425,11 +445,11 @@ describe("pagination", () => {
         body: [ORG1],
         headers: {
           link:
-            '<https://pagination-test.com/organizations?page=2>; rel="next"',
+            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
-      .getOnce("https://pagination-test.com/organizations?page=2", {
+      .getOnce("https://pagination-test.com/orgs/octokit/repos?page=2", {
         body: [ORG2],
         headers: {},
       });
