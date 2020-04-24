@@ -15,8 +15,6 @@
  * otherwise match: https://developer.github.com/v3/repos/statuses/#get-the-combined-status-for-a-specific-ref
  */
 
-import { Octokit } from "@octokit/core";
-
 import { OctokitResponse } from "./types";
 
 export function normalizePaginatedListResponse(
