@@ -2,7 +2,7 @@ import { Endpoints } from "@octokit/types";
 
 export interface PaginatingEndpoints {
   /**
-   * @see https://developer.github.com/v3/apps/#list-installations
+   * @see https://developer.github.com/v3/apps/#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
@@ -34,7 +34,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/gists/comments/#list-comments-on-a-gist
+   * @see https://developer.github.com/v3/gists/comments/#list-gist-comments
    */
   "GET /gists/:gist_id/comments": {
     parameters: Endpoints["GET /gists/:gist_id/comments"]["parameters"];
@@ -74,15 +74,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/gitignore/#listing-available-templates
-   */
-  "GET /gitignore/templates": {
-    parameters: Endpoints["GET /gitignore/templates"]["parameters"];
-    response: Endpoints["GET /gitignore/templates"]["response"];
-  };
-
-  /**
-   * @see https://developer.github.com/v3/apps/installations/#list-repositories
+   * @see https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-app-installation
    */
   "GET /installation/repositories": {
     parameters: Endpoints["GET /installation/repositories"]["parameters"];
@@ -97,14 +89,6 @@ export interface PaginatingEndpoints {
   "GET /issues": {
     parameters: Endpoints["GET /issues"]["parameters"];
     response: Endpoints["GET /issues"]["response"];
-  };
-
-  /**
-   * @see https://developer.github.com/v3/licenses/#list-commonly-used-licenses
-   */
-  "GET /licenses": {
-    parameters: Endpoints["GET /licenses"]["parameters"];
-    response: Endpoints["GET /licenses"]["response"];
   };
 
   /**
@@ -148,7 +132,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/#list-all-organizations
+   * @see https://developer.github.com/v3/orgs/#list-organizations
    */
   "GET /organizations": {
     parameters: Endpoints["GET /organizations"]["parameters"];
@@ -174,7 +158,27 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/blocking/#list-blocked-users
+   * @see https://developer.github.com/v3/actions/secrets/#list-organization-secrets
+   */
+  "GET /orgs/:org/actions/secrets": {
+    parameters: Endpoints["GET /orgs/:org/actions/secrets"]["parameters"];
+    response: Endpoints["GET /orgs/:org/actions/secrets"]["response"] & {
+      data: Endpoints["GET /orgs/:org/actions/secrets"]["response"]["data"]["secrets"];
+    };
+  };
+
+  /**
+   * @see https://developer.github.com/v3/actions/secrets/#list-selected-repositories-for-an-organization-secret
+   */
+  "GET /orgs/:org/actions/secrets/:secret_name/repositories": {
+    parameters: Endpoints["GET /orgs/:org/actions/secrets/:secret_name/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/:org/actions/secrets/:secret_name/repositories"]["response"] & {
+      data: Endpoints["GET /orgs/:org/actions/secrets/:secret_name/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
+   * @see https://developer.github.com/v3/orgs/blocking/#list-users-blocked-by-an-organization
    */
   "GET /orgs/:org/blocks": {
     parameters: Endpoints["GET /orgs/:org/blocks"]["parameters"];
@@ -182,7 +186,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/#list-credential-authorizations-for-an-organization
+   * @see https://developer.github.com/v3/orgs/#list-saml-sso-authorizations-for-an-organization
    */
   "GET /orgs/:org/credential-authorizations": {
     parameters: Endpoints["GET /orgs/:org/credential-authorizations"]["parameters"];
@@ -190,7 +194,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/hooks/#list-hooks
+   * @see https://developer.github.com/v3/orgs/hooks/#list-organization-webhooks
    */
   "GET /orgs/:org/hooks": {
     parameters: Endpoints["GET /orgs/:org/hooks"]["parameters"];
@@ -198,7 +202,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/#list-installations-for-an-organization
+   * @see https://developer.github.com/v3/orgs/#list-app-installations-for-an-organization
    */
   "GET /orgs/:org/installations": {
     parameters: Endpoints["GET /orgs/:org/installations"]["parameters"];
@@ -232,7 +236,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/members/#members-list
+   * @see https://developer.github.com/v3/orgs/members/#list-organization-members
    */
   "GET /orgs/:org/members": {
     parameters: Endpoints["GET /orgs/:org/members"]["parameters"];
@@ -256,7 +260,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators
+   * @see https://developer.github.com/v3/orgs/outside_collaborators/#list-outside-collaborators-for-an-organization
    */
   "GET /orgs/:org/outside_collaborators": {
     parameters: Endpoints["GET /orgs/:org/outside_collaborators"]["parameters"];
@@ -272,7 +276,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/members/#public-members-list
+   * @see https://developer.github.com/v3/orgs/members/#list-public-organization-members
    */
   "GET /orgs/:org/public_members": {
     parameters: Endpoints["GET /orgs/:org/public_members"]["parameters"];
@@ -288,7 +292,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/team_sync/#list-idp-groups-in-an-organization
+   * @see https://developer.github.com/v3/teams/team_sync/#list-idp-groups-for-an-organization
    */
   "GET /orgs/:org/team-sync/groups": {
     parameters: Endpoints["GET /orgs/:org/team-sync/groups"]["parameters"];
@@ -314,7 +318,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/discussion_comments/#list-comments
+   * @see https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comments
    */
   "GET /orgs/:org/teams/:team_slug/discussions/:discussion_number/comments": {
     parameters: Endpoints["GET /orgs/:org/teams/:team_slug/discussions/:discussion_number/comments"]["parameters"];
@@ -362,7 +366,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/#list-team-repos
+   * @see https://developer.github.com/v3/teams/#list-team-repositories
    */
   "GET /orgs/:org/teams/:team_slug/repos": {
     parameters: Endpoints["GET /orgs/:org/teams/:team_slug/repos"]["parameters"];
@@ -388,7 +392,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/projects/collaborators/#list-collaborators
+   * @see https://developer.github.com/v3/projects/collaborators/#list-project-collaborators
    */
   "GET /projects/:project_id/collaborators": {
     parameters: Endpoints["GET /projects/:project_id/collaborators"]["parameters"];
@@ -440,7 +444,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/actions/workflow-runs/#list-repository-workflow-runs
+   * @see https://developer.github.com/v3/actions/workflow-runs/#list-workflow-runs-for-a-repository
    */
   "GET /repos/:owner/:repo/actions/runs": {
     parameters: Endpoints["GET /repos/:owner/:repo/actions/runs"]["parameters"];
@@ -470,7 +474,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/actions/secrets/#list-secrets-for-a-repository
+   * @see https://developer.github.com/v3/actions/secrets/#list-repository-secrets
    */
   "GET /repos/:owner/:repo/actions/secrets": {
     parameters: Endpoints["GET /repos/:owner/:repo/actions/secrets"]["parameters"];
@@ -516,14 +520,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/branches/#list-required-status-checks-contexts-of-protected-branch
-   */
-  "GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts": {
-    parameters: Endpoints["GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"]["parameters"];
-    response: Endpoints["GET /repos/:owner/:repo/branches/:branch/protection/required_status_checks/contexts"]["response"];
-  };
-
-  /**
    * @see https://developer.github.com/v3/checks/runs/#list-check-run-annotations
    */
   "GET /repos/:owner/:repo/check-runs/:check_run_id/annotations": {
@@ -542,7 +538,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/collaborators/#list-collaborators
+   * @see https://developer.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
+   */
+  "GET /repos/:owner/:repo/code-scanning/alerts": {
+    parameters: Endpoints["GET /repos/:owner/:repo/code-scanning/alerts"]["parameters"];
+    response: Endpoints["GET /repos/:owner/:repo/code-scanning/alerts"]["response"];
+  };
+
+  /**
+   * @see https://developer.github.com/v3/repos/collaborators/#list-repository-collaborators
    */
   "GET /repos/:owner/:repo/collaborators": {
     parameters: Endpoints["GET /repos/:owner/:repo/collaborators"]["parameters"];
@@ -566,7 +570,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/commits/#list-commits-on-a-repository
+   * @see https://developer.github.com/v3/repos/commits/#list-commits
    */
   "GET /repos/:owner/:repo/commits": {
     parameters: Endpoints["GET /repos/:owner/:repo/commits"]["parameters"];
@@ -582,7 +586,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/comments/#list-comments-for-a-single-commit
+   * @see https://developer.github.com/v3/repos/comments/#list-commit-comments
    */
   "GET /repos/:owner/:repo/commits/:commit_sha/comments": {
     parameters: Endpoints["GET /repos/:owner/:repo/commits/:commit_sha/comments"]["parameters"];
@@ -590,7 +594,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-commit
+   * @see https://developer.github.com/v3/repos/commits/#list-pull-requests-associated-with-a-commit
    */
   "GET /repos/:owner/:repo/commits/:commit_sha/pulls": {
     parameters: Endpoints["GET /repos/:owner/:repo/commits/:commit_sha/pulls"]["parameters"];
@@ -618,7 +622,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/statuses/#list-statuses-for-a-specific-ref
+   * @see https://developer.github.com/v3/repos/statuses/#list-commit-statuses-for-a-reference
    */
   "GET /repos/:owner/:repo/commits/:ref/statuses": {
     parameters: Endpoints["GET /repos/:owner/:repo/commits/:ref/statuses"]["parameters"];
@@ -626,7 +630,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/#list-contributors
+   * @see https://developer.github.com/v3/repos/#list-repository-contributors
    */
   "GET /repos/:owner/:repo/contributors": {
     parameters: Endpoints["GET /repos/:owner/:repo/contributors"]["parameters"];
@@ -650,14 +654,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/downloads/#list-downloads-for-a-repository
-   */
-  "GET /repos/:owner/:repo/downloads": {
-    parameters: Endpoints["GET /repos/:owner/:repo/downloads"]["parameters"];
-    response: Endpoints["GET /repos/:owner/:repo/downloads"]["response"];
-  };
-
-  /**
    * @see https://developer.github.com/v3/repos/forks/#list-forks
    */
   "GET /repos/:owner/:repo/forks": {
@@ -674,7 +670,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/hooks/#list-hooks
+   * @see https://developer.github.com/v3/repos/hooks/#list-repository-webhooks
    */
   "GET /repos/:owner/:repo/hooks": {
     parameters: Endpoints["GET /repos/:owner/:repo/hooks"]["parameters"];
@@ -682,7 +678,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/invitations/#list-invitations-for-a-repository
+   * @see https://developer.github.com/v3/repos/invitations/#list-repository-invitations
    */
   "GET /repos/:owner/:repo/invitations": {
     parameters: Endpoints["GET /repos/:owner/:repo/invitations"]["parameters"];
@@ -698,7 +694,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/comments/#list-comments-on-an-issue
+   * @see https://developer.github.com/v3/issues/comments/#list-issue-comments
    */
   "GET /repos/:owner/:repo/issues/:issue_number/comments": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/:issue_number/comments"]["parameters"];
@@ -706,7 +702,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/events/#list-events-for-an-issue
+   * @see https://developer.github.com/v3/issues/events/#list-issue-events
    */
   "GET /repos/:owner/:repo/issues/:issue_number/events": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/:issue_number/events"]["parameters"];
@@ -714,7 +710,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/labels/#list-labels-on-an-issue
+   * @see https://developer.github.com/v3/issues/labels/#list-labels-for-an-issue
    */
   "GET /repos/:owner/:repo/issues/:issue_number/labels": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/:issue_number/labels"]["parameters"];
@@ -730,7 +726,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/timeline/#list-events-for-an-issue
+   * @see https://developer.github.com/v3/issues/timeline/#list-timeline-events-for-an-issue
    */
   "GET /repos/:owner/:repo/issues/:issue_number/timeline": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/:issue_number/timeline"]["parameters"];
@@ -738,7 +734,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/comments/#list-comments-in-a-repository
+   * @see https://developer.github.com/v3/issues/comments/#list-issue-comments-for-a-repository
    */
   "GET /repos/:owner/:repo/issues/comments": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/comments"]["parameters"];
@@ -754,7 +750,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/events/#list-events-for-a-repository
+   * @see https://developer.github.com/v3/issues/events/#list-issue-events-for-a-repository
    */
   "GET /repos/:owner/:repo/issues/events": {
     parameters: Endpoints["GET /repos/:owner/:repo/issues/events"]["parameters"];
@@ -770,7 +766,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/labels/#list-all-labels-for-this-repository
+   * @see https://developer.github.com/v3/issues/labels/#list-labels-for-a-repository
    */
   "GET /repos/:owner/:repo/labels": {
     parameters: Endpoints["GET /repos/:owner/:repo/labels"]["parameters"];
@@ -778,7 +774,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/#list-languages
+   * @see https://developer.github.com/v3/repos/#list-repository-languages
    */
   "GET /repos/:owner/:repo/languages": {
     parameters: Endpoints["GET /repos/:owner/:repo/languages"]["parameters"];
@@ -786,7 +782,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/milestones/#list-milestones-for-a-repository
+   * @see https://developer.github.com/v3/issues/milestones/#list-milestones
    */
   "GET /repos/:owner/:repo/milestones": {
     parameters: Endpoints["GET /repos/:owner/:repo/milestones"]["parameters"];
@@ -794,7 +790,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/issues/labels/#get-labels-for-every-issue-in-a-milestone
+   * @see https://developer.github.com/v3/issues/labels/#list-labels-for-issues-in-a-milestone
    */
   "GET /repos/:owner/:repo/milestones/:milestone_number/labels": {
     parameters: Endpoints["GET /repos/:owner/:repo/milestones/:milestone_number/labels"]["parameters"];
@@ -810,7 +806,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/pages/#list-pages-builds
+   * @see https://developer.github.com/v3/repos/pages/#list-github-pages-builds
    */
   "GET /repos/:owner/:repo/pages/builds": {
     parameters: Endpoints["GET /repos/:owner/:repo/pages/builds"]["parameters"];
@@ -834,7 +830,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/pulls/comments/#list-comments-on-a-pull-request
+   * @see https://developer.github.com/v3/pulls/comments/#list-review-comments-on-a-pull-request
    */
   "GET /repos/:owner/:repo/pulls/:pull_number/comments": {
     parameters: Endpoints["GET /repos/:owner/:repo/pulls/:pull_number/comments"]["parameters"];
@@ -858,7 +854,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/pulls/review_requests/#list-review-requests
+   * @see https://developer.github.com/v3/pulls/review_requests/#list-requested-reviewers-for-a-pull-request
    */
   "GET /repos/:owner/:repo/pulls/:pull_number/requested_reviewers": {
     parameters: Endpoints["GET /repos/:owner/:repo/pulls/:pull_number/requested_reviewers"]["parameters"];
@@ -868,7 +864,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/pulls/reviews/#list-reviews-on-a-pull-request
+   * @see https://developer.github.com/v3/pulls/reviews/#list-reviews-for-a-pull-request
    */
   "GET /repos/:owner/:repo/pulls/:pull_number/reviews": {
     parameters: Endpoints["GET /repos/:owner/:repo/pulls/:pull_number/reviews"]["parameters"];
@@ -876,7 +872,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/pulls/comments/#list-comments-in-a-repository
+   * @see https://developer.github.com/v3/pulls/reviews/#list-comments-for-a-pull-request-review
+   */
+  "GET /repos/:owner/:repo/pulls/:pull_number/reviews/:review_id/comments": {
+    parameters: Endpoints["GET /repos/:owner/:repo/pulls/:pull_number/reviews/:review_id/comments"]["parameters"];
+    response: Endpoints["GET /repos/:owner/:repo/pulls/:pull_number/reviews/:review_id/comments"]["response"];
+  };
+
+  /**
+   * @see https://developer.github.com/v3/pulls/comments/#list-review-comments-in-a-repository
    */
   "GET /repos/:owner/:repo/pulls/comments": {
     parameters: Endpoints["GET /repos/:owner/:repo/pulls/comments"]["parameters"];
@@ -892,7 +896,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/releases/#list-releases-for-a-repository
+   * @see https://developer.github.com/v3/repos/releases/#list-releases
    */
   "GET /repos/:owner/:repo/releases": {
     parameters: Endpoints["GET /repos/:owner/:repo/releases"]["parameters"];
@@ -900,7 +904,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/releases/#list-assets-for-a-release
+   * @see https://developer.github.com/v3/repos/releases/#list-release-assets
    */
   "GET /repos/:owner/:repo/releases/:release_id/assets": {
     parameters: Endpoints["GET /repos/:owner/:repo/releases/:release_id/assets"]["parameters"];
@@ -924,7 +928,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/#list-tags
+   * @see https://developer.github.com/v3/repos/#list-repository-tags
    */
   "GET /repos/:owner/:repo/tags": {
     parameters: Endpoints["GET /repos/:owner/:repo/tags"]["parameters"];
@@ -932,7 +936,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/#list-teams
+   * @see https://developer.github.com/v3/repos/#list-repository-teams
    */
   "GET /repos/:owner/:repo/teams": {
     parameters: Endpoints["GET /repos/:owner/:repo/teams"]["parameters"];
@@ -948,7 +952,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/scim/#get-a-list-of-provisioned-identities
+   * @see https://developer.github.com/v3/scim/#list-scim-provisioned-identities
    */
   "GET /scim/v2/organizations/:org/Users": {
     parameters: Endpoints["GET /scim/v2/organizations/:org/Users"]["parameters"];
@@ -966,7 +970,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/discussion_comments/#list-comments-legacy
+   * @see https://developer.github.com/v3/teams/discussion_comments/#list-discussion-comments-legacy
    */
   "GET /teams/:team_id/discussions/:discussion_number/comments": {
     parameters: Endpoints["GET /teams/:team_id/discussions/:discussion_number/comments"]["parameters"];
@@ -1014,7 +1018,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/#list-team-repos-legacy
+   * @see https://developer.github.com/v3/teams/#list-team-repositories-legacy
    */
   "GET /teams/:team_id/repos": {
     parameters: Endpoints["GET /teams/:team_id/repos"]["parameters"];
@@ -1048,7 +1052,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/blocking/#list-blocked-users
+   * @see https://developer.github.com/v3/users/blocking/#list-users-blocked-by-the-authenticated-user
    */
   "GET /user/blocks": {
     parameters: Endpoints["GET /user/blocks"]["parameters"];
@@ -1056,7 +1060,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/emails/#list-email-addresses-for-a-user
+   * @see https://developer.github.com/v3/users/emails/#list-email-addresses-for-the-authenticated-user
    */
   "GET /user/emails": {
     parameters: Endpoints["GET /user/emails"]["parameters"];
@@ -1072,7 +1076,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/followers/#list-users-followed-by-the-authenticated-user
+   * @see https://developer.github.com/v3/users/followers/#list-the-people-the-authenticated-user-follows
    */
   "GET /user/following": {
     parameters: Endpoints["GET /user/following"]["parameters"];
@@ -1080,7 +1084,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/gpg_keys/#list-your-gpg-keys
+   * @see https://developer.github.com/v3/users/gpg_keys/#list-gpg-keys-for-the-authenticated-user
    */
   "GET /user/gpg_keys": {
     parameters: Endpoints["GET /user/gpg_keys"]["parameters"];
@@ -1088,7 +1092,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/apps/installations/#list-installations-for-a-user
+   * @see https://developer.github.com/v3/apps/installations/#list-app-installations-accessible-to-the-user-access-token
    */
   "GET /user/installations": {
     parameters: Endpoints["GET /user/installations"]["parameters"];
@@ -1098,7 +1102,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-for-an-installation
+   * @see https://developer.github.com/v3/apps/installations/#list-repositories-accessible-to-the-user-access-token
    */
   "GET /user/installations/:installation_id/repositories": {
     parameters: Endpoints["GET /user/installations/:installation_id/repositories"]["parameters"];
@@ -1116,7 +1120,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/keys/#list-your-public-keys
+   * @see https://developer.github.com/v3/users/keys/#list-public-ssh-keys-for-the-authenticated-user
    */
   "GET /user/keys": {
     parameters: Endpoints["GET /user/keys"]["parameters"];
@@ -1140,7 +1144,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/members/#list-your-organization-memberships
+   * @see https://developer.github.com/v3/orgs/members/#list-organization-memberships-for-the-authenticated-user
    */
   "GET /user/memberships/orgs": {
     parameters: Endpoints["GET /user/memberships/orgs"]["parameters"];
@@ -1156,7 +1160,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/#list-your-organizations
+   * @see https://developer.github.com/v3/orgs/#list-organizations-for-the-authenticated-user
    */
   "GET /user/orgs": {
     parameters: Endpoints["GET /user/orgs"]["parameters"];
@@ -1164,7 +1168,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-a-user
+   * @see https://developer.github.com/v3/users/emails/#list-public-email-addresses-for-the-authenticated-user
    */
   "GET /user/public_emails": {
     parameters: Endpoints["GET /user/public_emails"]["parameters"];
@@ -1172,7 +1176,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/repos/invitations/#list-a-users-repository-invitations
+   * @see https://developer.github.com/v3/repos/invitations/#list-repository-invitations-for-the-authenticated-user
    */
   "GET /user/repository_invitations": {
     parameters: Endpoints["GET /user/repository_invitations"]["parameters"];
@@ -1196,7 +1200,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/teams/#list-user-teams
+   * @see https://developer.github.com/v3/teams/#list-teams-for-the-authenticated-user
    */
   "GET /user/teams": {
     parameters: Endpoints["GET /user/teams"]["parameters"];
@@ -1204,7 +1208,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/#get-all-users
+   * @see https://developer.github.com/v3/users/#list-users
    */
   "GET /users": {
     parameters: Endpoints["GET /users"]["parameters"];
@@ -1220,7 +1224,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/users/followers/#list-users-followed-by-another-user
+   * @see https://developer.github.com/v3/users/followers/#list-the-people-a-user-follows
    */
   "GET /users/:username/following": {
     parameters: Endpoints["GET /users/:username/following"]["parameters"];
@@ -1252,7 +1256,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/orgs/#list-user-organizations
+   * @see https://developer.github.com/v3/orgs/#list-organizations-for-a-user
    */
   "GET /users/:username/orgs": {
     parameters: Endpoints["GET /users/:username/orgs"]["parameters"];
