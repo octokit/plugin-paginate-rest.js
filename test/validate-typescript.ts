@@ -183,7 +183,9 @@ export async function knownRouteWithNamespacedResponseIterator() {
 }
 
 export async function requestMethodWithNamespacedResponse() {
-  const results = await octokit.paginate(octokit.apps.listRepos);
+  const results = await octokit.paginate(
+    octokit.apps.listReposAccessibleToInstallation
+  );
   for (const result of results) {
     console.log(result.owner.login);
   }
