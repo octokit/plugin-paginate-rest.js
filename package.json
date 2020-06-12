@@ -28,7 +28,7 @@
     "@octokit/types": "^5.0.0"
   },
   "devDependencies": {
-    "@octokit/core": "^2.0.0",
+    "@octokit/core": "^3.0.0",
     "@octokit/plugin-rest-endpoint-methods": "^4.0.0",
     "@pika/pack": "^0.5.0",
     "@pika/plugin-build-node": "^0.9.0",
