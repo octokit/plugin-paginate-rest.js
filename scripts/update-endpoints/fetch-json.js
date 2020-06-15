@@ -12,6 +12,7 @@ const QUERY = `
     endpoints(version: $version) {
       url
       id
+      scope
       documentationUrl
       renamed {
         note

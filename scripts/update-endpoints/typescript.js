@@ -12,7 +12,9 @@ const ENDPOINTS = require("./generated/endpoints.json");
 const endpoints = [];
 
 for (const endpoint of ENDPOINTS) {
-  if (!/^list\b/.test(endpoint.id)) {
+  // All paginating endpoints have an operation ID starting with "list",
+  // with the exception of search endpoints
+  if (!/^list\b/.test(endpoint.id) && endpoint.scope !== "search") {
     continue;
   }
 
