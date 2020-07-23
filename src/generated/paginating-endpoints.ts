@@ -1114,14 +1114,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://developer.github.com/v3/migrations/users/#list-repositories-for-a-user-migration
-   */
-  "GET /user/:migration_id/repositories": {
-    parameters: Endpoints["GET /user/:migration_id/repositories"]["parameters"];
-    response: Endpoints["GET /user/:migration_id/repositories"]["response"];
-  };
-
-  /**
    * @see https://developer.github.com/v3/users/blocking/#list-users-blocked-by-the-authenticated-user
    */
   "GET /user/blocks": {
@@ -1227,6 +1219,14 @@ export interface PaginatingEndpoints {
   "GET /user/migrations": {
     parameters: Endpoints["GET /user/migrations"]["parameters"];
     response: Endpoints["GET /user/migrations"]["response"];
+  };
+
+  /**
+   * @see https://developer.github.com/v3/migrations/users/#list-repositories-for-a-user-migration
+   */
+  "GET /user/migrations/:migration_id/repositories": {
+    parameters: Endpoints["GET /user/migrations/:migration_id/repositories"]["parameters"];
+    response: Endpoints["GET /user/migrations/:migration_id/repositories"]["response"];
   };
 
   /**

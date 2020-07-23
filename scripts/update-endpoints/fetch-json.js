@@ -32,9 +32,7 @@ main();
 
 async function main() {
   const { endpoints } = await graphql(QUERY, {
-    // url: "https://github-openapi-graphql-server.vercel.app/api/graphql",
-    url:
-      "https://github-openapi-graphql-server-git-zeit-v2.gr2m.vercel.app/api/graphql",
+    url: "https://github-openapi-graphql-server.vercel.app/api/graphql",
     version,
   });
 
