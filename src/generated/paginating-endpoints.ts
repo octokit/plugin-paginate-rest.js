@@ -952,6 +952,26 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://developer.github.com/v3/enterprise-admin/scim/#list-provisioned-scim groups-for-an-enterprise
+   */
+  "GET /scim/v2/enterprises/:enterprise/Groups": {
+    parameters: Endpoints["GET /scim/v2/enterprises/:enterprise/Groups"]["parameters"];
+    response: Endpoints["GET /scim/v2/enterprises/:enterprise/Groups"]["response"] & {
+      data: Endpoints["GET /scim/v2/enterprises/:enterprise/Groups"]["response"]["data"]["schemas"];
+    };
+  };
+
+  /**
+   * @see https://developer.github.com/v3/enterprise-admin/scim/#list-scim-provisioned-identities-for-an-enterprise
+   */
+  "GET /scim/v2/enterprises/:enterprise/Users": {
+    parameters: Endpoints["GET /scim/v2/enterprises/:enterprise/Users"]["parameters"];
+    response: Endpoints["GET /scim/v2/enterprises/:enterprise/Users"]["response"] & {
+      data: Endpoints["GET /scim/v2/enterprises/:enterprise/Users"]["response"]["data"]["schemas"];
+    };
+  };
+
+  /**
    * @see https://developer.github.com/v3/scim/#list-scim-provisioned-identities
    */
   "GET /scim/v2/organizations/:org/Users": {

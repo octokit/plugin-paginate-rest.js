@@ -2464,6 +2464,182 @@
     "responses": []
   },
   {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
+    "id": "delete-scim-group-from-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-group-from-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}",
+    "id": "delete-user-from-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-user-from-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
+    "id": "get-provisioning-information-for-enterprise-group",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise group",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"abcd27f8-a9aa-11ea-8221-f59b2be9cccc\",\"externalId\":null,\"displayName\":\"octo-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"},{\"value\":\"aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"display\":\"hubot@example.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T03:10:17.000+10:0\",\"lastModified\":\"2020-06-09T03:10:17.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/abcd27f8-a9aa-11ea-8221-f59b2be9cccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}",
+    "id": "get-provisioning-information-for-enterprise-user",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#get-scim-provisioning-information-for-an-enterprise-user",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Mona\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups",
+    "id": "list-provisioned-groups-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#list-provisioned-scim groups-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:api:messages:2.0:ListResponse\"],\"totalResults\":2,\"itemsPerPage\":2,\"startIndex\":1,\"Resources\":[{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"abcd27f8-a9aa-11ea-8221-f59b2be9cccc\",\"externalId\":null,\"displayName\":\"octo-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"},{\"value\":\"aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"display\":\"hubot@example.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T03:10:17.000+10:00\",\"lastModified\":\"2020-06-09T03:10:17.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/abcd27f8-a9aa-11ea-8221-f59b2be9cccc\"}},{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"5e75bbbb-aa1a-11ea-8644-75ff655cdddd\",\"externalId\":null,\"displayName\":\"octo-docs-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T16:28:01.000+10:00\",\"lastModified\":\"2020-06-09T16:28:01.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/5e75bbbb-aa1a-11ea-8644-75ff655cdddd\"}}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users",
+    "id": "list-provisioned-identities-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#list-scim-provisioned-identities-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:api:messages:2.0:ListResponse\"],\"totalResults\":2,\"itemsPerPage\":2,\"startIndex\":1,\"Resources\":[{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"octocat@github.com\",\"name\":{\"givenName\":\"Mona\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"octocat@github.com\",\"primary\":true,\"type\":\"work\"}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2020-05-30T04:02:34.000+10:00\",\"lastModified\":\"2020-05-30T04:05:04.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}},{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"e18b8c34-a6b2-11ea-9d70-54abbd1c8fd5\",\"externalId\":\"sdfoiausdofiua\",\"userName\":\"hubot@example.com\",\"name\":{\"givenName\":\"hu\",\"familyName\":\"bot\"},\"emails\":[{\"value\":\"hubot@example.com\",\"type\":\"work\",\"primary\":true}],\"groups\":[],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2020-06-05T08:29:40.000+10:00\",\"lastModified\":\"2020-06-05T08:30:19.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/e18b8c34-a6b2-11ea-9d70-54abbd1c8fd5\"}}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups",
+    "id": "provision-and-invite-enterprise-group",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#provision-a-scim-enterprise-group-and-invite-users",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"abcd27f8-a9aa-11ea-8221-f59b2be9cccc\",\"externalId\":null,\"displayName\":\"octo-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"},{\"value\":\"aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"display\":\"hubot@example.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T03:10:17.000+10:0\",\"lastModified\":\"2020-06-09T03:10:17.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/abcd27f8-a9aa-11ea-8221-f59b2be9cccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users",
+    "id": "provision-and-invite-enterprise-user",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#provision-and-invite-a-scim-enterprise-user",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Mona\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
+    "id": "set-information-for-provisioned-enterprise-group",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-group",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"abcd27f8-a9aa-11ea-8221-f59b2be9cccc\",\"externalId\":null,\"displayName\":\"octo-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"},{\"value\":\"aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/aaaa8c34-a6b2-11ea-9d70-bbbbbd1c8fd5\",\"display\":\"hubot@example.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T03:10:17.000+10:0\",\"lastModified\":\"2020-06-09T03:10:17.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/abcd27f8-a9aa-11ea-8221-f59b2be9cccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}",
+    "id": "set-information-for-provisioned-enterprise-user",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#set-scim-information-for-a-provisioned-enterprise-user",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Mona\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
+    "id": "update-attribute-for-enterprise-group",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-group",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:Group\"],\"id\":\"abcd27f8-a9aa-11ea-8221-f59b2be9cccc\",\"externalId\":null,\"displayName\":\"octo-org\",\"members\":[{\"value\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"$ref\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"display\":\"octocat@github.com\"}],\"meta\":{\"resourceType\":\"Group\",\"created\":\"2020-06-09T03:10:17.000+10:00\",\"lastModified\":\"2020-06-09T03:10:17.000+10:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Groups/abcd27f8-a9aa-11ea-8221-f59b2be9cccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/scim/v2/enterprises/{enterprise}/Users/{scim_user_id}",
+    "id": "update-attribute-for-enterprise-user",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#update-an-attribute-for-a-scim-enterprise-user",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Monalisa\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true},{\"value\":\"monalisa@octocat.github.com\",\"type\":\"home\"}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/gists/{gist_id}/star",
     "id": "check-is-starred",
     "scope": "gists",
