@@ -1,9 +1,25 @@
 [
   {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}",
+    "id": "add-repo-access-to-self-hosted-runner-group-in-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#add-repository-acess-to-a-self-hosted-runner-group-in-an-organization",
+    "renamed": null,
+    "responses": []
+  },
+  {
     "url": "/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}",
     "id": "add-selected-repo-to-org-secret",
     "scope": "actions",
     "documentationUrl": "https://developer.github.com/v3/actions/secrets/#add-selected-repository-to-an-organization-secret",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}",
+    "id": "add-self-hosted-runner-to-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#add-a-self-hosted-runner-to-a-group-for-an-organization",
     "renamed": null,
     "responses": []
   },
@@ -142,6 +158,22 @@
     ]
   },
   {
+    "url": "/orgs/{org}/actions/runner-groups",
+    "id": "create-self-hosted-runner-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#create-a-self-hosted-runner-group-for-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_repositories_url\":\"https://api.github.com/orgs/octo-org/actions/runner-groups/2/repositories\",\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/runners\",\"inherited\":false}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches",
     "id": "create-workflow-dispatch",
     "scope": "actions",
@@ -196,6 +228,14 @@
     "id": "delete-self-hosted-runner-from-repo",
     "scope": "actions",
     "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runners/#delete-a-self-hosted-runner-from-a-repository",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}",
+    "id": "delete-self-hosted-runner-group-from-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#delete-a-self-hosted-runner-group-from-an-organization",
     "renamed": null,
     "responses": []
   },
@@ -393,7 +433,7 @@
       {
         "examples": [
           {
-            "data": "{\"id\":23,\"name\":\"MBP\",\"os\":\"macos\",\"status\":\"online\",\"busy\":false}"
+            "data": "{\"id\":23,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true}"
           }
         ]
       }
@@ -409,7 +449,7 @@
       {
         "examples": [
           {
-            "data": "{\"id\":23,\"name\":\"MBP\",\"os\":\"macos\",\"status\":\"online\",\"busy\":false}"
+            "data": "{\"id\":23,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true}"
           }
         ]
       }
@@ -425,7 +465,23 @@
       {
         "examples": [
           {
-            "data": "{\"id\":23,\"name\":\"MBP\",\"os\":\"macos\",\"status\":\"online\",\"busy\":false}"
+            "data": "{\"id\":23,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}",
+    "id": "get-self-hosted-runner-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#get-a-self-hosted-runner-group-for-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_repositories_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/repositories\",\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/runners\",\"inherited\":false}"
           }
         ]
       }
@@ -580,6 +636,22 @@
     ]
   },
   {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
+    "id": "list-repo-access-to-self-hosted-runner-group-in-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-repository-access-to-a-self-hosted-runner-group-in-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":1,\"repositories\":[{\"id\":1296269,\"node_id\":\"MDEwOlJlcG9zaXRvcnkxMjk2MjY5\",\"name\":\"Hello-World\",\"full_name\":\"octocat/Hello-World\",\"owner\":{\"login\":\"octocat\",\"id\":1,\"node_id\":\"MDQ6VXNlcjE=\",\"avatar_url\":\"https://github.com/images/error/octocat_happy.gif\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/octocat\",\"html_url\":\"https://github.com/octocat\",\"followers_url\":\"https://api.github.com/users/octocat/followers\",\"following_url\":\"https://api.github.com/users/octocat/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/octocat/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/octocat/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/octocat/subscriptions\",\"organizations_url\":\"https://api.github.com/users/octocat/orgs\",\"repos_url\":\"https://api.github.com/users/octocat/repos\",\"events_url\":\"https://api.github.com/users/octocat/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/octocat/received_events\",\"type\":\"User\",\"site_admin\":false},\"private\":false,\"html_url\":\"https://github.com/octocat/Hello-World\",\"description\":\"This your first repo!\",\"fork\":false,\"url\":\"https://api.github.com/repos/octocat/Hello-World\",\"archive_url\":\"http://api.github.com/repos/octocat/Hello-World/{archive_format}{/ref}\",\"assignees_url\":\"http://api.github.com/repos/octocat/Hello-World/assignees{/user}\",\"blobs_url\":\"http://api.github.com/repos/octocat/Hello-World/git/blobs{/sha}\",\"branches_url\":\"http://api.github.com/repos/octocat/Hello-World/branches{/branch}\",\"collaborators_url\":\"http://api.github.com/repos/octocat/Hello-World/collaborators{/collaborator}\",\"comments_url\":\"http://api.github.com/repos/octocat/Hello-World/comments{/number}\",\"commits_url\":\"http://api.github.com/repos/octocat/Hello-World/commits{/sha}\",\"compare_url\":\"http://api.github.com/repos/octocat/Hello-World/compare/{base}...{head}\",\"contents_url\":\"http://api.github.com/repos/octocat/Hello-World/contents/{+path}\",\"contributors_url\":\"http://api.github.com/repos/octocat/Hello-World/contributors\",\"deployments_url\":\"http://api.github.com/repos/octocat/Hello-World/deployments\",\"downloads_url\":\"http://api.github.com/repos/octocat/Hello-World/downloads\",\"events_url\":\"http://api.github.com/repos/octocat/Hello-World/events\",\"forks_url\":\"http://api.github.com/repos/octocat/Hello-World/forks\",\"git_commits_url\":\"http://api.github.com/repos/octocat/Hello-World/git/commits{/sha}\",\"git_refs_url\":\"http://api.github.com/repos/octocat/Hello-World/git/refs{/sha}\",\"git_tags_url\":\"http://api.github.com/repos/octocat/Hello-World/git/tags{/sha}\",\"git_url\":\"git:github.com/octocat/Hello-World.git\",\"issue_comment_url\":\"http://api.github.com/repos/octocat/Hello-World/issues/comments{/number}\",\"issue_events_url\":\"http://api.github.com/repos/octocat/Hello-World/issues/events{/number}\",\"issues_url\":\"http://api.github.com/repos/octocat/Hello-World/issues{/number}\",\"keys_url\":\"http://api.github.com/repos/octocat/Hello-World/keys{/key_id}\",\"labels_url\":\"http://api.github.com/repos/octocat/Hello-World/labels{/name}\",\"languages_url\":\"http://api.github.com/repos/octocat/Hello-World/languages\",\"merges_url\":\"http://api.github.com/repos/octocat/Hello-World/merges\",\"milestones_url\":\"http://api.github.com/repos/octocat/Hello-World/milestones{/number}\",\"notifications_url\":\"http://api.github.com/repos/octocat/Hello-World/notifications{?since,all,participating}\",\"pulls_url\":\"http://api.github.com/repos/octocat/Hello-World/pulls{/number}\",\"releases_url\":\"http://api.github.com/repos/octocat/Hello-World/releases{/id}\",\"ssh_url\":\"git@github.com:octocat/Hello-World.git\",\"stargazers_url\":\"http://api.github.com/repos/octocat/Hello-World/stargazers\",\"statuses_url\":\"http://api.github.com/repos/octocat/Hello-World/statuses/{sha}\",\"subscribers_url\":\"http://api.github.com/repos/octocat/Hello-World/subscribers\",\"subscription_url\":\"http://api.github.com/repos/octocat/Hello-World/subscription\",\"tags_url\":\"http://api.github.com/repos/octocat/Hello-World/tags\",\"teams_url\":\"http://api.github.com/repos/octocat/Hello-World/teams\",\"trees_url\":\"http://api.github.com/repos/octocat/Hello-World/git/trees{/sha}\",\"clone_url\":\"https://github.com/octocat/Hello-World.git\",\"mirror_url\":\"git:git.example.com/octocat/Hello-World\",\"hooks_url\":\"http://api.github.com/repos/octocat/Hello-World/hooks\",\"svn_url\":\"https://svn.github.com/octocat/Hello-World\",\"homepage\":\"https://github.com\",\"language\":null,\"forks_count\":9,\"stargazers_count\":80,\"watchers_count\":80,\"size\":108,\"default_branch\":\"master\",\"open_issues_count\":0,\"is_template\":true,\"topics\":[\"octocat\",\"atom\",\"electron\",\"api\"],\"has_issues\":true,\"has_projects\":true,\"has_wiki\":true,\"has_pages\":false,\"has_downloads\":true,\"archived\":false,\"disabled\":false,\"visibility\":\"public\",\"pushed_at\":\"2011-01-26T19:06:43Z\",\"created_at\":\"2011-01-26T19:01:12Z\",\"updated_at\":\"2011-01-26T19:14:43Z\",\"permissions\":{\"admin\":false,\"push\":false,\"pull\":true},\"allow_rebase_merge\":true,\"template_repository\":null,\"temp_clone_token\":\"ABTLWHOULUVAXGTRYU7OC2876QJ2O\",\"allow_squash_merge\":true,\"delete_branch_on_merge\":true,\"allow_merge_commit\":true,\"subscribers_count\":42,\"network_count\":0}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/repos/{owner}/{repo}/actions/secrets",
     "id": "list-repo-secrets",
     "scope": "actions",
@@ -696,6 +768,22 @@
     ]
   },
   {
+    "url": "/orgs/{org}/actions/runner-groups",
+    "id": "list-self-hosted-runner-groups-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-self-hosted-runner-groups-for-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":3,\"runner_groups\":[{\"id\":1,\"name\":\"Default\",\"visibility\":\"all\",\"default\":true,\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/1/runners\",\"inherited\":false},{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_repositories_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/repositories\",\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/runners\",\"inherited\":true},{\"id\":3,\"name\":\"expensive-hardware\",\"visibility\":\"private\",\"default\":false,\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/3/runners\",\"inherited\":false}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/orgs/{org}/actions/runners",
     "id": "list-self-hosted-runners-for-org",
     "scope": "actions",
@@ -705,7 +793,7 @@
       {
         "examples": [
           {
-            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"MBP\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"iMac\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
+            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"linux_runner\",\"os\":\"linux\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
           }
         ]
       }
@@ -721,7 +809,23 @@
       {
         "examples": [
           {
-            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"MBP\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"iMac\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
+            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"linux_runner\",\"os\":\"linux\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
+    "id": "list-self-hosted-runners-in-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#list-self-hosted-runners-in-a-group-for-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"linux_runner\",\"os\":\"linux\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
           }
         ]
       }
@@ -804,6 +908,14 @@
     "responses": []
   },
   {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories/{repository_id}",
+    "id": "remove-repo-access-to-self-hosted-runner-group-in-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#remove-repository-access-to-a-self-hosted-runner-group-in-an-organization",
+    "renamed": null,
+    "responses": []
+  },
+  {
     "url": "/orgs/{org}/actions/secrets/{secret_name}/repositories/{repository_id}",
     "id": "remove-selected-repo-from-org-secret",
     "scope": "actions",
@@ -822,12 +934,52 @@
     "responses": []
   },
   {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners/{runner_id}",
+    "id": "remove-self-hosted-runner-from-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#remove-a-self-hosted-runner-from-a-group-for-an-organization",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
+    "id": "set-repo-access-to-self-hosted-runner-group-in-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#set-repository-access-to-a-self-hosted-runner-group-in-an-organization",
+    "renamed": null,
+    "responses": []
+  },
+  {
     "url": "/orgs/{org}/actions/secrets/{secret_name}/repositories",
     "id": "set-selected-repos-for-org-secret",
     "scope": "actions",
     "documentationUrl": "https://developer.github.com/v3/actions/secrets/#set-selected-repositories-for-an-organization-secret",
     "renamed": null,
     "responses": []
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
+    "id": "set-self-hosted-runners-in-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/sef-hosted-runner-groups/#set-self-hosted-runners-in-a-group-for-an-organization",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/orgs/{org}/actions/runner-groups/{runner_group_id}",
+    "id": "update-self-hosted-runner-group-for-org",
+    "scope": "actions",
+    "documentationUrl": "https://developer.github.com/v3/actions/self-hosted-runner-groups/#update-a-self-hosted-runner-group-for-an-organization",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_repositories_url\":\"https://api.github.com/orgs/octo-org/actions/runner-groups/2/repositories\",\"runners_url\":\"https://api.github.com/orgs/octo-org/actions/runner_groups/2/runners\",\"inherited\":false}"
+          }
+        ]
+      }
+    ]
   },
   {
     "url": "/user/starred/{owner}/{repo}",
@@ -2043,22 +2195,6 @@
     "responses": []
   },
   {
-    "url": "/enterprises/{enterprise_id}/settings/billing/actions",
-    "id": "get-github-actions-billing-ghe",
-    "scope": "billing",
-    "documentationUrl": "https://developer.github.com/v3/billing/#get-github-actions-billing-for-an-enterprise",
-    "renamed": null,
-    "responses": [
-      {
-        "examples": [
-          {
-            "data": "{\"total_minutes_used\":305,\"total_paid_minutes_used\":0,\"included_minutes\":3000,\"minutes_used_breakdown\":{\"UBUNTU\":205,\"MACOS\":10,\"WINDOWS\":90}}"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "url": "/orgs/{org}/settings/billing/actions",
     "id": "get-github-actions-billing-org",
     "scope": "billing",
@@ -2091,22 +2227,6 @@
     ]
   },
   {
-    "url": "/enterprises/{enterprise_id}/settings/billing/packages",
-    "id": "get-github-packages-billing-ghe",
-    "scope": "billing",
-    "documentationUrl": "https://developer.github.com/v3/billing/#get-github-packages-billing-for-an-enterprise",
-    "renamed": null,
-    "responses": [
-      {
-        "examples": [
-          {
-            "data": "{\"total_gigabytes_bandwidth_used\":50,\"total_paid_gigabytes_bandwidth_used\":40,\"included_gigabytes_bandwidth\":10}"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "url": "/orgs/{org}/settings/billing/packages",
     "id": "get-github-packages-billing-org",
     "scope": "billing",
@@ -2133,22 +2253,6 @@
         "examples": [
           {
             "data": "{\"total_gigabytes_bandwidth_used\":50,\"total_paid_gigabytes_bandwidth_used\":40,\"included_gigabytes_bandwidth\":10}"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "url": "/enterprises/{enterprise_id}/settings/billing/shared-storage",
-    "id": "get-shared-storage-billing-ghe",
-    "scope": "billing",
-    "documentationUrl": "https://developer.github.com/v3/billing/#get-shared-storage-billing-for-an-enterprise",
-    "renamed": null,
-    "responses": [
-      {
-        "examples": [
-          {
-            "data": "{\"days_left_in_billing_cycle\":20,\"estimated_paid_storage_for_month\":15,\"estimated_storage_for_month\":40}"
           }
         ]
       }
@@ -2464,10 +2568,90 @@
     "responses": []
   },
   {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}",
+    "id": "add-org-access-to-self-hosted-runner-group-in-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#add-organization-access-to-a-self-hosted-runner-group-in-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}",
+    "id": "add-self-hosted-runner-to-runner-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#add-a-self-hosted-runner-to-a-group-for-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runners/registration-token",
+    "id": "create-registration-token-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#create-a-registration-token-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"token\":\"LLBF3JGZDX3P5PMEXLND6TS6FCWO6\",\"expires_at\":\"2020-01-22T12:13:35.123-08:00\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runners/remove-token",
+    "id": "create-remove-token-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#create-a-remove-token-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"token\":\"AABF3JGZDX3P5PMEXLND6TS6FCWO6\",\"expires_at\":\"2020-01-29T12:13:35.123-08:00\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups",
+    "id": "create-self-hosted-runner-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#create-self-hosted-runner-group-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_organizations_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/organizations\",\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/runners\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
     "id": "delete-scim-group-from-enterprise",
     "scope": "enterprise-admin",
     "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-group-from-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runners/{runner_id}",
+    "id": "delete-self-hosted-runner-from-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#delete-self-hosted-runner-from-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}",
+    "id": "delete-self-hosted-runner-group-from-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#delete-a-self-hosted-runner-group-from-an-enterprise",
     "renamed": null,
     "responses": []
   },
@@ -2478,6 +2662,38 @@
     "documentationUrl": "https://developer.github.com/v3/enterprise-admin/scim/#delete-a-scim-user-from-an-enterprise",
     "renamed": null,
     "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/settings/billing/actions",
+    "id": "get-github-actions-billing-ghe",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/billing/#get-github-actions-billing-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_minutes_used\":305,\"total_paid_minutes_used\":0,\"included_minutes\":3000,\"minutes_used_breakdown\":{\"UBUNTU\":205,\"MACOS\":10,\"WINDOWS\":90}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/settings/billing/packages",
+    "id": "get-github-packages-billing-ghe",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/billing/#get-github-packages-billing-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_gigabytes_bandwidth_used\":50,\"total_paid_gigabytes_bandwidth_used\":40,\"included_gigabytes_bandwidth\":10}"
+          }
+        ]
+      }
+    ]
   },
   {
     "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
@@ -2506,6 +2722,70 @@
         "examples": [
           {
             "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Mona\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runners/{runner_id}",
+    "id": "get-self-hosted-runner-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#get-a-self-hosted-runner-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":23,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"online\",\"busy\":true}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}",
+    "id": "get-self-hosted-runner-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#get-a-self-hosted-runner-group-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_organizations_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/organizations\",\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/runners\"}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/settings/billing/shared-storage",
+    "id": "get-shared-storage-billing-ghe",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/billing/#get-shared-storage-billing-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"days_left_in_billing_cycle\":20,\"estimated_paid_storage_for_month\":15,\"estimated_storage_for_month\":40}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations",
+    "id": "list-org-access-to-self-hosted-runner-group-in-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":1,\"organizations\":[{\"login\":\"octocat\",\"id\":161335,\"node_id\":\"MDEwOlJlcG9zaXRvcnkxMjk2MjY5\",\"url\":\"https://api.github.com/orgs/octo-org\",\"repos_url\":\"https://api.github.com/orgs/octo-org/repos\",\"events_url\":\"https://api.github.com/orgs/octo-org/events\",\"hooks_url\":\"https://api.github.com/orgs/octo-org/hooks\",\"issues_url\":\"https://api.github.com/orgs/octo-org/issues\",\"members_url\":\"https://api.github.com/orgs/octo-org/members{/member}\",\"public_members_url\":\"https://api.github.com/orgs/octo-org/public_members{/member}\",\"avatar_url\":\"https://github.com/images/error/octocat_happy.gif\",\"description\":\"A great organization\"}]}"
           }
         ]
       }
@@ -2544,6 +2824,70 @@
     ]
   },
   {
+    "url": "/enterprises/{enterprise}/actions/runners/downloads",
+    "id": "list-runner-applications-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#list-runner-applications-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "[{\"os\":\"osx\",\"architecture\":\"x64\",\"download_url\":\"https://github.com/actions/runner/releases/download/v2.164.0/actions-runner-osx-x64-2.164.0.tar.gz\",\"filename\":\"actions-runner-osx-x64-2.164.0.tar.gz\"},{\"os\":\"linux\",\"architecture\":\"x64\",\"download_url\":\"https://github.com/actions/runner/releases/download/v2.164.0/actions-runner-linux-x64-2.164.0.tar.gz\",\"filename\":\"actions-runner-linux-x64-2.164.0.tar.gz\"},{\"os\":\"linux\",\"architecture\":\"arm\",\"download_url\":\"https://github.com/actions/runner/releases/download/v2.164.0/actions-runner-linux-arm-2.164.0.tar.gz\",\"filename\":\"actions-runner-linux-arm-2.164.0.tar.gz\"},{\"os\":\"win\",\"architecture\":\"x64\",\"download_url\":\"https://github.com/actions/runner/releases/download/v2.164.0/actions-runner-win-x64-2.164.0.zip\",\"filename\":\"actions-runner-win-x64-2.164.0.zip\"},{\"os\":\"linux\",\"architecture\":\"arm64\",\"download_url\":\"https://github.com/actions/runner/releases/download/v2.164.0/actions-runner-linux-arm64-2.164.0.tar.gz\",\"filename\":\"actions-runner-linux-arm64-2.164.0.tar.gz\"}]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups",
+    "id": "list-self-hosted-runner-groups-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runner-groups-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":3,\"runner_groups\":[{\"id\":1,\"name\":\"Default\",\"visibility\":\"all\",\"default\":true,\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner_groups/1/runners\"},{\"id\":2,\"name\":\"octo-runner-group\",\"visibility\":\"selected\",\"default\":false,\"selected_organizations_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner_groups/2/organizations\",\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner_groups/2/runners\"},{\"id\":3,\"name\":\"expensive-hardware\",\"visibility\":\"private\",\"default\":false,\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner_groups/3/runners\"}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runners",
+    "id": "list-self-hosted-runners-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runners-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"linux_runner\",\"os\":\"linux\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners",
+    "id": "list-self-hosted-runners-in-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#list-self-hosted-runners-in-a-group-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"total_count\":2,\"runners\":[{\"id\":23,\"name\":\"linux_runner\",\"os\":\"linux\",\"status\":\"online\",\"busy\":true},{\"id\":24,\"name\":\"mac_runner\",\"os\":\"macos\",\"status\":\"offline\",\"busy\":false}]}"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "url": "/scim/v2/enterprises/{enterprise}/Groups",
     "id": "provision-and-invite-enterprise-group",
     "scope": "enterprise-admin",
@@ -2574,6 +2918,22 @@
         ]
       }
     ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations/{org_id}",
+    "id": "remove-org-access-to-self-hosted-runner-group-in-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#remove-organization-access-to-a-self-hosted-runner-group-in-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners/{runner_id}",
+    "id": "remove-self-hosted-runner-from-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#remove-a-self-hosted-runner-from-a-group-for-an-enterprise",
+    "renamed": null,
+    "responses": []
   },
   {
     "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
@@ -2608,6 +2968,22 @@
     ]
   },
   {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations",
+    "id": "set-org-access-to-self-hosted-runner-group-in-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#set-organization-access-to-a-self-hosted-runner-group-in-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners",
+    "id": "set-self-hosted-in-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#set-self-hosted-runners-in-a-group-for-an-enterprise",
+    "renamed": null,
+    "responses": []
+  },
+  {
     "url": "/scim/v2/enterprises/{enterprise}/Groups/{scim_group_id}",
     "id": "update-attribute-for-enterprise-group",
     "scope": "enterprise-admin",
@@ -2634,6 +3010,22 @@
         "examples": [
           {
             "data": "{\"schemas\":[\"urn:ietf:params:scim:schemas:core:2.0:User\"],\"id\":\"92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\",\"externalId\":\"00dowz5dr9oSfDFRA0h7\",\"userName\":\"mona.octocat@okta.example.com\",\"name\":{\"givenName\":\"Monalisa\",\"familyName\":\"Octocat\"},\"emails\":[{\"value\":\"mona.octocat@okta.example.com\",\"type\":\"work\",\"primary\":true},{\"value\":\"monalisa@octocat.github.com\",\"type\":\"home\"}],\"groups\":[{\"value\":\"468dd3fa-a1d6-11ea-9031-15a1f0d7811d\"}],\"active\":true,\"meta\":{\"resourceType\":\"User\",\"created\":\"2017-03-09T16:11:13-05:00\",\"lastModified\":\"2017-03-09T16:11:13-05:00\",\"location\":\"https://api.github.com/scim/v2/enterprises/octo-corp/Users/92b58aaa-a1d6-11ea-8227-b9ce9e023ccc\"}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/enterprises/{enterprise}/actions/runner-groups/{runner_group_id}",
+    "id": "update-self-hosted-runner-group-for-enterprise",
+    "scope": "enterprise-admin",
+    "documentationUrl": "https://developer.github.com/v3/enterprise-admin/actions/#update-a-self-hosted-runner-group-for-an-enterprise",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"id\":2,\"name\":\"Expensive hardware runners\",\"visibility\":\"selected\",\"default\":false,\"selected_organizations_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/organizations\",\"runners_url\":\"https://api.github.com/enterprises/octo-corp/actions/runner-groups/2/runners\"}"
           }
         ]
       }
