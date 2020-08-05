@@ -27,6 +27,9 @@
   "dependencies": {
     "@octokit/types": "^5.2.0"
   },
+  "peerDependencies": {
+    "@octokit/core": ">=3"
+  },
   "devDependencies": {
     "@octokit/core": "^3.0.0",
     "@octokit/plugin-rest-endpoint-methods": "^4.0.0",
