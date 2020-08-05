@@ -5,7 +5,7 @@ import { iterator } from "./iterator";
 import { PaginateInterface } from "./types";
 export { PaginateInterface } from "./types";
 
-import { Octokit } from "@octokit/core";
+import type { Octokit } from "@octokit/core";
 
 /**
  * @param octokit Octokit instance
