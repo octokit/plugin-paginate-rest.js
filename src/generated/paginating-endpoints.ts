@@ -624,6 +624,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://developer.github.com/v3/code-scanning/#list-recent-analyses
+   */
+  "GET /repos/:owner/:repo/code-scanning/analyses": {
+    parameters: Endpoints["GET /repos/:owner/:repo/code-scanning/analyses"]["parameters"];
+    response: Endpoints["GET /repos/:owner/:repo/code-scanning/analyses"]["response"];
+  };
+
+  /**
    * @see https://developer.github.com/v3/repos/collaborators/#list-repository-collaborators
    */
   "GET /repos/:owner/:repo/collaborators": {

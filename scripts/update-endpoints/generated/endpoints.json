@@ -2462,7 +2462,7 @@
     ]
   },
   {
-    "url": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_id}",
+    "url": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}",
     "id": "get-alert",
     "scope": "code-scanning",
     "documentationUrl": "https://developer.github.com/v3/code-scanning/#get-a-code-scanning-alert",
@@ -2471,7 +2471,7 @@
       {
         "examples": [
           {
-            "data": "{\"rule_id\":\"js/useless-expression\",\"rule_severity\":\"warning\",\"rule_description\":\"Expression has no effect\",\"tool\":\"CodeQL\",\"created_at\":\"2020-05-06T12:00:00Z\",\"open\":true,\"closed_by\":null,\"closed_at\":null,\"url\":\"https://api.github.com/repos/Octo-org/octo-repo/code-scanning/alerts/88\",\"html_url\":\"https://github.com/Octo-org/octo-repo/security/code-scanning/88\"}"
+            "data": "{\"number\":22,\"created_at\":\"2020-06-19T11:21:34Z\",\"url\":\"https://api.github.com/repos/github/hello-world/code-scanning/alerts/22\",\"html_url\":\"https://github.com/github/hello-world/code-scanning/22\",\"instances\":[{\"ref\":\"refs/heads/codeql-analysis-yml\",\"analysis_key\":\".github/workflows/codeql-analysis.yml:CodeQL-Build\",\"environment\":{},\"state\":\"fixed\"},{\"ref\":\"refs/pull/3740/head\",\"analysis_key\":\".github/workflows/codeql-analysis.yml:CodeQL-Build\",\"environment\":{},\"state\":\"fixed\"}],\"state\":\"fixed\",\"dismissed_by\":null,\"dismissed_at\":null,\"dismissed_reason\":null,\"rule\":{\"id\":\"js/polynomial-redos\",\"severity\":\"warning\",\"description\":\"Polynomial regular expression used on uncontrolled data\"},\"tool\":{\"name\":\"CodeQL command-line toolchain\",\"version\":null}}"
           }
         ]
       }
@@ -2487,11 +2487,51 @@
       {
         "examples": [
           {
-            "data": "[{\"rule_id\":\"js/trivial-conditional\",\"rule_severity\":\"warning\",\"rule_description\":\"Useless conditional\",\"tool\":\"CodeQL\",\"created_at\":\"2020-05-06T12:00:00Z\",\"open\":true,\"closed_by\":null,\"closed_at\":null,\"url\":\"https://api.github.com/repos/Octo-org/octo-repo/code-scanning/alerts/25\",\"html_url\":\"https://github.com/Octo-org/octo-repo/security/code-scanning/25\"},{\"rule_id\":\"js/useless-expression\",\"rule_severity\":\"warning\",\"rule_description\":\"Expression has no effect\",\"tool\":\"CodeQL\",\"created_at\":\"2020-05-06T12:00:00Z\",\"open\":true,\"closed_by\":null,\"closed_at\":null,\"url\":\"https://api.github.com/repos/Octo-org/octo-repo/code-scanning/alerts/88\",\"html_url\":\"https://github.com/Octo-org/octo-repo/security/code-scanning/88\"}]"
+            "data": "[{\"number\":4,\"created_at\":\"2020-02-13T12:29:18Z\",\"url\":\"https://api.github.com/repos/github/hello-world/code-scanning/alerts/4\",\"html_url\":\"https://github.com/github/hello-world/code-scanning/4\",\"state\":\"open\",\"dismissed_by\":null,\"dismissed_at\":null,\"dismissed_reason\":null,\"rule\":{\"id\":\"js/zipslip\",\"severity\":\"error\",\"description\":\"Arbitrary file write during zip extraction\"},\"tool\":{\"name\":\"CodeQL command-line toolchain\",\"version\":null}},{\"number\":3,\"created_at\":\"2020-02-13T12:29:18Z\",\"url\":\"https://api.github.com/repos/github/hello-world/code-scanning/alerts/3\",\"html_url\":\"https://github.com/dsp-testing/github/hello-world/code-scanning/3\",\"state\":\"open\",\"dismissed_by\":null,\"dismissed_at\":null,\"dismissed_reason\":null,\"rule\":{\"id\":\"js/zipslip\",\"severity\":\"error\",\"description\":\"Arbitrary file write during zip extraction\"},\"tool\":{\"name\":\"CodeQL command-line toolchain\",\"version\":null}}]"
           }
         ]
       }
     ]
+  },
+  {
+    "url": "/repos/{owner}/{repo}/code-scanning/analyses",
+    "id": "list-recent-analyses",
+    "scope": "code-scanning",
+    "documentationUrl": "https://developer.github.com/v3/code-scanning/#list-recent-analyses",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "[{\"ref\":\"refs/heads/master\",\"commit_sha\":\"d99612c3e1f2970085cfbaeadf8f010ef69bad83\",\"analysis_key\":\".github/workflows/codeql-analysis.yml:analyze\",\"tool_name\":\"CodeQL command-line toolchain\",\"environment\":\"{}\",\"error\":\"\",\"created_at\":\"2020-08-27T15:05:21Z\"},{\"ref\":\"refs/heads/my-branch\",\"commit_sha\":\"c8cff6510d4d084fb1b4aa13b64b97ca12b07321\",\"analysis_key\":\".github/workflows/shiftleft.yml:build\",\"tool_name\":\"Python Security Analysis\",\"environment\":\"{}\",\"error\":\"\",\"created_at\":\"2020-08-31T22:46:44Z\"}]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/repos/{owner}/{repo}/code-scanning/alerts/{alert_number}",
+    "id": "update-alert",
+    "scope": "code-scanning",
+    "documentationUrl": "https://developer.github.com/v3/code-scanning/#upload-a-code-scanning-alert",
+    "renamed": null,
+    "responses": [
+      {
+        "examples": [
+          {
+            "data": "{\"number\":22,\"created_at\":\"2020-08-25T21:28:36Z\",\"url\":\"https://api.github.com/repos/github/hello-world/code-scanning/alerts/22\",\"html_url\":\"https://github.com/github/hello-world/code-scanning/22\",\"instances\":[{\"ref\":\"refs/heads/codeql-analysis-yml\",\"analysis_key\":\".github/workflows/codeql-analysis.yml:CodeQL-Build\",\"environment\":{},\"state\":\"dismissed\"},{\"ref\":\"refs/pull/3740/head\",\"analysis_key\":\".github/workflows/codeql-analysis.yml:CodeQL-Build\",\"environment\":{},\"state\":\"dismissed\"}],\"state\":\"dismissed\",\"dismissed_by\":{\"login\":\"octocat\",\"id\":1,\"node_id\":\"MDQ6VXNlcjE=\",\"avatar_url\":\"https://github.com/images/error/octocat_happy.gif\",\"gravatar_id\":\"\",\"url\":\"https://api.github.com/users/octocat\",\"html_url\":\"https://github.com/octocat\",\"followers_url\":\"https://api.github.com/users/octocat/followers\",\"following_url\":\"https://api.github.com/users/octocat/following{/other_user}\",\"gists_url\":\"https://api.github.com/users/octocat/gists{/gist_id}\",\"starred_url\":\"https://api.github.com/users/octocat/starred{/owner}{/repo}\",\"subscriptions_url\":\"https://api.github.com/users/octocat/subscriptions\",\"organizations_url\":\"https://api.github.com/users/octocat/orgs\",\"repos_url\":\"https://api.github.com/users/octocat/repos\",\"events_url\":\"https://api.github.com/users/octocat/events{/privacy}\",\"received_events_url\":\"https://api.github.com/users/octocat/received_events\",\"type\":\"User\",\"site_admin\":false},\"dismissed_at\":\"2020-09-02T22:34:56Z\",\"dismissed_reason\":\"false positive\",\"rule\":{\"id\":\"js/polynomial-redos\",\"severity\":\"warning\",\"description\":\"Polynomial regular expression used on uncontrolled data\"},\"tool\":{\"name\":\"CodeQL command-line toolchain\",\"version\":null}}"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "url": "/repos/{owner}/{repo}/code-scanning/sarifs",
+    "id": "upload-sarif",
+    "scope": "code-scanning",
+    "documentationUrl": "https://developer.github.com/v3/code-scanning/#upload-a-sarif-analysis",
+    "renamed": null,
+    "responses": []
   },
   {
     "url": "/codes_of_conduct",
