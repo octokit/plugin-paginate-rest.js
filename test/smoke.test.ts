@@ -1,14 +1,18 @@
 import { Octokit } from "@octokit/core";
 
-import { paginateRest } from "../src";
+import { paginateRest, composePaginateRest } from "../src";
 
 describe("Smoke test", () => {
-  it("is a function", () => {
+  it("paginateRest", () => {
     expect(paginateRest).toBeInstanceOf(Function);
   });
 
   it("paginateRest.VERSION is set", () => {
     expect(paginateRest.VERSION).toEqual("0.0.0-development");
+  });
+
+  it("composePaginateRest", () => {
+    expect(composePaginateRest).toBeInstanceOf(Function);
   });
 
   it("Loads plugin", () => {

@@ -1,11 +1,12 @@
-import { VERSION } from "./version";
+import { Octokit } from "@octokit/core";
 
+import { VERSION } from "./version";
 import { paginate } from "./paginate";
 import { iterator } from "./iterator";
 import { PaginateInterface } from "./types";
-export { PaginateInterface } from "./types";
 
-import { Octokit } from "@octokit/core";
+export { PaginateInterface } from "./types";
+export { composePaginateRest } from "./compose-paginate";
 
 /**
  * @param octokit Octokit instance
