@@ -4,7 +4,6 @@ import { normalizePaginatedListResponse } from "./normalize-paginated-list-respo
 import {
   EndpointOptions,
   RequestInterface,
-  OctokitResponse,
   RequestParameters,
   Route,
 } from "./types";
@@ -25,24 +24,20 @@ export function iterator(
 
   return {
     [Symbol.asyncIterator]: () => ({
-      next() {
-        if (!url) {
-          return Promise.resolve({ done: true });
-        }
+      async next() {
+        if (!url) return { done: true };
 
-        return requestMethod({ method, url, headers })
-          .then(normalizePaginatedListResponse)
+        const response = await requestMethod({ method, url, headers });
+        const normalizedResponse = normalizePaginatedListResponse(response);
 
-          .then((response: OctokitResponse<any>) => {
-            // `response.headers.link` format:
-            // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
-            // sets `url` to undefined if "next" URL is not present or `link` header is not set
-            url = ((response.headers.link || "").match(
-              /<([^>]+)>;\s*rel="next"/
-            ) || [])[1];
+        // `response.headers.link` format:
+        // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
+        // sets `url` to undefined if "next" URL is not present or `link` header is not set
+        url = ((normalizedResponse.headers.link || "").match(
+          /<([^>]+)>;\s*rel="next"/
+        ) || [])[1];
 
-            return { value: response };
-          });
+        return { value: normalizedResponse };
       },
     }),
   };
