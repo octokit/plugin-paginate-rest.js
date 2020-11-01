@@ -18,7 +18,10 @@ Load `@octokit/plugin-paginate-rest` and [`@octokit/core`](https://github.com/oc
 ```html
 <script type="module">
   import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-  import { paginateRest } from "https://cdn.skypack.dev/@octokit/plugin-paginate-rest";
+  import {
+    paginateRest,
+    composePaginateRest,
+  } from "https://cdn.skypack.dev/@octokit/plugin-paginate-rest";
 </script>
 ```
 
@@ -31,7 +34,10 @@ Install with `npm install @octokit/core @octokit/plugin-paginate-rest`. Optional
 
 ```js
 const { Octokit } = require("@octokit/core");
-const { paginateRest } = require("@octokit/plugin-paginate-rest");
+const {
+  paginateRest,
+  composePaginateRest,
+} = require("@octokit/plugin-paginate-rest");
 ```
 
 </td></tr>
@@ -49,6 +55,22 @@ const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
   since: "2010-10-01",
   per_page: 100,
 });
+```
+
+If you want to utilize the pagination methods in another plugin, use `composePaginateRest`.
+
+```js
+function myPlugin(octokit, options) {
+  return {
+    allStars({owner, repo}) => {
+      return composePaginateRest(
+        octokit,
+        "GET /repos/{owner}/{repo}/stargazers",
+        {owner, repo }
+      )
+    }
+  }
+}
 ```
 
 ## `octokit.paginate()`
@@ -140,6 +162,10 @@ for await (const response of octokit.paginate.iterator(
   console.log(response.data.title);
 }
 ```
+
+## `composePaginateRest` and `composePaginateRest.iterator`
+
+The `compose*` methods work just like their `octokit.*` counterparts described above, with the differenct that both methods require an `octokit` instance to be passed as first argument
 
 ## How it works
 
