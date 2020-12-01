@@ -31,7 +31,7 @@ describe("pagination", () => {
       },
     });
 
-    const organizations = await octokit.paginate("GET /orgs/:org/repos", {
+    const organizations = await octokit.paginate("GET /orgs/{org}/repos", {
       org: "octokit",
       per_page: 1,
     });
@@ -39,7 +39,7 @@ describe("pagination", () => {
 
     await octokit
       .paginate(
-        "GET /orgs/:org/repos",
+        "GET /orgs/{org}/repos",
         { org: "octokit", per_page: 1 },
         (response: any) => response.data.map((org: any) => org.id)
       )
@@ -50,7 +50,7 @@ describe("pagination", () => {
       .paginate<typeof ORG1, number>(
         {
           method: "GET",
-          url: "/orgs/:org/repos",
+          url: "/orgs/{org}/repos",
           org: "octokit",
           per_page: 1,
         },
@@ -178,9 +178,11 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate("GET /orgs/:org/repos", { org: "octokit", per_page: 1 }, () => [
-        undefined,
-      ])
+      .paginate(
+        "GET /orgs/{org}/repos",
+        { org: "octokit", per_page: 1 },
+        () => [undefined]
+      )
       .then((results) => {
         expect(results).toStrictEqual([undefined, undefined]);
       });
@@ -210,7 +212,7 @@ describe("pagination", () => {
 
     return octokit
       .paginate(
-        "GET /orgs/:org/repos",
+        "GET /orgs/{org}/repos",
         { org: "octokit", per_page: 1 },
         (response, done) => {
           done();
@@ -245,7 +247,7 @@ describe("pagination", () => {
     });
 
     return octokit
-      .paginate("GET /orgs/:org/repos", { org: "octokit", per_page: 1 })
+      .paginate("GET /orgs/{org}/repos", { org: "octokit", per_page: 1 })
       .then((organizations) => {
         expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
@@ -283,7 +285,7 @@ describe("pagination", () => {
     });
 
     return octokit
-      .request("GET /orgs/:org/repos", {
+      .request("GET /orgs/{org}/repos", {
         org: "octokit",
         per_page: 1,
         request: { paginate: true },
@@ -307,7 +309,7 @@ describe("pagination", () => {
     const iterator = octokit.paginate
       .iterator({
         method: "GET",
-        url: "/orgs/:org",
+        url: "/orgs/{org}",
         org: "myorg",
       })
       [Symbol.asyncIterator]();
@@ -378,7 +380,7 @@ describe("pagination", () => {
     });
 
     const iterator = octokit.paginate
-      .iterator("GET /orgs/:org/repos", {
+      .iterator("GET /orgs/{org}/repos", {
         org: "octokit",
         per_page: 1,
       })
@@ -654,7 +656,7 @@ describe("pagination", () => {
       });
   });
 
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/artifacts)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts)", () => {
     const result1 = {
       total_count: 2,
       artifacts: [
@@ -705,7 +707,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/runs/:run_id/artifacts",
+        url: "/repos/{owner}/{repo}/actions/runs/{run_id}/artifacts",
         owner: "octocat",
         repo: "hello-world",
         run_id: 123,
@@ -719,7 +721,7 @@ describe("pagination", () => {
       });
   });
 
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/secrets)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/secrets)", () => {
     const result1 = {
       total_count: 2,
       secrets: [
@@ -770,7 +772,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/secrets",
+        url: "/repos/{owner}/{repo}/actions/secrets",
         owner: "octocat",
         repo: "hello-world",
         per_page: 1,
@@ -780,7 +782,7 @@ describe("pagination", () => {
       });
   });
 
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/workflows)", () => {
     const result1 = {
       total_count: 2,
       workflows: [
@@ -831,7 +833,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/workflows",
+        url: "/repos/{owner}/{repo}/actions/workflows",
         owner: "octocat",
         repo: "hello-world",
         per_page: 1,
@@ -843,7 +845,7 @@ describe("pagination", () => {
         ]);
       });
   });
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs/:run_id/jobs)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs)", () => {
     const result1 = {
       total_count: 2,
       jobs: [
@@ -894,7 +896,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/runs/:run_id/jobs",
+        url: "/repos/{owner}/{repo}/actions/runs/{run_id}/jobs",
         owner: "octocat",
         repo: "hello-world",
         run_id: 123,
@@ -904,7 +906,7 @@ describe("pagination", () => {
         expect(results).toStrictEqual([...result1.jobs, ...result2.jobs]);
       });
   });
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/workflows/:workflow_id/runs)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs)", () => {
     const result1 = {
       total_count: 2,
       workflow_runs: [
@@ -955,7 +957,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/workflows/:workflow_id/runs",
+        url: "/repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs",
         owner: "octocat",
         repo: "hello-world",
         workflow_id: 123,
@@ -968,7 +970,7 @@ describe("pagination", () => {
         ]);
       });
   });
-  it(".paginate() with results namespace (GET /repos/:owner/:repo/actions/runs)", () => {
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/runs)", () => {
     const result1 = {
       total_count: 2,
       workflow_runs: [
@@ -1019,7 +1021,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/runs",
+        url: "/repos/{owner}/{repo}/actions/runs",
         owner: "octocat",
         repo: "hello-world",
         per_page: 1,
@@ -1093,7 +1095,7 @@ describe("pagination", () => {
     return octokit
       .paginate<typeof result>({
         method: "GET",
-        url: "/repos/:owner/:repo/commits/:ref/status",
+        url: "/repos/{owner}/{repo}/commits/{ref}/status",
         owner: "octokit",
         repo: "rest.js",
         ref: "abc4567",
@@ -1154,7 +1156,7 @@ describe("pagination", () => {
     return octokit
       .paginate({
         method: "GET",
-        url: "/repos/:owner/:repo/actions/runs",
+        url: "/repos/{owner}/{repo}/actions/runs",
         owner: "octocat",
         repo: "hello-world",
         per_page: 1,

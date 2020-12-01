@@ -50,6 +50,8 @@ type GetResultsType<T> = T extends { data: any[] }
 
 type NormalizeResponse<T> = T & { data: GetResultsType<T> };
 
+type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
+
 export interface MapFunction<T = unknown, R = unknown> {
   (
     response: OctokitTypes.OctokitResponse<PaginationResults<T>>,
@@ -85,7 +87,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using a known endpoint route string and map each response to a custom array
    *
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
@@ -99,7 +101,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using a known endpoint route string and parameters, and map each response to a custom array
    *
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
@@ -115,13 +117,13 @@ export interface PaginateInterface {
   /**
    * Paginate a request using an known endpoint route string
    *
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <R extends keyof PaginatingEndpoints>(
     route: R,
     parameters?: PaginatingEndpoints[R]["parameters"]
-  ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
+  ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   // I tried this version which would make the `parameters` argument required if the route has required parameters
   // but it caused some weird errors
@@ -130,12 +132,12 @@ export interface PaginateInterface {
   //   ...args: RequiredKeys<PaginatingEndpoints[R]["parameters"]> extends never
   //     ? [PaginatingEndpoints[R]["parameters"]?]
   //     : [PaginatingEndpoints[R]["parameters"]]
-  // ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
+  // ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   /**
    * Paginate a request using an unknown endpoint route string
    *
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
@@ -213,21 +215,21 @@ export interface PaginateInterface {
      * Get an async iterator to paginate a request using a known endpoint route string and optional parameters
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
-     * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+     * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
      * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
     <R extends keyof PaginatingEndpoints>(
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"]
     ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginatingEndpoints[R]["response"]["data"]>
+      OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
     /**
      * Get an async iterator to paginate a request using an unknown endpoint route string and optional parameters
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
-     * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+     * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
      * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
     <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
@@ -291,7 +293,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using a known endpoint route string and map each response to a custom array
    *
    * @param {object} octokit Octokit instance
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
@@ -307,7 +309,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using a known endpoint route string and parameters, and map each response to a custom array
    *
    * @param {object} octokit Octokit instance
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
@@ -325,14 +327,14 @@ export interface ComposePaginateInterface {
    * Paginate a request using an known endpoint route string
    *
    * @param {object} octokit Octokit instance
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <R extends keyof PaginatingEndpoints>(
     octokit: Octokit,
     route: R,
     parameters?: PaginatingEndpoints[R]["parameters"]
-  ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
+  ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   // I tried this version which would make the `parameters` argument required if the route has required parameters
   // but it caused some weird errors
@@ -341,13 +343,13 @@ export interface ComposePaginateInterface {
   //   ...args: RequiredKeys<PaginatingEndpoints[R]["parameters"]> extends never
   //     ? [PaginatingEndpoints[R]["parameters"]?]
   //     : [PaginatingEndpoints[R]["parameters"]]
-  // ): Promise<PaginatingEndpoints[R]["response"]["data"]>;
+  // ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   /**
    * Paginate a request using an unknown endpoint route string
    *
    * @param {object} octokit Octokit instance
-   * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+   * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
@@ -439,7 +441,7 @@ export interface ComposePaginateInterface {
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      *
      * @param {object} octokit Octokit instance
-     * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+     * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
      * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
     <R extends keyof PaginatingEndpoints>(
@@ -447,7 +449,7 @@ export interface ComposePaginateInterface {
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"]
     ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginatingEndpoints[R]["response"]["data"]>
+      OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
     /**
@@ -456,7 +458,7 @@ export interface ComposePaginateInterface {
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      *
      * @param {object} octokit Octokit instance
-     * @param {string} route Request method + URL. Example: `'GET /orgs/:org'`
+     * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
      * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
     <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
