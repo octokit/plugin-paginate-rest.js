@@ -20,9 +20,8 @@ const QUERY = `
         note
       }
       responses {
-        examples {
-          data
-        }
+        code
+        schema
       }
     }
   }

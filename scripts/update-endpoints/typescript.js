@@ -22,30 +22,38 @@ for (const endpoint of ENDPOINTS) {
     continue;
   }
 
-  if (endpoint.url === "/feeds") {
-    debugger;
-  }
+  const successResponses = endpoint.responses.filter(
+    (response) => response.code < 300
+  );
 
-  if (endpoint.responses.length === 0) {
+  if (successResponses.length === 0) {
     continue;
   }
-  if (endpoint.responses[0].examples.length === 0) {
+  if (!successResponses[0].schema) {
     continue;
   }
 
-  const data = JSON.parse(endpoint.responses[0].examples[0].data);
-  const url = endpoint.url.replace(/\{([^}]+)}/g, ":$1");
+  const schema = JSON.parse(successResponses[0].schema);
+  const url = endpoint.url;
+
+  if (!schema.type || (schema.type === "object" && !schema.properties)) {
+    continue;
+  }
 
   endpoints.push({
     url,
-    resultsKey: Array.isArray(data) ? null : findResultsKey(data),
+    resultsKey: schema.type === "array" ? null : findResultsKey(schema),
     documentationUrl: endpoint.documentationUrl,
   });
 }
 
-function findResultsKey(data) {
-  for (const [key, value] of Object.entries(data)) {
-    if (Array.isArray(value)) {
+function findResultsKey(schema) {
+  for (const [key, value] of Object.entries(schema.properties)) {
+    if (key === "schemas") {
+      // e.g. https://docs.github.com/en/free-pro-team@latest/rest/reference/enterprise-admin#list-scim-provisioned-identities-for-an-enterprise
+      continue;
+    }
+    if (value.type === "array") {
       return key;
     }
   }

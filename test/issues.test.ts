@@ -5,7 +5,7 @@ import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 import { paginateRest } from "../src";
 
 describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
-  it("octokit.paginate('GET /projects/columns/:column/cards', { column })", async () => {
+  it("octokit.paginate('GET /projects/columns/{column}/cards', { column })", async () => {
     const mock = fetchMock
       .sandbox()
       .get("https://api.github.com/projects/columns/123/cards", {
@@ -20,7 +20,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
     });
 
     const result = await octokit.paginate(
-      "GET /projects/columns/:column_id/cards",
+      "GET /projects/columns/{column_id}/cards",
       {
         column_id: 123,
         mediaType: {

@@ -16,7 +16,7 @@ export async function knownRoute() {
 }
 
 export async function knownRouteWithParameters() {
-  const results = await octokit.paginate("GET /orgs/:org/repos", {
+  const results = await octokit.paginate("GET /orgs/{org}/repos", {
     org: "octorg",
   });
   for (const result of results) {
@@ -67,7 +67,7 @@ export async function unknownRouteWithResultType() {
 
 export async function unknownRouteWithParameters() {
   const results = await octokit.paginate<{ foo: { bar: number } }>(
-    "GET /foo/bar/:baz",
+    "GET /foo/bar/{baz}",
     {
       baz: "daz",
     }
@@ -134,7 +134,7 @@ export async function unknownRouteIterator() {
 
 export async function knownRouteWithParametersIterator() {
   for await (const response of octokit.paginate.iterator(
-    "GET /orgs/:org/repos",
+    "GET /orgs/{org}/repos",
     {
       org: "yo",
     }
@@ -145,7 +145,7 @@ export async function knownRouteWithParametersIterator() {
 
 export async function unknownRouteWithParametersIterator() {
   for await (const response of octokit.paginate.iterator<{ id: number }>(
-    "GET /foo/bar/:baz",
+    "GET /foo/bar/{baz}",
     {
       baz: "daz",
     }

@@ -31,7 +31,7 @@ test("composePaginateRest(octokit, route)", async () => {
 
   const organizations = await composePaginateRest(
     octokit,
-    "GET /orgs/:org/repos",
+    "GET /orgs/{org}/repos",
     {
       org: "octokit",
       per_page: 1,

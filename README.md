@@ -49,7 +49,7 @@ const MyOctokit = Octokit.plugin(paginateRest);
 const octokit = new MyOctokit({ auth: "secret123" });
 
 // See https://developer.github.com/v3/issues/#list-issues-for-a-repository
-const issues = await octokit.paginate("GET /repos/:owner/:repo/issues", {
+const issues = await octokit.paginate("GET /repos/{owner}/{repo}/issues", {
   owner: "octocat",
   repo: "hello-world",
   since: "2010-10-01",
@@ -83,7 +83,7 @@ An optional `mapFunction` can be passed to map each page response to a new value
 
 ```js
 const issueTitles = await octokit.paginate(
-  "GET /repos/:owner/:repo/issues",
+  "GET /repos/{owner}/{repo}/issues",
   {
     owner: "octocat",
     repo: "hello-world",
@@ -98,7 +98,7 @@ The `mapFunction` gets a 2nd argument `done` which can be called to end the pagi
 
 ```js
 const issues = await octokit.paginate(
-  "GET /repos/:owner/:repo/issues",
+  "GET /repos/{owner}/{repo}/issues",
   {
     owner: "octocat",
     repo: "hello-world",
@@ -137,7 +137,7 @@ const parameters = {
   per_page: 100,
 };
 for await (const response of octokit.paginate.iterator(
-  "GET /repos/:owner/:repo/issues",
+  "GET /repos/{owner}/{repo}/issues",
   parameters
 )) {
   // do whatever you want with each response, break out of the loop, etc.
