@@ -37,7 +37,7 @@ test("composePaginateRest(octokit, route)", async () => {
       per_page: 1,
     }
   );
-  expect(organizations).toStrictEqual([ORG1, ORG2]);
+  expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
 });
 
 test("composePaginateRest.iterator(octokit, route)", () => {

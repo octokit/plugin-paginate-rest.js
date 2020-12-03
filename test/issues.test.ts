@@ -29,7 +29,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
       }
     );
 
-    expect(result).toStrictEqual([{ id: 123 }]);
+    expect(result[0].id).toEqual(123);
   });
 
   it("octokit.paginate(octokit.projects.listCards, { column })", async () => {
@@ -50,6 +50,6 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
       column_id: 123,
     });
 
-    expect(result).toStrictEqual([{ id: 123 }]);
+    expect(result[0].id).toEqual(123);
   });
 });

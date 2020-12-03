@@ -35,7 +35,7 @@ describe("pagination", () => {
       org: "octokit",
       per_page: 1,
     });
-    expect(organizations).toStrictEqual([ORG1, ORG2]);
+    expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
 
     await octokit
       .paginate(
@@ -84,7 +84,7 @@ describe("pagination", () => {
     });
 
     const organizations = await octokit.paginate(octokit.orgs.list);
-    expect(organizations).toStrictEqual([ORG1, ORG2]);
+    expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
   });
 
   it(".paginate(request, options)", async () => {
@@ -116,7 +116,7 @@ describe("pagination", () => {
       org: "octokit",
       per_page: 1,
     });
-    expect(organizations).toStrictEqual([ORG1, ORG2]);
+    expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
   });
 
   it(".paginate(request, options, mapFunction)", async () => {
@@ -228,7 +228,7 @@ describe("pagination", () => {
     const mock = fetchMock
       .sandbox()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
-        body: [ORG1],
+        body: [{ id: 1 }],
         headers: {
           link:
             '<https://pagination-test.com/foobar?page=2&per_page=1>; rel="next"',
@@ -236,7 +236,7 @@ describe("pagination", () => {
         },
       })
       .get("https://pagination-test.com/foobar?page=2&per_page=1", {
-        body: [ORG2],
+        body: [{ id: 2 }],
         headers: {},
       });
 
@@ -248,8 +248,8 @@ describe("pagination", () => {
 
     return octokit
       .paginate("GET /orgs/{org}/repos", { org: "octokit", per_page: 1 })
-      .then((organizations) => {
-        expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
+      .then((repos) => {
+        expect(repos.map((o) => o.id)).toStrictEqual([1, 2]);
       });
   });
 
@@ -257,7 +257,7 @@ describe("pagination", () => {
     const mock = fetchMock
       .sandbox()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
-        body: [ORG1],
+        body: [{ id: 1 }],
         headers: {
           link:
             '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
@@ -265,7 +265,7 @@ describe("pagination", () => {
         },
       })
       .get("https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1", {
-        body: [ORG2],
+        body: [{ id: 2 }],
         headers: {},
       });
 
@@ -291,6 +291,7 @@ describe("pagination", () => {
         request: { paginate: true },
       })
       .then((organizations) => {
+        // @ts-ignore
         expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
   });
