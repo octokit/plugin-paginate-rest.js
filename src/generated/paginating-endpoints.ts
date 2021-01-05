@@ -1042,6 +1042,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
+   */
+  "GET /repos/{owner}/{repo}/secret-scanning/alerts": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/alerts"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/alerts"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/activity#list-stargazers
    */
   "GET /repos/{owner}/{repo}/stargazers": {
