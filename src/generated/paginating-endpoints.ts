@@ -316,6 +316,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations
+   */
+  "GET /orgs/{org}/failed_invitations": {
+    parameters: Endpoints["GET /orgs/{org}/failed_invitations"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/failed_invitations"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/orgs#list-organization-webhooks
    */
   "GET /orgs/{org}/hooks": {
@@ -1090,7 +1098,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/enterprise-admin#list-provisioned-scim groups-for-an-enterprise
+   * @see https://docs.github.com/rest/reference/enterprise-admin#list-provisioned-scim-groups-for-an-enterprise
    */
   "GET /scim/v2/enterprises/{enterprise}/Groups": {
     parameters: Endpoints["GET /scim/v2/enterprises/{enterprise}/Groups"]["parameters"];
