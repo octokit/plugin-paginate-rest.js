@@ -179,7 +179,7 @@ export interface PaginateInterface {
       response: NormalizeResponse<
         OctokitTypes.GetResponseTypeFromEndpointMethod<R>
       >,
-      done?: () => void
+      done: () => void
     ) => MR
   ): Promise<MR>;
 
@@ -396,7 +396,7 @@ export interface ComposePaginateInterface {
       response: NormalizeResponse<
         OctokitTypes.GetResponseTypeFromEndpointMethod<R>
       >,
-      done?: () => void
+      done: () => void
     ) => MR
   ): Promise<MR>;
 
