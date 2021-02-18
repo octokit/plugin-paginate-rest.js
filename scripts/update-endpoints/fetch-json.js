@@ -2,6 +2,7 @@ const { writeFileSync } = require("fs");
 const path = require("path");
 
 const { graphql } = require("@octokit/graphql");
+const prettier = require("prettier");
 
 if (!process.env.VERSION) {
   throw new Error("VERSION environment variable must be set");
@@ -30,13 +31,21 @@ const QUERY = `
 main();
 
 async function main() {
-  const { endpoints } = await graphql(QUERY, {
-    url: "https://github-openapi-graphql-server.vercel.app/api/graphql",
-    version,
-  });
+  try {
+    const { endpoints } = await graphql(QUERY, {
+      // url: "https://github-openapi-graphql-server.vercel.app/api/graphql",
+      url: "http://localhost:3000/api/graphql",
+      version,
+    });
 
-  writeFileSync(
-    path.resolve(__dirname, "generated", "endpoints.json"),
-    JSON.stringify(endpoints, null, 2) + "\n"
-  );
+    writeFileSync(
+      path.resolve(__dirname, "generated", "endpoints.json"),
+      prettier.format(JSON.stringify(endpoints), {
+        parser: "json",
+      })
+    );
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
