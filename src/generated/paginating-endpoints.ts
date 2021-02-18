@@ -668,7 +668,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/v3/code-scanning/#list-code-scanning-alerts-for-a-repository
+   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/code-scanning/alerts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/alerts"]["parameters"];
@@ -676,7 +676,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/v3/code-scanning/#list-recent-analyses
+   * @see https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
+   */
+  "GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
    */
   "GET /repos/{owner}/{repo}/code-scanning/analyses": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/analyses"]["parameters"];
