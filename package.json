@@ -16,7 +16,7 @@
     "update-endpoints:fetch-json": "node scripts/update-endpoints/fetch-json",
     "update-endpoints:typescript": "node scripts/update-endpoints/typescript"
   },
-  "repository": "https://github.com/octokit/plugin-paginate-rest.js",
+  "repository": "github:octokit/plugin-paginate-rest.js",
   "keywords": [
     "github",
     "api",
