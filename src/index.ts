@@ -6,6 +6,7 @@ import { iterator } from "./iterator";
 import { PaginateInterface } from "./types";
 
 export { PaginateInterface } from "./types";
+export { PaginatingEndpoints } from "./types";
 export { composePaginateRest } from "./compose-paginate";
 
 /**
