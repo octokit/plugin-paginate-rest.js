@@ -1,6 +1,10 @@
 import { Octokit } from "@octokit/core";
 
-import { paginateRest, composePaginateRest } from "../src";
+import {
+  paginateRest,
+  composePaginateRest,
+  isPaginatingEndpoint,
+} from "../src";
 
 describe("Smoke test", () => {
   it("paginateRest", () => {
@@ -13,6 +17,13 @@ describe("Smoke test", () => {
 
   it("composePaginateRest", () => {
     expect(composePaginateRest).toBeInstanceOf(Function);
+  });
+
+  it("isPaginatingEndpoint", () => {
+    expect(isPaginatingEndpoint("GET /repos/{owner}/{repo}/releases")).toBe(
+      true
+    );
+    expect(isPaginatingEndpoint(123)).toBe(false);
   });
 
   it("Loads plugin", () => {
