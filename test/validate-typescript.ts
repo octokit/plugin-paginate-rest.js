@@ -3,7 +3,7 @@
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
-import { paginateRest } from "../src";
+import { paginateRest, PaginatingEndpoints } from "../src";
 
 const MyOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
 const octokit = new MyOctokit();
@@ -189,4 +189,10 @@ export async function requestMethodWithNamespacedResponse() {
   for (const result of results) {
     console.log(result.owner.login);
   }
+}
+
+export async function paginatingEndpointKeyProvidedByUser<
+  R extends keyof PaginatingEndpoints
+>(route: R) {
+  console.log(await octokit.paginate(route));
 }

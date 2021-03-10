@@ -9,6 +9,8 @@ export {
   Route,
 } from "@octokit/types";
 
+export { PaginatingEndpoints } from "./generated/paginating-endpoints";
+
 import { PaginatingEndpoints } from "./generated/paginating-endpoints";
 
 // // https://stackoverflow.com/a/52991061/206879
