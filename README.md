@@ -242,7 +242,7 @@ async function myPaginatePlugin<E extends keyof PaginatingEndpoints>(
 
 ### isPaginatingEndpoint
 
-A type guard, `isPaginatingEndpoint(arg)` returns `true` iff `arg` is one of the keys in `PaginatingEndpoints` (is `keyof PaginatingEndpoints`).
+A type guard, `isPaginatingEndpoint(arg)` returns `true` if `arg` is one of the keys in `PaginatingEndpoints` (is `keyof PaginatingEndpoints`).
 
 ```typescript
 import { Octokit } from "@octokit/core";
