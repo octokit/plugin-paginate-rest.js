@@ -81,6 +81,10 @@ function endpointToTypes(endpoint) {
   `;
 }
 
+function endpointToKey(endpoint) {
+  return `"GET ${endpoint.url}"`;
+}
+
 writeFileSync(
   "./src/generated/paginating-endpoints.ts",
   prettier.format(
@@ -88,7 +92,12 @@ writeFileSync(
 
     export interface PaginatingEndpoints {
       ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
-    }`,
+    }
+
+    export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
+      ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
+    ]
+    `,
     {
       parser: "typescript",
     }
