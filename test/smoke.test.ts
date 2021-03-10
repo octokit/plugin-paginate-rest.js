@@ -4,6 +4,7 @@ import {
   paginateRest,
   composePaginateRest,
   isPaginatingEndpoint,
+  paginatingEndpoints,
 } from "../src";
 
 describe("Smoke test", () => {
@@ -24,6 +25,11 @@ describe("Smoke test", () => {
       true
     );
     expect(isPaginatingEndpoint(123)).toBe(false);
+  });
+
+  it("paginatingEndpoints", () => {
+    expect(paginatingEndpoints).toBeInstanceOf(Array);
+    expect(paginatingEndpoints).toContain("GET /repos/{owner}/{repo}/releases");
   });
 
   it("Loads plugin", () => {
