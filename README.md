@@ -183,6 +183,82 @@ Most of GitHub's paginating REST API endpoints return an array, but there are a 
 
 If a response is lacking the `Link` header, `octokit.paginate()` still resolves with an array, even if the response returns a single object.
 
+## Types
+
+The plugin also exposes some types and runtime type guards for TypeScript projects.
+
+<table>
+<tbody valign=top align=left>
+<tr><th>
+<tr><th>
+Types
+</th><td>
+
+```typescript
+import {
+  PaginateInterface,
+  PaginatingEndpoints,
+} from "@octokit/plugin-paginate-rest";
+```
+
+</td></tr>
+<tr><th>
+Guards
+</th><td>
+
+```typescript
+import { isPaginatingEndpoint } from "@octokit/plugin-paginate-rest";
+```
+
+</td></tr>
+</tbody>
+</table>
+
+### PaginateInterface
+
+An `interface` that declares all the overloads of the `.paginate` method.
+
+### PaginatingEndpoints
+
+An `interface` which describes all API endpoints supported by the plugin. Some overloads of `.paginate()` method and `composePaginateRest()` function depend on `PaginatingEndpoints`, using the `keyof PaginatingEndpoints` as a type for one of its arguments.
+
+```typescript
+import { Octokit } from "@octokit/core";
+import {
+  PaginatingEndpoints,
+  composePaginateRest,
+} from "@octokit/plugin-paginate-rest";
+
+type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
+
+async function myPaginatePlugin<E extends keyof PaginatingEndpoints>(
+  octokit: Octokit,
+  endpoint: E,
+  parameters?: PaginatingEndpoints[E]["parameters"]
+): Promise<DataType<PaginatingEndpoints[E]["response"]>> {
+  return await composePaginateRest(octokit, endpoint, parameters);
+}
+```
+
+### isPaginatingEndpoint
+
+A type guard, `isPaginatingEndpoint(arg)` returns `true` if `arg` is one of the keys in `PaginatingEndpoints` (is `keyof PaginatingEndpoints`).
+
+```typescript
+import { Octokit } from "@octokit/core";
+import {
+  isPaginatingEndpoint,
+  composePaginateRest,
+} from "@octokit/plugin-paginate-rest";
+
+async function myPlugin(octokit: Octokit, arg: unknown) {
+  if (isPaginatingEndpoint(arg)) {
+    return await composePaginateRest(octokit, arg);
+  }
+  // ...
+}
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)
