@@ -54,11 +54,11 @@ type NormalizeResponse<T> = T & { data: GetResultsType<T> };
 
 type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
-export interface MapFunction<T = unknown, R = unknown> {
-  (
-    response: OctokitTypes.OctokitResponse<PaginationResults<T>>,
-    done: () => void
-  ): R[];
+export interface MapFunction<
+  T = OctokitTypes.OctokitResponse<PaginationResults<unknown>>,
+  R = unknown[]
+> {
+  (response: T, done: () => void): R;
 }
 
 export type PaginationResults<T = unknown> = T[];
@@ -74,7 +74,7 @@ export interface PaginateInterface {
    */
   <T, R>(
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<T, R>
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, R[]>
   ): Promise<PaginationResults<R>>;
 
   /**
@@ -94,10 +94,7 @@ export interface PaginateInterface {
    */
   <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
     route: R,
-    mapFn: (
-      response: PaginatingEndpoints[R]["response"],
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
   ): Promise<MR>;
 
   /**
@@ -110,10 +107,7 @@ export interface PaginateInterface {
   <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: (
-      response: PaginatingEndpoints[R]["response"],
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
   ): Promise<MR>;
 
   /**
@@ -159,12 +153,10 @@ export interface PaginateInterface {
    */
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     request: R,
-    mapFn: (
-      response: NormalizeResponse<
-        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
-      >,
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<
+      NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
+      MR
+    >
   ): Promise<MR>;
 
   /**
@@ -177,12 +169,10 @@ export interface PaginateInterface {
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     request: R,
     parameters: Parameters<R>[0],
-    mapFn: (
-      response: NormalizeResponse<
-        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
-      >,
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<
+      NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
+      MR
+    >
   ): Promise<MR>;
 
   /**
@@ -276,7 +266,7 @@ export interface ComposePaginateInterface {
   <T, R>(
     octokit: Octokit,
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<T, R>
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, R[]>
   ): Promise<PaginationResults<R>>;
 
   /**
@@ -301,10 +291,7 @@ export interface ComposePaginateInterface {
   <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
     octokit: Octokit,
     route: R,
-    mapFn: (
-      response: PaginatingEndpoints[R]["response"],
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
   ): Promise<MR>;
 
   /**
@@ -319,10 +306,7 @@ export interface ComposePaginateInterface {
     octokit: Octokit,
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: (
-      response: PaginatingEndpoints[R]["response"],
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
   ): Promise<MR>;
 
   /**
@@ -374,12 +358,10 @@ export interface ComposePaginateInterface {
   <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
     octokit: Octokit,
     request: R,
-    mapFn: (
-      response: NormalizeResponse<
-        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
-      >,
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<
+      NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
+      MR
+    >
   ): Promise<MR>;
 
   /**
@@ -394,12 +376,10 @@ export interface ComposePaginateInterface {
     octokit: Octokit,
     request: R,
     parameters: Parameters<R>[0],
-    mapFn: (
-      response: NormalizeResponse<
-        OctokitTypes.GetResponseTypeFromEndpointMethod<R>
-      >,
-      done: () => void
-    ) => MR
+    mapFn: MapFunction<
+      NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
+      MR
+    >
   ): Promise<MR>;
 
   /**
