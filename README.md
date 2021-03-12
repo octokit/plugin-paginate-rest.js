@@ -141,7 +141,8 @@ for await (const response of octokit.paginate.iterator(
   parameters
 )) {
   // do whatever you want with each response, break out of the loop, etc.
-  console.log(response.data.title);
+  const issues = response.data;
+  console.log("%d issues found", issues.length);
 }
 ```
 
@@ -159,7 +160,8 @@ for await (const response of octokit.paginate.iterator(
   parameters
 )) {
   // do whatever you want with each response, break out of the loop, etc.
-  console.log(response.data.title);
+  const issues = response.data;
+  console.log("%d issues found", issues.length);
 }
 ```
 
