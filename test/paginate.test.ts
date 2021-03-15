@@ -275,6 +275,7 @@ describe("pagination", () => {
       },
     });
 
+    // @ts-expect-error we change the form of the response object. We probably shouldn't do that :)
     octokit.hook.wrap("request", (request, options) => {
       if (!options.request.paginate) {
         return request(options);
