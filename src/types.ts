@@ -69,7 +69,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using endpoint options and map each response to a custom array
    *
-   * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <T, R>(
@@ -80,7 +80,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using endpoint options
    *
-   * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <T>(options: OctokitTypes.EndpointOptions): Promise<PaginationResults<T>>;
 
@@ -195,9 +195,9 @@ export interface PaginateInterface {
      * Get an async iterator to paginate a request using endpoint options
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
-     * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
-    <T>(EndpointOptions: OctokitTypes.EndpointOptions): AsyncIterableIterator<
+    <T>(options: OctokitTypes.EndpointOptions): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -260,7 +260,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using endpoint options and map each response to a custom array
    *
    * @param {object} octokit Octokit instance
-   * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <T, R>(
@@ -273,7 +273,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using endpoint options
    *
    * @param {object} octokit Octokit instance
-   * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    */
   <T>(octokit: Octokit, options: OctokitTypes.EndpointOptions): Promise<
     PaginationResults<T>
@@ -406,11 +406,11 @@ export interface ComposePaginateInterface {
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      *
      * @param {object} octokit Octokit instance
-     * @param {object} endpoint Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
      */
     <T>(
       octokit: Octokit,
-      EndpointOptions: OctokitTypes.EndpointOptions
+      options: OctokitTypes.EndpointOptions
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
