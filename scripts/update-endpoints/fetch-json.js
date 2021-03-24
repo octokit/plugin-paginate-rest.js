@@ -33,7 +33,8 @@ main();
 async function main() {
   try {
     const { endpoints } = await graphql(QUERY, {
-      url: "https://github-openapi-graphql-server.vercel.app/api/graphql",
+      // baseUrl: "https://github-openapi-graphql-server.vercel.app/api",
+      baseUrl: "http://localhost:3000/api",
       version,
     });
 
