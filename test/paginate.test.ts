@@ -83,7 +83,7 @@ describe("pagination", () => {
       },
     });
 
-    const organizations = await octokit.paginate(octokit.orgs.list);
+    const organizations = await octokit.paginate(octokit.rest.orgs.list);
     expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
   });
 
@@ -112,10 +112,13 @@ describe("pagination", () => {
       },
     });
 
-    const organizations = await octokit.paginate(octokit.repos.listForOrg, {
-      org: "octokit",
-      per_page: 1,
-    });
+    const organizations = await octokit.paginate(
+      octokit.rest.repos.listForOrg,
+      {
+        org: "octokit",
+        per_page: 1,
+      }
+    );
     expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
   });
 
@@ -145,7 +148,7 @@ describe("pagination", () => {
     });
 
     const organizations = await octokit.paginate(
-      octokit.repos.listForOrg,
+      octokit.rest.repos.listForOrg,
       {
         org: "octokit",
         per_page: 1,
@@ -464,7 +467,7 @@ describe("pagination", () => {
     });
 
     const iterator = octokit.paginate
-      .iterator(octokit.orgs.list)
+      .iterator(octokit.rest.orgs.list)
       [Symbol.asyncIterator]();
 
     return iterator

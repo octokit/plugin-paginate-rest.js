@@ -78,15 +78,16 @@ export async function unknownRouteWithParameters() {
 }
 
 export async function requestMethod() {
-  const results = await octokit.paginate(octokit.repos.listPublic);
+  const results = await octokit.paginate(octokit.rest.repos.listPublic);
   for (const result of results) {
     console.log(result.owner.login);
   }
 }
 
 export async function requestMethodAndMapFunction() {
-  const results = await octokit.paginate(octokit.repos.listPublic, (response) =>
-    response.data.map((repository) => repository.owner)
+  const results = await octokit.paginate(
+    octokit.rest.repos.listPublic,
+    (response) => response.data.map((repository) => repository.owner)
   );
   for (const result of results) {
     console.log(result.login);
@@ -94,17 +95,20 @@ export async function requestMethodAndMapFunction() {
 }
 
 export async function requestMethodWithParameters() {
-  const results = await octokit.paginate(octokit.issues.listLabelsForRepo, {
-    owner: "owner",
-    repo: "repo",
-  });
+  const results = await octokit.paginate(
+    octokit.rest.issues.listLabelsForRepo,
+    {
+      owner: "owner",
+      repo: "repo",
+    }
+  );
   for (const result of results) {
     console.log(result.id);
   }
 }
 
 export async function requestMethodWithParametersAndMapFunction() {
-  const results = await octokit.paginate(octokit.orgs.list, (response) =>
+  const results = await octokit.paginate(octokit.rest.orgs.list, (response) =>
     response.data.map((org) => {
       return {
         foo: {
@@ -156,7 +160,7 @@ export async function unknownRouteWithParametersIterator() {
 
 export async function requestMethodWithParametersIterator() {
   for await (const response of octokit.paginate.iterator(
-    octokit.issues.listLabelsForRepo,
+    octokit.rest.issues.listLabelsForRepo,
     {
       owner: "owner",
       repo: "repo",
@@ -184,7 +188,7 @@ export async function knownRouteWithNamespacedResponseIterator() {
 
 export async function requestMethodWithNamespacedResponse() {
   const results = await octokit.paginate(
-    octokit.apps.listReposAccessibleToInstallation
+    octokit.rest.apps.listReposAccessibleToInstallation
   );
   for (const result of results) {
     console.log(result.owner.login);
