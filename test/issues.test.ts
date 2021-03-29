@@ -46,7 +46,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
       },
     });
 
-    const result = await octokit.paginate(octokit.projects.listCards, {
+    const result = await octokit.paginate(octokit.rest.projects.listCards, {
       column_id: 123,
     });
 
