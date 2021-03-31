@@ -56,9 +56,9 @@ type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
 export interface MapFunction<
   T = OctokitTypes.OctokitResponse<PaginationResults<unknown>>,
-  R = unknown[]
+  M = unknown[]
 > {
-  (response: T, done: () => void): R;
+  (response: T, done: () => void): M;
 }
 
 export type PaginationResults<T = unknown> = T[];
@@ -72,10 +72,10 @@ export interface PaginateInterface {
    * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <T, R>(
+  <T, M>(
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, R[]>
-  ): Promise<PaginationResults<R>>;
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>
+  ): Promise<PaginationResults<M>>;
 
   /**
    * Paginate a request using endpoint options
@@ -92,10 +92,10 @@ export interface PaginateInterface {
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     route: R,
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
-  ): Promise<MR>;
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+  ): Promise<M>;
 
   /**
    * Paginate a request using a known endpoint route string and parameters, and map each response to a custom array
@@ -104,11 +104,11 @@ export interface PaginateInterface {
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
-  ): Promise<MR>;
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+  ): Promise<M>;
 
   /**
    * Paginate a request using an known endpoint route string
@@ -151,13 +151,13 @@ export interface PaginateInterface {
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
-  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+  <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
     request: R,
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
-      MR
+      M
     >
-  ): Promise<MR>;
+  ): Promise<M>;
 
   /**
    * Paginate a request using an endpoint method, parameters, and a map function
@@ -166,14 +166,14 @@ export interface PaginateInterface {
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
-  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+  <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
     request: R,
     parameters: Parameters<R>[0],
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
-      MR
+      M
     >
-  ): Promise<MR>;
+  ): Promise<M>;
 
   /**
    * Paginate a request using an endpoint method and parameters
@@ -263,11 +263,11 @@ export interface ComposePaginateInterface {
    * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <T, R>(
+  <T, M>(
     octokit: Octokit,
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, R[]>
-  ): Promise<PaginationResults<R>>;
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>
+  ): Promise<PaginationResults<M>>;
 
   /**
    * Paginate a request using endpoint options
@@ -288,11 +288,11 @@ export interface ComposePaginateInterface {
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     octokit: Octokit,
     route: R,
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
-  ): Promise<MR>;
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+  ): Promise<M>;
 
   /**
    * Paginate a request using a known endpoint route string and parameters, and map each response to a custom array
@@ -302,12 +302,12 @@ export interface ComposePaginateInterface {
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
-  <R extends keyof PaginatingEndpoints, MR extends unknown[]>(
+  <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     octokit: Octokit,
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], MR>
-  ): Promise<MR>;
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+  ): Promise<M>;
 
   /**
    * Paginate a request using an known endpoint route string
@@ -355,14 +355,14 @@ export interface ComposePaginateInterface {
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
-  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+  <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
     octokit: Octokit,
     request: R,
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
-      MR
+      M
     >
-  ): Promise<MR>;
+  ): Promise<M>;
 
   /**
    * Paginate a request using an endpoint method, parameters, and a map function
@@ -372,15 +372,15 @@ export interface ComposePaginateInterface {
    * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
-  <R extends OctokitTypes.RequestInterface, MR extends unknown[]>(
+  <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
     octokit: Octokit,
     request: R,
     parameters: Parameters<R>[0],
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
-      MR
+      M
     >
-  ): Promise<MR>;
+  ): Promise<M>;
 
   /**
    * Paginate a request using an endpoint method and parameters
