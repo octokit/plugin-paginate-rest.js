@@ -33,7 +33,8 @@ for (const endpoint of ENDPOINTS) {
     continue;
   }
 
-  const schema = JSON.parse(successResponses[0].schema);
+  const schemaObj = JSON.parse(successResponses[0].schema);
+  const schema = schemaObj.anyOf ? schemaObj.anyOf[0] : schemaObj;
   const url = endpoint.url;
 
   if (!schema.type || (schema.type === "object" && !schema.properties)) {
