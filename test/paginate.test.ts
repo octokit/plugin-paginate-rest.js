@@ -15,8 +15,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -67,8 +66,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -93,8 +91,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -128,8 +125,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -164,8 +160,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -197,8 +192,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -233,8 +227,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [{ id: 1 }],
         headers: {
-          link:
-            '<https://pagination-test.com/foobar?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/foobar?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -262,8 +255,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [{ id: 1 }],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -330,8 +322,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/organizations?since=2>; rel="next"',
+          link: '<https://pagination-test.com/organizations?since=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -368,8 +359,7 @@ describe("pagination", () => {
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -409,8 +399,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
@@ -450,8 +439,7 @@ describe("pagination", () => {
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
-          link:
-            '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
+          link: '<https://pagination-test.com/orgs/octokit/repos?page=2>; rel="next"',
           "X-GitHub-Media-Type": "github.v3; format=json",
         },
       })
