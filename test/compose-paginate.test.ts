@@ -12,8 +12,7 @@ test("composePaginateRest(octokit, route)", async () => {
     .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
       body: [ORG1],
       headers: {
-        link:
-          '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
+        link: '<https://pagination-test.com/orgs/octokit/repos?page=2&per_page=1>; rel="next"',
         "X-GitHub-Media-Type": "github.v3; format=json",
       },
     })
