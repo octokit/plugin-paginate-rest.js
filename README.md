@@ -192,7 +192,6 @@ The plugin also exposes some types and runtime type guards for TypeScript projec
 <table>
 <tbody valign=top align=left>
 <tr><th>
-<tr><th>
 Types
 </th><td>
 
