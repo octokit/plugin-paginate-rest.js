@@ -67,16 +67,17 @@ function sortEndpoints(endpoints) {
 }
 
 function endpointToTypes(endpoint) {
+  const key = endpointToKey(endpoint);
   const response = endpoint.resultsKey
-    ? `Endpoints["GET ${endpoint.url}"]["response"] & { data: Endpoints["GET ${endpoint.url}"]["response"]["data"]["${endpoint.resultsKey}"] }`
-    : `Endpoints["GET ${endpoint.url}"]["response"]`;
+    ? `Endpoints[${key}]["response"] & { data: Endpoints[${key}]["response"]["data"]["${endpoint.resultsKey}"] }`
+    : `Endpoints[${key}]["response"]`;
 
   return `
   /**
    * @see ${endpoint.documentationUrl}
    */
-  "GET ${endpoint.url}": {
-    parameters: Endpoints["GET ${endpoint.url}"]["parameters"];
+  ${key}: {
+    parameters: Endpoints[${key}]["parameters"];
     response: ${response};
   };
   `;
