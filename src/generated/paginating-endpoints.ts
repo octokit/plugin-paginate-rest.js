@@ -2,7 +2,7 @@ import { Endpoints } from "@octokit/types";
 
 export interface PaginatingEndpoints {
   /**
-   * @see https://docs.github.com/rest/reference/apps/#list-installations-for-the-authenticated-app
+   * @see https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
@@ -92,7 +92,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-gists-for-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user
    */
   "GET /gists": {
     parameters: Endpoints["GET /gists"]["parameters"];
@@ -100,7 +100,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-public-gists
+   * @see https://docs.github.com/rest/reference/gists#list-public-gists
    */
   "GET /gists/public": {
     parameters: Endpoints["GET /gists/public"]["parameters"];
@@ -108,7 +108,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-starred-gists
+   * @see https://docs.github.com/rest/reference/gists#list-starred-gists
    */
   "GET /gists/starred": {
     parameters: Endpoints["GET /gists/starred"]["parameters"];
@@ -124,7 +124,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-gist-commits
+   * @see https://docs.github.com/rest/reference/gists#list-gist-commits
    */
   "GET /gists/{gist_id}/commits": {
     parameters: Endpoints["GET /gists/{gist_id}/commits"]["parameters"];
@@ -132,7 +132,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-gist-forks
+   * @see https://docs.github.com/rest/reference/gists#list-gist-forks
    */
   "GET /gists/{gist_id}/forks": {
     parameters: Endpoints["GET /gists/{gist_id}/forks"]["parameters"];
@@ -150,7 +150,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues/#list-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user
    */
   "GET /issues": {
     parameters: Endpoints["GET /issues"]["parameters"];
@@ -206,7 +206,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs/#list-organizations
+   * @see https://docs.github.com/rest/reference/orgs#list-organizations
    */
   "GET /organizations": {
     parameters: Endpoints["GET /organizations"]["parameters"];
@@ -300,7 +300,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs/#list-saml-sso-authorizations-for-an-organization
+   * @see https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization
    */
   "GET /orgs/{org}/credential-authorizations": {
     parameters: Endpoints["GET /orgs/{org}/credential-authorizations"]["parameters"];
@@ -332,7 +332,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs/#list-app-installations-for-an-organization
+   * @see https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization
    */
   "GET /orgs/{org}/installations": {
     parameters: Endpoints["GET /orgs/{org}/installations"]["parameters"];
@@ -358,7 +358,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues/#list-organization-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user
    */
   "GET /orgs/{org}/issues": {
     parameters: Endpoints["GET /orgs/{org}/issues"]["parameters"];
@@ -398,7 +398,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects/#list-organization-projects
+   * @see https://docs.github.com/rest/reference/projects#list-organization-projects
    */
   "GET /orgs/{org}/projects": {
     parameters: Endpoints["GET /orgs/{org}/projects"]["parameters"];
@@ -414,7 +414,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-organization-repositories
+   * @see https://docs.github.com/rest/reference/repos#list-organization-repositories
    */
   "GET /orgs/{org}/repos": {
     parameters: Endpoints["GET /orgs/{org}/repos"]["parameters"];
@@ -432,7 +432,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-teams
+   * @see https://docs.github.com/rest/reference/teams#list-teams
    */
   "GET /orgs/{org}/teams": {
     parameters: Endpoints["GET /orgs/{org}/teams"]["parameters"];
@@ -456,7 +456,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions"]["parameters"];
@@ -464,7 +464,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions"]["parameters"];
@@ -488,7 +488,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-team-projects
+   * @see https://docs.github.com/rest/reference/teams#list-team-projects
    */
   "GET /orgs/{org}/teams/{team_slug}/projects": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/projects"]["parameters"];
@@ -496,7 +496,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-team-repositories
+   * @see https://docs.github.com/rest/reference/teams#list-team-repositories
    */
   "GET /orgs/{org}/teams/{team_slug}/repos": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/repos"]["parameters"];
@@ -514,7 +514,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-child-teams
+   * @see https://docs.github.com/rest/reference/teams#list-child-teams
    */
   "GET /orgs/{org}/teams/{team_slug}/teams": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/teams"]["parameters"];
@@ -708,7 +708,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-commit-comment
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment
    */
   "GET /repos/{owner}/{repo}/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/comments/{comment_id}/reactions"]["parameters"];
@@ -776,7 +776,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-repository-contributors
+   * @see https://docs.github.com/rest/reference/repos#list-repository-contributors
    */
   "GET /repos/{owner}/{repo}/contributors": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/contributors"]["parameters"];
@@ -840,7 +840,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues/#list-repository-issues
+   * @see https://docs.github.com/rest/reference/issues#list-repository-issues
    */
   "GET /repos/{owner}/{repo}/issues": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues"]["parameters"];
@@ -856,7 +856,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-an-issue-comment
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment
    */
   "GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions"]["parameters"];
@@ -896,7 +896,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-an-issue
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/reactions"]["parameters"];
@@ -960,7 +960,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects/#list-repository-projects
+   * @see https://docs.github.com/rest/reference/projects#list-repository-projects
    */
   "GET /repos/{owner}/{repo}/projects": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/projects"]["parameters"];
@@ -968,7 +968,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls/#list-pull-requests
+   * @see https://docs.github.com/rest/reference/pulls#list-pull-requests
    */
   "GET /repos/{owner}/{repo}/pulls": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls"]["parameters"];
@@ -984,7 +984,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-pull-request-review-comment
+   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment
    */
   "GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions"]["parameters"];
@@ -1000,7 +1000,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls/#list-commits-on-a-pull-request
+   * @see https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/commits"]["parameters"];
@@ -1008,7 +1008,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls/#list-pull-requests-files
+   * @see https://docs.github.com/rest/reference/pulls#list-pull-requests-files
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/files": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/files"]["parameters"];
@@ -1082,7 +1082,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-repository-tags
+   * @see https://docs.github.com/rest/reference/repos#list-repository-tags
    */
   "GET /repos/{owner}/{repo}/tags": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/tags"]["parameters"];
@@ -1090,7 +1090,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-repository-teams
+   * @see https://docs.github.com/rest/reference/repos#list-repository-teams
    */
   "GET /repos/{owner}/{repo}/teams": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/teams"]["parameters"];
@@ -1098,7 +1098,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-public-repositories
+   * @see https://docs.github.com/rest/reference/repos#list-public-repositories
    */
   "GET /repositories": {
     parameters: Endpoints["GET /repositories"]["parameters"];
@@ -1136,7 +1136,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/scim/#list-scim-provisioned-identities
+   * @see https://docs.github.com/rest/reference/scim#list-scim-provisioned-identities
    */
   "GET /scim/v2/organizations/{org}/Users": {
     parameters: Endpoints["GET /scim/v2/organizations/{org}/Users"]["parameters"];
@@ -1146,7 +1146,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-code
+   * @see https://docs.github.com/rest/reference/search#search-code
    */
   "GET /search/code": {
     parameters: Endpoints["GET /search/code"]["parameters"];
@@ -1156,7 +1156,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-commits
+   * @see https://docs.github.com/rest/reference/search#search-commits
    */
   "GET /search/commits": {
     parameters: Endpoints["GET /search/commits"]["parameters"];
@@ -1166,7 +1166,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-issues-and-pull-requests
+   * @see https://docs.github.com/rest/reference/search#search-issues-and-pull-requests
    */
   "GET /search/issues": {
     parameters: Endpoints["GET /search/issues"]["parameters"];
@@ -1176,7 +1176,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-labels
+   * @see https://docs.github.com/rest/reference/search#search-labels
    */
   "GET /search/labels": {
     parameters: Endpoints["GET /search/labels"]["parameters"];
@@ -1186,7 +1186,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-repositories
+   * @see https://docs.github.com/rest/reference/search#search-repositories
    */
   "GET /search/repositories": {
     parameters: Endpoints["GET /search/repositories"]["parameters"];
@@ -1196,7 +1196,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-topics
+   * @see https://docs.github.com/rest/reference/search#search-topics
    */
   "GET /search/topics": {
     parameters: Endpoints["GET /search/topics"]["parameters"];
@@ -1206,7 +1206,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search/#search-users
+   * @see https://docs.github.com/rest/reference/search#search-users
    */
   "GET /search/users": {
     parameters: Endpoints["GET /search/users"]["parameters"];
@@ -1358,7 +1358,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues/#list-user-account-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
    */
   "GET /user/issues": {
     parameters: Endpoints["GET /user/issues"]["parameters"];
@@ -1414,7 +1414,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs/#list-organizations-for-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user
    */
   "GET /user/orgs": {
     parameters: Endpoints["GET /user/orgs"]["parameters"];
@@ -1430,7 +1430,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-repositories-for-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user
    */
   "GET /user/repos": {
     parameters: Endpoints["GET /user/repos"]["parameters"];
@@ -1462,7 +1462,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-teams-for-the-authenticated-user
+   * @see https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user
    */
   "GET /user/teams": {
     parameters: Endpoints["GET /user/teams"]["parameters"];
@@ -1470,7 +1470,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users/#list-users
+   * @see https://docs.github.com/rest/reference/users#list-users
    */
   "GET /users": {
     parameters: Endpoints["GET /users"]["parameters"];
@@ -1518,7 +1518,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists/#list-gists-for-a-user
+   * @see https://docs.github.com/rest/reference/gists#list-gists-for-a-user
    */
   "GET /users/{username}/gists": {
     parameters: Endpoints["GET /users/{username}/gists"]["parameters"];
@@ -1542,7 +1542,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs/#list-organizations-for-a-user
+   * @see https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user
    */
   "GET /users/{username}/orgs": {
     parameters: Endpoints["GET /users/{username}/orgs"]["parameters"];
@@ -1550,7 +1550,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects/#list-user-projects
+   * @see https://docs.github.com/rest/reference/projects#list-user-projects
    */
   "GET /users/{username}/projects": {
     parameters: Endpoints["GET /users/{username}/projects"]["parameters"];
@@ -1574,7 +1574,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos/#list-repositories-for-a-user
+   * @see https://docs.github.com/rest/reference/repos#list-repositories-for-a-user
    */
   "GET /users/{username}/repos": {
     parameters: Endpoints["GET /users/{username}/repos"]["parameters"];
