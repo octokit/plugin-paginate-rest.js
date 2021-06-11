@@ -53,3 +53,30 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
     expect(result[0].id).toEqual(123);
   });
 });
+
+describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => {
+  test("handle 204 response for `GET /repos/{owner}/{repo}/contributors` if repository is empty", async () => {
+    const mock = fetchMock
+      .sandbox()
+      .get("https://api.github.com/repos/owner/empty-repo/contributors", {
+        status: 204,
+      });
+
+    const TestOctokit = Octokit.plugin(paginateRest);
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    const result = await octokit.paginate(
+      "GET /repos/{owner}/{repo}/contributors",
+      {
+        owner: "owner",
+        repo: "empty-repo",
+      }
+    );
+
+    expect(result.length).toEqual(0);
+  });
+});
