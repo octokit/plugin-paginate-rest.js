@@ -1161,4 +1161,32 @@ describe("pagination", () => {
         ]);
       });
   });
+
+  it("404 error", async () => {
+    const mock = fetchMock
+      .sandbox()
+      .get("https://api.github.com/repos/owner/non-existing-repo/issues", {
+        status: 404,
+        body: {
+          message: "Not Found",
+          documentation_url:
+            "https://docs.github.com/en/rest/reference/issues#list-repository-issues",
+        },
+      });
+
+    const TestOctokit = Octokit.plugin(paginateRest);
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock,
+      },
+    });
+
+    await expect(
+      async () =>
+        await octokit.paginate("GET /repos/{owner}/{repo}/issues", {
+          owner: "owner",
+          repo: "non-existing-repo",
+        })
+    ).rejects.toThrow("Not Found");
+  });
 });
