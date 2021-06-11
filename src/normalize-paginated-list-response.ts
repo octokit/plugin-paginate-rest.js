@@ -20,6 +20,13 @@ import { OctokitResponse } from "./types";
 export function normalizePaginatedListResponse(
   response: OctokitResponse<any>
 ): OctokitResponse<any> {
+  // endpoints can respond with 204 if repository is empty
+  if (!response.data) {
+    return {
+      ...response,
+      data: [],
+    };
+  }
   const responseNeedsNormalization =
     "total_count" in response.data && !("url" in response.data);
   if (!responseNeedsNormalization) return response;
