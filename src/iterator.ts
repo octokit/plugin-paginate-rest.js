@@ -27,17 +27,31 @@ export function iterator(
       async next() {
         if (!url) return { done: true };
 
-        const response = await requestMethod({ method, url, headers });
-        const normalizedResponse = normalizePaginatedListResponse(response);
+        try {
+          const response = await requestMethod({ method, url, headers });
+          const normalizedResponse = normalizePaginatedListResponse(response);
 
-        // `response.headers.link` format:
-        // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
-        // sets `url` to undefined if "next" URL is not present or `link` header is not set
-        url = ((normalizedResponse.headers.link || "").match(
-          /<([^>]+)>;\s*rel="next"/
-        ) || [])[1];
+          // `response.headers.link` format:
+          // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
+          // sets `url` to undefined if "next" URL is not present or `link` header is not set
+          url = ((normalizedResponse.headers.link || "").match(
+            /<([^>]+)>;\s*rel="next"/
+          ) || [])[1];
 
-        return { value: normalizedResponse };
+          return { value: normalizedResponse };
+        } catch (error) {
+          if (error.status !== 409) throw error;
+
+          url = "";
+
+          return {
+            value: {
+              status: 200,
+              headers: {},
+              data: [],
+            },
+          };
+        }
       },
     }),
   };
