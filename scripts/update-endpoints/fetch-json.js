@@ -1,7 +1,7 @@
 const { writeFileSync } = require("fs");
 const path = require("path");
 
-const { graphql } = require("@octokit/graphql");
+const graphql = require("github-openapi-graphql-query");
 const prettier = require("prettier");
 
 if (!process.env.VERSION) {
@@ -32,9 +32,9 @@ main();
 
 async function main() {
   try {
-    const { endpoints } = await graphql(QUERY, {
-      baseUrl: "https://github-openapi-graphql-server.vercel.app/api",
-      // baseUrl: "http://localhost:3000/api",
+    const {
+      data: { endpoints },
+    } = await graphql(QUERY, {
       version,
     });
 
