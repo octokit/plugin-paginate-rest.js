@@ -2,6 +2,14 @@ import { Endpoints } from "@octokit/types";
 
 export interface PaginatingEndpoints {
   /**
+   * @see https://docs.github.com/rest/reference/apps#list-deliveries-for-an-app-webhook
+   */
+  "GET /app/hook/deliveries": {
+    parameters: Endpoints["GET /app/hook/deliveries"]["parameters"];
+    response: Endpoints["GET /app/hook/deliveries"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
@@ -329,6 +337,14 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/hooks": {
     parameters: Endpoints["GET /orgs/{org}/hooks"]["parameters"];
     response: Endpoints["GET /orgs/{org}/hooks"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/orgs#list-deliveries-for-an-organization-webhook
+   */
+  "GET /orgs/{org}/hooks/{hook_id}/deliveries": {
+    parameters: Endpoints["GET /orgs/{org}/hooks/{hook_id}/deliveries"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/hooks/{hook_id}/deliveries"]["response"];
   };
 
   /**
@@ -829,6 +845,14 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/hooks": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/hooks"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/repos#list-deliveries-for-a-repository-webhook
+   */
+  "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries"]["response"];
   };
 
   /**
@@ -1599,6 +1623,7 @@ export interface PaginatingEndpoints {
 }
 
 export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
+  "GET /app/hook/deliveries",
   "GET /app/installations",
   "GET /applications/grants",
   "GET /authorizations",
@@ -1637,6 +1662,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/events",
   "GET /orgs/{org}/failed_invitations",
   "GET /orgs/{org}/hooks",
+  "GET /orgs/{org}/hooks/{hook_id}/deliveries",
   "GET /orgs/{org}/installations",
   "GET /orgs/{org}/invitations",
   "GET /orgs/{org}/invitations/{invitation_id}/teams",
@@ -1696,6 +1722,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/forks",
   "GET /repos/{owner}/{repo}/git/matching-refs/{ref}",
   "GET /repos/{owner}/{repo}/hooks",
+  "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries",
   "GET /repos/{owner}/{repo}/invitations",
   "GET /repos/{owner}/{repo}/issues",
   "GET /repos/{owner}/{repo}/issues/comments",
