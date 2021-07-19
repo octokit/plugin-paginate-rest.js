@@ -20,6 +20,8 @@ jobs:
           # make sure that other actions get triggered when using `git push` in gr2m/create-or-update-pull-request-action
           token: ${{ secrets.OCTOKITBOT_PAT }}
       - uses: actions/setup-node@v2
+        with:
+          cache: npm
 
       # try checking out routes-update branch. Ignore error if it does not exist
       - run: git checkout routes-update || true
