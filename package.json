@@ -25,7 +25,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@octokit/types": "^6.21.1"
+    "@octokit/types": "^6.22.0"
   },
   "peerDependencies": {
     "@octokit/core": ">=2"
