@@ -658,6 +658,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/v3/repos#list-autolinks
+   */
+  "GET /repos/{owner}/{repo}/autolinks": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/autolinks"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/autolinks"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/repos#list-branches
    */
   "GET /repos/{owner}/{repo}/branches": {
@@ -1699,6 +1707,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/actions/workflows",
   "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs",
   "GET /repos/{owner}/{repo}/assignees",
+  "GET /repos/{owner}/{repo}/autolinks",
   "GET /repos/{owner}/{repo}/branches",
   "GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations",
   "GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs",
