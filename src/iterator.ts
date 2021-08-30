@@ -39,7 +39,7 @@ export function iterator(
           ) || [])[1];
 
           return { value: normalizedResponse };
-        } catch (error) {
+        } catch (error: any) {
           if (error.status !== 409) throw error;
 
           url = "";
