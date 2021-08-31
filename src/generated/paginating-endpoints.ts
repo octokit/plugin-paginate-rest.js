@@ -446,6 +446,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-by-organization
+   */
+  "GET /orgs/{org}/secret-scanning/alerts": {
+    parameters: Endpoints["GET /orgs/{org}/secret-scanning/alerts"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/secret-scanning/alerts"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/teams#list-idp-groups-for-an-organization
    */
   "GET /orgs/{org}/team-sync/groups": {
@@ -1707,6 +1715,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/projects",
   "GET /orgs/{org}/public_members",
   "GET /orgs/{org}/repos",
+  "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/team-sync/groups",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
