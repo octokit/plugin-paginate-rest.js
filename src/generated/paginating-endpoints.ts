@@ -414,6 +414,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/packages#list-packages-for-an-organization
+   */
+  "GET /orgs/{org}/packages": {
+    parameters: Endpoints["GET /orgs/{org}/packages"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/packages"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/projects#list-organization-projects
    */
   "GET /orgs/{org}/projects": {
@@ -435,6 +443,14 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/repos": {
     parameters: Endpoints["GET /orgs/{org}/repos"]["parameters"];
     response: Endpoints["GET /orgs/{org}/repos"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-by-organization
+   */
+  "GET /orgs/{org}/secret-scanning/alerts": {
+    parameters: Endpoints["GET /orgs/{org}/secret-scanning/alerts"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/secret-scanning/alerts"]["response"];
   };
 
   /**
@@ -1454,6 +1470,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/packages#list-packages-for-the-authenticated-user
+   */
+  "GET /user/packages": {
+    parameters: Endpoints["GET /user/packages"]["parameters"];
+    response: Endpoints["GET /user/packages"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user
    */
   "GET /user/public_emails": {
@@ -1499,6 +1523,14 @@ export interface PaginatingEndpoints {
   "GET /user/teams": {
     parameters: Endpoints["GET /user/teams"]["parameters"];
     response: Endpoints["GET /user/teams"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/packages#list-packages-for-user
+   */
+  "GET /user/{username}/packages": {
+    parameters: Endpoints["GET /user/{username}/packages"]["parameters"];
+    response: Endpoints["GET /user/{username}/packages"]["response"];
   };
 
   /**
@@ -1679,9 +1711,11 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/migrations",
   "GET /orgs/{org}/migrations/{migration_id}/repositories",
   "GET /orgs/{org}/outside_collaborators",
+  "GET /orgs/{org}/packages",
   "GET /orgs/{org}/projects",
   "GET /orgs/{org}/public_members",
   "GET /orgs/{org}/repos",
+  "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/team-sync/groups",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
@@ -1802,12 +1836,14 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/migrations",
   "GET /user/migrations/{migration_id}/repositories",
   "GET /user/orgs",
+  "GET /user/packages",
   "GET /user/public_emails",
   "GET /user/repos",
   "GET /user/repository_invitations",
   "GET /user/starred",
   "GET /user/subscriptions",
   "GET /user/teams",
+  "GET /user/{username}/packages",
   "GET /users",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",
