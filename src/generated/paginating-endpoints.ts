@@ -1526,14 +1526,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#list-packages-for-user
-   */
-  "GET /user/{username}/packages": {
-    parameters: Endpoints["GET /user/{username}/packages"]["parameters"];
-    response: Endpoints["GET /user/{username}/packages"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/reference/users#list-users
    */
   "GET /users": {
@@ -1611,6 +1603,14 @@ export interface PaginatingEndpoints {
   "GET /users/{username}/orgs": {
     parameters: Endpoints["GET /users/{username}/orgs"]["parameters"];
     response: Endpoints["GET /users/{username}/orgs"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/packages#list-packages-for-user
+   */
+  "GET /users/{username}/packages": {
+    parameters: Endpoints["GET /users/{username}/packages"]["parameters"];
+    response: Endpoints["GET /users/{username}/packages"]["response"];
   };
 
   /**
@@ -1843,7 +1843,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/starred",
   "GET /user/subscriptions",
   "GET /user/teams",
-  "GET /user/{username}/packages",
   "GET /users",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",
@@ -1854,6 +1853,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/gpg_keys",
   "GET /users/{username}/keys",
   "GET /users/{username}/orgs",
+  "GET /users/{username}/packages",
   "GET /users/{username}/projects",
   "GET /users/{username}/received_events",
   "GET /users/{username}/received_events/public",
