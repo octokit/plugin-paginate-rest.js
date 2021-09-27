@@ -23,9 +23,6 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
       "GET /projects/columns/{column_id}/cards",
       {
         column_id: 123,
-        mediaType: {
-          previews: ["inertia"],
-        },
       }
     );
 
