@@ -250,6 +250,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/codespaces#list-in-organization
+   */
+  "GET /orgs/{org_id}/codespaces": {
+    parameters: Endpoints["GET /orgs/{org_id}/codespaces"]["parameters"];
+    response: Endpoints["GET /orgs/{org_id}/codespaces"]["response"] & {
+      data: Endpoints["GET /orgs/{org_id}/codespaces"]["response"]["data"]["codespaces"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization
    */
   "GET /orgs/{org}/actions/permissions/repositories": {
@@ -1892,6 +1902,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /notifications",
   "GET /organizations",
   "GET /organizations/{organization_id}/custom_roles",
+  "GET /orgs/{org_id}/codespaces",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/runner-groups",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
