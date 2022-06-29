@@ -24,6 +24,9 @@ const QUERY = `
         code
         schema
       }
+      parameters {
+        name
+      }
     }
   }
 `;
