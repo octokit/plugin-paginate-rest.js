@@ -248,16 +248,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-in-organization
-   */
-  "GET /orgs/{org_id}/codespaces": {
-    parameters: Endpoints["GET /orgs/{org_id}/codespaces"]["parameters"];
-    response: Endpoints["GET /orgs/{org_id}/codespaces"]["response"] & {
-      data: Endpoints["GET /orgs/{org_id}/codespaces"]["response"]["data"]["codespaces"];
-    };
-  };
-
-  /**
    * @see https://docs.github.com/rest/reference/actions#list-repositories-with-github-actions-cache-usage-for-an-organization
    */
   "GET /orgs/{org}/actions/cache/usage-by-repository": {
@@ -359,6 +349,16 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/code-scanning/alerts": {
     parameters: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["parameters"];
     response: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/codespaces#list-in-organization
+   */
+  "GET /orgs/{org}/codespaces": {
+    parameters: Endpoints["GET /orgs/{org}/codespaces"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/codespaces"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/codespaces"]["response"]["data"]["codespaces"];
+    };
   };
 
   /**
@@ -1854,7 +1854,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /networks/{owner}/{repo}/events",
   "GET /notifications",
   "GET /organizations",
-  "GET /orgs/{org_id}/codespaces",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/runner-groups",
@@ -1866,6 +1865,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/audit-log",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/code-scanning/alerts",
+  "GET /orgs/{org}/codespaces",
   "GET /orgs/{org}/credential-authorizations",
   "GET /orgs/{org}/dependabot/secrets",
   "GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories",
