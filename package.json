@@ -28,7 +28,7 @@
     "@octokit/types": "^6.40.0"
   },
   "peerDependencies": {
-    "@octokit/core": ">=4"
+    "@octokit/core": ">=2"
   },
   "devDependencies": {
     "@octokit/core": "^4.0.0",
