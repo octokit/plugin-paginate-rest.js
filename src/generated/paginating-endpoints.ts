@@ -92,6 +92,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-an-enterprise
+   */
+  "GET /enterprises/{enterprise}/code-scanning/alerts": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/code-scanning/alerts"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/code-scanning/alerts"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/secret-scanning/alerts": {
@@ -1835,6 +1843,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners",
   "GET /enterprises/{enterprise}/actions/runners",
   "GET /enterprises/{enterprise}/audit-log",
+  "GET /enterprises/{enterprise}/code-scanning/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /enterprises/{enterprise}/settings/billing/advanced-security",
   "GET /events",
