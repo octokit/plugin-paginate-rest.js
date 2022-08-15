@@ -18,22 +18,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/oauth-authorizations#list-your-grants
-   */
-  "GET /applications/grants": {
-    parameters: Endpoints["GET /applications/grants"]["parameters"];
-    response: Endpoints["GET /applications/grants"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/oauth-authorizations#list-your-authorizations
-   */
-  "GET /authorizations": {
-    parameters: Endpoints["GET /authorizations"]["parameters"];
-    response: Endpoints["GET /authorizations"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/reference/actions#list-selected-organizations-enabled-for-github-actions-in-an-enterprise
    */
   "GET /enterprises/{enterprise}/actions/permissions/organizations": {
@@ -1835,8 +1819,6 @@ export interface PaginatingEndpoints {
 export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /app/hook/deliveries",
   "GET /app/installations",
-  "GET /applications/grants",
-  "GET /authorizations",
   "GET /enterprises/{enterprise}/actions/permissions/organizations",
   "GET /enterprises/{enterprise}/actions/runner-groups",
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations",
