@@ -1006,15 +1006,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/git#list-matching-references
-   */
-  "GET /repos/{owner}/{repo}/git/matching-refs/{ref}": {
-    parameters: Endpoints["GET /repos/{owner}/{repo}/git/matching-refs/{ref}"]["parameters"];
-    response: Endpoints["GET /repos/{owner}/{repo}/git/matching-refs/{ref}"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-webhooks
+   * @see https://docs.github.com/rest/webhooks/repos#list-repository-webhooks
    */
   "GET /repos/{owner}/{repo}/hooks": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks"]["parameters"];
@@ -1211,16 +1203,6 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/files": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/files"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/files"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/pulls#list-requested-reviewers-for-a-pull-request
-   */
-  "GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers": {
-    parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers"]["parameters"];
-    response: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers"]["response"] & {
-      data: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers"]["response"]["data"]["users"];
-    };
   };
 
   /**
@@ -1942,7 +1924,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies",
   "GET /repos/{owner}/{repo}/events",
   "GET /repos/{owner}/{repo}/forks",
-  "GET /repos/{owner}/{repo}/git/matching-refs/{ref}",
   "GET /repos/{owner}/{repo}/hooks",
   "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries",
   "GET /repos/{owner}/{repo}/invitations",
@@ -1968,7 +1949,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/comments",
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits",
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/files",
-  "GET /repos/{owner}/{repo}/pulls/{pull_number}/requested_reviewers",
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews",
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments",
   "GET /repos/{owner}/{repo}/releases",
