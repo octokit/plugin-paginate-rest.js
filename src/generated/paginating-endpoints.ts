@@ -850,7 +850,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-collaborators
+   * @see https://docs.github.com/rest/collaborators/collaborators#list-repository-collaborators
    */
   "GET /repos/{owner}/{repo}/collaborators": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/collaborators"]["parameters"];
@@ -858,7 +858,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-commit-comments-for-a-repository
+   * @see https://docs.github.com/rest/commits/comments#list-commit-comments-for-a-repository
    */
   "GET /repos/{owner}/{repo}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/comments"]["parameters"];
@@ -874,7 +874,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-commits
+   * @see https://docs.github.com/rest/commits/commits#list-commits
    */
   "GET /repos/{owner}/{repo}/commits": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits"]["parameters"];
@@ -882,7 +882,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-commit-comments
+   * @see https://docs.github.com/rest/commits/comments#list-commit-comments
    */
   "GET /repos/{owner}/{repo}/commits/{commit_sha}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/comments"]["parameters"];
@@ -890,7 +890,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-pull-requests-associated-with-a-commit
+   * @see https://docs.github.com/rest/commits/commits#list-pull-requests-associated-with-a-commit
    */
   "GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls"]["parameters"];
@@ -918,7 +918,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#get-the-combined-status-for-a-specific-reference
+   * @see https://docs.github.com/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/status": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/status"]["parameters"];
@@ -928,7 +928,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-commit-statuses-for-a-reference
+   * @see https://docs.github.com/rest/commits/statuses#list-commit-statuses-for-a-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/statuses": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/statuses"]["parameters"];
@@ -970,7 +970,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#get-all-environments
+   * @see https://docs.github.com/rest/deployments/environments#list-environments
    */
   "GET /repos/{owner}/{repo}/environments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/environments"]["parameters"];
@@ -1012,7 +1012,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-deliveries-for-a-repository-webhook
+   * @see https://docs.github.com/rest/webhooks/repo-deliveries#list-deliveries-for-a-repository-webhook
    */
   "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries"]["parameters"];
@@ -1020,7 +1020,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-invitations
+   * @see https://docs.github.com/rest/collaborators/invitations#list-repository-invitations
    */
   "GET /repos/{owner}/{repo}/invitations": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/invitations"]["parameters"];
@@ -1140,7 +1140,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-github-pages-builds
+   * @see https://docs.github.com/rest/pages#list-github-pages-builds
    */
   "GET /repos/{owner}/{repo}/pages/builds": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pages/builds"]["parameters"];
@@ -1648,7 +1648,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-invitations-for-the-authenticated-user
+   * @see https://docs.github.com/rest/collaborators/invitations#list-repository-invitations-for-the-authenticated-user
    */
   "GET /user/repository_invitations": {
     parameters: Endpoints["GET /user/repository_invitations"]["parameters"];
