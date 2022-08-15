@@ -980,6 +980,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/deployments/branch-policies#list-deployment-branch-policies
+   */
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies"]["response"]["data"]["branch_policies"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/activity#list-repository-events
    */
   "GET /repos/{owner}/{repo}/events": {
@@ -1929,6 +1939,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/deployments",
   "GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses",
   "GET /repos/{owner}/{repo}/environments",
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies",
   "GET /repos/{owner}/{repo}/events",
   "GET /repos/{owner}/{repo}/forks",
   "GET /repos/{owner}/{repo}/git/matching-refs/{ref}",
