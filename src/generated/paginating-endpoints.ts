@@ -1648,6 +1648,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/users#list-public-ssh-signing-keys-for-the-authenticated-user
+   */
+  "GET /user/ssh_signing_keys": {
+    parameters: Endpoints["GET /user/ssh_signing_keys"]["parameters"];
+    response: Endpoints["GET /user/ssh_signing_keys"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user
    */
   "GET /user/starred": {
@@ -1789,6 +1797,14 @@ export interface PaginatingEndpoints {
   "GET /users/{username}/repos": {
     parameters: Endpoints["GET /users/{username}/repos"]["parameters"];
     response: Endpoints["GET /users/{username}/repos"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/users#list-ssh-signing-keys-for-a-user
+   */
+  "GET /users/{username}/ssh_signing_keys": {
+    parameters: Endpoints["GET /users/{username}/ssh_signing_keys"]["parameters"];
+    response: Endpoints["GET /users/{username}/ssh_signing_keys"]["response"];
   };
 
   /**
@@ -2001,6 +2017,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/public_emails",
   "GET /user/repos",
   "GET /user/repository_invitations",
+  "GET /user/ssh_signing_keys",
   "GET /user/starred",
   "GET /user/subscriptions",
   "GET /user/teams",
@@ -2019,6 +2036,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/received_events",
   "GET /users/{username}/received_events/public",
   "GET /users/{username}/repos",
+  "GET /users/{username}/ssh_signing_keys",
   "GET /users/{username}/starred",
   "GET /users/{username}/subscriptions",
 ];
