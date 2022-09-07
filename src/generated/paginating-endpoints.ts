@@ -498,7 +498,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-an-organization
+   * @see https://docs.github.com/rest/packages#get-all-package-versions-for-a-package-owned-by-an-organization
    */
   "GET /orgs/{org}/packages/{package_type}/{package_name}/versions": {
     parameters: Endpoints["GET /orgs/{org}/packages/{package_type}/{package_name}/versions"]["parameters"];
@@ -1616,7 +1616,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+   * @see https://docs.github.com/rest/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
    */
   "GET /user/packages/{package_type}/{package_name}/versions": {
     parameters: Endpoints["GET /user/packages/{package_type}/{package_name}/versions"]["parameters"];
