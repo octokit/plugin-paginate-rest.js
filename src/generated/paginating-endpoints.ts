@@ -68,14 +68,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise
-   */
-  "GET /enterprises/{enterprise}/audit-log": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/audit-log"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/audit-log"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/code-scanning/alerts": {
@@ -240,6 +232,26 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/codespaces#list-organization-secrets
+   */
+  "GET /organizations/{org}/codespaces/secrets": {
+    parameters: Endpoints["GET /organizations/{org}/codespaces/secrets"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/codespaces/secrets"]["response"] & {
+      data: Endpoints["GET /organizations/{org}/codespaces/secrets"]["response"]["data"]["secrets"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/codespaces#list-selected-repositories-for-an-organization-secret
+   */
+  "GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories": {
+    parameters: Endpoints["GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories"]["response"] & {
+      data: Endpoints["GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/actions#list-repositories-with-github-actions-cache-usage-for-an-organization
    */
   "GET /orgs/{org}/actions/cache/usage-by-repository": {
@@ -320,14 +332,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#get-audit-log
-   */
-  "GET /orgs/{org}/audit-log": {
-    parameters: Endpoints["GET /orgs/{org}/audit-log"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/audit-log"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization
    */
   "GET /orgs/{org}/blocks": {
@@ -351,14 +355,6 @@ export interface PaginatingEndpoints {
     response: Endpoints["GET /orgs/{org}/codespaces"]["response"] & {
       data: Endpoints["GET /orgs/{org}/codespaces"]["response"]["data"]["codespaces"];
     };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/orgs#list-saml-sso-authorizations-for-an-organization
-   */
-  "GET /orgs/{org}/credential-authorizations": {
-    parameters: Endpoints["GET /orgs/{org}/credential-authorizations"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/credential-authorizations"]["response"];
   };
 
   /**
@@ -387,16 +383,6 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/events": {
     parameters: Endpoints["GET /orgs/{org}/events"]["parameters"];
     response: Endpoints["GET /orgs/{org}/events"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/teams#list-external-idp-groups-for-an-organization
-   */
-  "GET /orgs/{org}/external-groups": {
-    parameters: Endpoints["GET /orgs/{org}/external-groups"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/external-groups"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/external-groups"]["response"]["data"]["groups"];
-    };
   };
 
   /**
@@ -544,16 +530,6 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/settings/billing/advanced-security"]["parameters"];
     response: Endpoints["GET /orgs/{org}/settings/billing/advanced-security"]["response"] & {
       data: Endpoints["GET /orgs/{org}/settings/billing/advanced-security"]["response"]["data"]["repositories"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/teams#list-idp-groups-for-an-organization
-   */
-  "GET /orgs/{org}/team-sync/groups": {
-    parameters: Endpoints["GET /orgs/{org}/team-sync/groups"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/team-sync/groups"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/team-sync/groups"]["response"]["data"]["groups"];
     };
   };
 
@@ -941,6 +917,14 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/contributors": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/contributors"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/contributors"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/dependabot#list-dependabot-alerts-for-a-repository
+   */
+  "GET /repos/{owner}/{repo}/dependabot/alerts": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/dependabot/alerts"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/dependabot/alerts"]["response"];
   };
 
   /**
@@ -1832,7 +1816,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations",
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners",
   "GET /enterprises/{enterprise}/actions/runners",
-  "GET /enterprises/{enterprise}/audit-log",
   "GET /enterprises/{enterprise}/code-scanning/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /enterprises/{enterprise}/settings/billing/advanced-security",
@@ -1853,6 +1836,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /networks/{owner}/{repo}/events",
   "GET /notifications",
   "GET /organizations",
+  "GET /organizations/{org}/codespaces/secrets",
+  "GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/runner-groups",
@@ -1861,15 +1846,12 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/runners",
   "GET /orgs/{org}/actions/secrets",
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
-  "GET /orgs/{org}/audit-log",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/code-scanning/alerts",
   "GET /orgs/{org}/codespaces",
-  "GET /orgs/{org}/credential-authorizations",
   "GET /orgs/{org}/dependabot/secrets",
   "GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/events",
-  "GET /orgs/{org}/external-groups",
   "GET /orgs/{org}/failed_invitations",
   "GET /orgs/{org}/hooks",
   "GET /orgs/{org}/hooks/{hook_id}/deliveries",
@@ -1888,7 +1870,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/repos",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/settings/billing/advanced-security",
-  "GET /orgs/{org}/team-sync/groups",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments",
@@ -1933,6 +1914,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/commits/{ref}/status",
   "GET /repos/{owner}/{repo}/commits/{ref}/statuses",
   "GET /repos/{owner}/{repo}/contributors",
+  "GET /repos/{owner}/{repo}/dependabot/alerts",
   "GET /repos/{owner}/{repo}/dependabot/secrets",
   "GET /repos/{owner}/{repo}/deployments",
   "GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses",
