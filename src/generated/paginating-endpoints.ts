@@ -2,7 +2,7 @@ import { Endpoints } from "@octokit/types";
 
 export interface PaginatingEndpoints {
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-deliveries-for-an-app-webhook
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-deliveries-for-an-app-webhook
    */
   "GET /app/hook/deliveries": {
     parameters: Endpoints["GET /app/hook/deliveries"]["parameters"];
@@ -10,7 +10,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
@@ -18,7 +18,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-selected-organizations-enabled-for-github-actions-in-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-selected-organizations-enabled-for-github-actions-in-an-enterprise
    */
   "GET /enterprises/{enterprise}/actions/permissions/organizations": {
     parameters: Endpoints["GET /enterprises/{enterprise}/actions/permissions/organizations"]["parameters"];
@@ -28,7 +28,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runner-groups-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/actions/runner-groups": {
     parameters: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["parameters"];
@@ -38,7 +38,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-organization-access-to-a-self-hosted-runner-group-in-a-enterprise
    */
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations": {
     parameters: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/organizations"]["parameters"];
@@ -48,7 +48,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners": {
     parameters: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups/{runner_group_id}/runners"]["parameters"];
@@ -58,7 +58,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runners-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/actions/runners": {
     parameters: Endpoints["GET /enterprises/{enterprise}/actions/runners"]["parameters"];
@@ -68,7 +68,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/enterprise-admin#get-the-audit-log-for-an-enterprise
+   */
+  "GET /enterprises/{enterprise}/audit-log": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/audit-log"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/audit-log"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/code-scanning#list-code-scanning-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/code-scanning/alerts": {
     parameters: Endpoints["GET /enterprises/{enterprise}/code-scanning/alerts"]["parameters"];
@@ -76,7 +84,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/secret-scanning/alerts": {
     parameters: Endpoints["GET /enterprises/{enterprise}/secret-scanning/alerts"]["parameters"];
@@ -84,7 +92,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/billing#export-advanced-security-active-committers-data-for-enterprise
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/billing#export-advanced-security-active-committers-data-for-enterprise
    */
   "GET /enterprises/{enterprise}/settings/billing/advanced-security": {
     parameters: Endpoints["GET /enterprises/{enterprise}/settings/billing/advanced-security"]["parameters"];
@@ -94,7 +102,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-public-events
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-public-events
    */
   "GET /events": {
     parameters: Endpoints["GET /events"]["parameters"];
@@ -102,7 +110,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-gists-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-gists-for-the-authenticated-user
    */
   "GET /gists": {
     parameters: Endpoints["GET /gists"]["parameters"];
@@ -110,7 +118,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-public-gists
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-public-gists
    */
   "GET /gists/public": {
     parameters: Endpoints["GET /gists/public"]["parameters"];
@@ -118,7 +126,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-starred-gists
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-starred-gists
    */
   "GET /gists/starred": {
     parameters: Endpoints["GET /gists/starred"]["parameters"];
@@ -126,7 +134,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-gist-comments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-gist-comments
    */
   "GET /gists/{gist_id}/comments": {
     parameters: Endpoints["GET /gists/{gist_id}/comments"]["parameters"];
@@ -134,7 +142,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-gist-commits
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-gist-commits
    */
   "GET /gists/{gist_id}/commits": {
     parameters: Endpoints["GET /gists/{gist_id}/commits"]["parameters"];
@@ -142,7 +150,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-gist-forks
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-gist-forks
    */
   "GET /gists/{gist_id}/forks": {
     parameters: Endpoints["GET /gists/{gist_id}/forks"]["parameters"];
@@ -150,7 +158,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-app-installation
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-repositories-accessible-to-the-app-installation
    */
   "GET /installation/repositories": {
     parameters: Endpoints["GET /installation/repositories"]["parameters"];
@@ -160,7 +168,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-issues-assigned-to-the-authenticated-user
    */
   "GET /issues": {
     parameters: Endpoints["GET /issues"]["parameters"];
@@ -168,7 +176,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/licenses#get-all-commonly-used-licenses
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/licenses#get-all-commonly-used-licenses
    */
   "GET /licenses": {
     parameters: Endpoints["GET /licenses"]["parameters"];
@@ -176,7 +184,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-plans
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-plans
    */
   "GET /marketplace_listing/plans": {
     parameters: Endpoints["GET /marketplace_listing/plans"]["parameters"];
@@ -184,7 +192,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-accounts-for-a-plan
    */
   "GET /marketplace_listing/plans/{plan_id}/accounts": {
     parameters: Endpoints["GET /marketplace_listing/plans/{plan_id}/accounts"]["parameters"];
@@ -192,7 +200,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-plans-stubbed
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-plans-stubbed
    */
   "GET /marketplace_listing/stubbed/plans": {
     parameters: Endpoints["GET /marketplace_listing/stubbed/plans"]["parameters"];
@@ -200,7 +208,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-accounts-for-a-plan-stubbed
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-accounts-for-a-plan-stubbed
    */
   "GET /marketplace_listing/stubbed/plans/{plan_id}/accounts": {
     parameters: Endpoints["GET /marketplace_listing/stubbed/plans/{plan_id}/accounts"]["parameters"];
@@ -208,7 +216,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-public-events-for-a-network-of-repositories
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-public-events-for-a-network-of-repositories
    */
   "GET /networks/{owner}/{repo}/events": {
     parameters: Endpoints["GET /networks/{owner}/{repo}/events"]["parameters"];
@@ -216,7 +224,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-notifications-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-notifications-for-the-authenticated-user
    */
   "GET /notifications": {
     parameters: Endpoints["GET /notifications"]["parameters"];
@@ -224,7 +232,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organizations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organizations
    */
   "GET /organizations": {
     parameters: Endpoints["GET /organizations"]["parameters"];
@@ -232,7 +240,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-organization-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-organization-secrets
    */
   "GET /organizations/{org}/codespaces/secrets": {
     parameters: Endpoints["GET /organizations/{org}/codespaces/secrets"]["parameters"];
@@ -242,7 +250,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-selected-repositories-for-an-organization-secret
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-selected-repositories-for-an-organization-secret
    */
   "GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories": {
     parameters: Endpoints["GET /organizations/{org}/codespaces/secrets/{secret_name}/repositories"]["parameters"];
@@ -252,7 +260,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-repositories-with-github-actions-cache-usage-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-repositories-with-github-actions-cache-usage-for-an-organization
    */
   "GET /orgs/{org}/actions/cache/usage-by-repository": {
     parameters: Endpoints["GET /orgs/{org}/actions/cache/usage-by-repository"]["parameters"];
@@ -262,7 +270,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-selected-repositories-enabled-for-github-actions-in-an-organization
    */
   "GET /orgs/{org}/actions/permissions/repositories": {
     parameters: Endpoints["GET /orgs/{org}/actions/permissions/repositories"]["parameters"];
@@ -272,7 +280,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
    */
   "GET /orgs/{org}/actions/runner-groups": {
     parameters: Endpoints["GET /orgs/{org}/actions/runner-groups"]["parameters"];
@@ -282,7 +290,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
    */
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["parameters"];
@@ -292,7 +300,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
    */
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners": {
     parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["parameters"];
@@ -302,7 +310,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runners-for-an-organization
    */
   "GET /orgs/{org}/actions/runners": {
     parameters: Endpoints["GET /orgs/{org}/actions/runners"]["parameters"];
@@ -312,7 +320,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-organization-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-organization-secrets
    */
   "GET /orgs/{org}/actions/secrets": {
     parameters: Endpoints["GET /orgs/{org}/actions/secrets"]["parameters"];
@@ -322,7 +330,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-selected-repositories-for-an-organization-secret
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-selected-repositories-for-an-organization-secret
    */
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/actions/secrets/{secret_name}/repositories"]["parameters"];
@@ -332,7 +340,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-users-blocked-by-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#get-audit-log
+   */
+  "GET /orgs/{org}/audit-log": {
+    parameters: Endpoints["GET /orgs/{org}/audit-log"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/audit-log"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-users-blocked-by-an-organization
    */
   "GET /orgs/{org}/blocks": {
     parameters: Endpoints["GET /orgs/{org}/blocks"]["parameters"];
@@ -340,7 +356,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-by-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/code-scanning#list-code-scanning-alerts-by-organization
    */
   "GET /orgs/{org}/code-scanning/alerts": {
     parameters: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["parameters"];
@@ -348,7 +364,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-in-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-in-organization
    */
   "GET /orgs/{org}/codespaces": {
     parameters: Endpoints["GET /orgs/{org}/codespaces"]["parameters"];
@@ -358,7 +374,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/dependabot#list-organization-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-saml-sso-authorizations-for-an-organization
+   */
+  "GET /orgs/{org}/credential-authorizations": {
+    parameters: Endpoints["GET /orgs/{org}/credential-authorizations"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/credential-authorizations"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/dependabot#list-organization-secrets
    */
   "GET /orgs/{org}/dependabot/secrets": {
     parameters: Endpoints["GET /orgs/{org}/dependabot/secrets"]["parameters"];
@@ -368,7 +392,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/dependabot#list-selected-repositories-for-an-organization-secret
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/dependabot#list-selected-repositories-for-an-organization-secret
    */
   "GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories"]["parameters"];
@@ -378,7 +402,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-public-organization-events
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-public-organization-events
    */
   "GET /orgs/{org}/events": {
     parameters: Endpoints["GET /orgs/{org}/events"]["parameters"];
@@ -386,7 +410,17 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-failed-organization-invitations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-external-idp-groups-for-an-organization
+   */
+  "GET /orgs/{org}/external-groups": {
+    parameters: Endpoints["GET /orgs/{org}/external-groups"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/external-groups"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/external-groups"]["response"]["data"]["groups"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-failed-organization-invitations
    */
   "GET /orgs/{org}/failed_invitations": {
     parameters: Endpoints["GET /orgs/{org}/failed_invitations"]["parameters"];
@@ -394,7 +428,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organization-webhooks
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organization-webhooks
    */
   "GET /orgs/{org}/hooks": {
     parameters: Endpoints["GET /orgs/{org}/hooks"]["parameters"];
@@ -402,7 +436,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-deliveries-for-an-organization-webhook
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-deliveries-for-an-organization-webhook
    */
   "GET /orgs/{org}/hooks/{hook_id}/deliveries": {
     parameters: Endpoints["GET /orgs/{org}/hooks/{hook_id}/deliveries"]["parameters"];
@@ -410,7 +444,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-app-installations-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-app-installations-for-an-organization
    */
   "GET /orgs/{org}/installations": {
     parameters: Endpoints["GET /orgs/{org}/installations"]["parameters"];
@@ -420,7 +454,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-pending-organization-invitations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-pending-organization-invitations
    */
   "GET /orgs/{org}/invitations": {
     parameters: Endpoints["GET /orgs/{org}/invitations"]["parameters"];
@@ -428,7 +462,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organization-invitation-teams
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organization-invitation-teams
    */
   "GET /orgs/{org}/invitations/{invitation_id}/teams": {
     parameters: Endpoints["GET /orgs/{org}/invitations/{invitation_id}/teams"]["parameters"];
@@ -436,7 +470,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-organization-issues-assigned-to-the-authenticated-user
    */
   "GET /orgs/{org}/issues": {
     parameters: Endpoints["GET /orgs/{org}/issues"]["parameters"];
@@ -444,7 +478,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organization-members
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organization-members
    */
   "GET /orgs/{org}/members": {
     parameters: Endpoints["GET /orgs/{org}/members"]["parameters"];
@@ -452,7 +486,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-organization-migrations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/migrations#list-organization-migrations
    */
   "GET /orgs/{org}/migrations": {
     parameters: Endpoints["GET /orgs/{org}/migrations"]["parameters"];
@@ -460,7 +494,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/migrations#list-repositories-in-an-organization-migration
    */
   "GET /orgs/{org}/migrations/{migration_id}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/migrations/{migration_id}/repositories"]["parameters"];
@@ -468,7 +502,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-outside-collaborators-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-outside-collaborators-for-an-organization
    */
   "GET /orgs/{org}/outside_collaborators": {
     parameters: Endpoints["GET /orgs/{org}/outside_collaborators"]["parameters"];
@@ -476,7 +510,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#list-packages-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/packages#list-packages-for-an-organization
    */
   "GET /orgs/{org}/packages": {
     parameters: Endpoints["GET /orgs/{org}/packages"]["parameters"];
@@ -484,7 +518,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/packages#get-all-package-versions-for-a-package-owned-by-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/packages#get-all-package-versions-for-a-package-owned-by-an-organization
    */
   "GET /orgs/{org}/packages/{package_type}/{package_name}/versions": {
     parameters: Endpoints["GET /orgs/{org}/packages/{package_type}/{package_name}/versions"]["parameters"];
@@ -492,7 +526,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-organization-projects
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-organization-projects
    */
   "GET /orgs/{org}/projects": {
     parameters: Endpoints["GET /orgs/{org}/projects"]["parameters"];
@@ -500,7 +534,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-public-organization-members
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-public-organization-members
    */
   "GET /orgs/{org}/public_members": {
     parameters: Endpoints["GET /orgs/{org}/public_members"]["parameters"];
@@ -508,7 +542,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-organization-repositories
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-organization-repositories
    */
   "GET /orgs/{org}/repos": {
     parameters: Endpoints["GET /orgs/{org}/repos"]["parameters"];
@@ -516,7 +550,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-organization
    */
   "GET /orgs/{org}/secret-scanning/alerts": {
     parameters: Endpoints["GET /orgs/{org}/secret-scanning/alerts"]["parameters"];
@@ -524,7 +558,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/billing#get-github-advanced-security-active-committers-for-an-organization
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/billing#get-github-advanced-security-active-committers-for-an-organization
    */
   "GET /orgs/{org}/settings/billing/advanced-security": {
     parameters: Endpoints["GET /orgs/{org}/settings/billing/advanced-security"]["parameters"];
@@ -534,7 +568,17 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-teams
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-idp-groups-for-an-organization
+   */
+  "GET /orgs/{org}/team-sync/groups": {
+    parameters: Endpoints["GET /orgs/{org}/team-sync/groups"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/team-sync/groups"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/team-sync/groups"]["response"]["data"]["groups"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-teams
    */
   "GET /orgs/{org}/teams": {
     parameters: Endpoints["GET /orgs/{org}/teams"]["parameters"];
@@ -542,7 +586,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-discussions
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-discussions
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions"]["parameters"];
@@ -550,7 +594,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-discussion-comments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-discussion-comments
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments"]["parameters"];
@@ -558,7 +602,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion-comment
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-a-team-discussion-comment
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments/{comment_number}/reactions"]["parameters"];
@@ -566,7 +610,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-team-discussion
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-a-team-discussion
    */
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions"]["parameters"];
@@ -574,7 +618,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-pending-team-invitations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-pending-team-invitations
    */
   "GET /orgs/{org}/teams/{team_slug}/invitations": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/invitations"]["parameters"];
@@ -582,7 +626,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-team-members
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-team-members
    */
   "GET /orgs/{org}/teams/{team_slug}/members": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/members"]["parameters"];
@@ -590,7 +634,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-team-projects
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-team-projects
    */
   "GET /orgs/{org}/teams/{team_slug}/projects": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/projects"]["parameters"];
@@ -598,7 +642,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-team-repositories
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-team-repositories
    */
   "GET /orgs/{org}/teams/{team_slug}/repos": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/repos"]["parameters"];
@@ -606,7 +650,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-child-teams
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-child-teams
    */
   "GET /orgs/{org}/teams/{team_slug}/teams": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/teams"]["parameters"];
@@ -614,7 +658,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-project-cards
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-project-cards
    */
   "GET /projects/columns/{column_id}/cards": {
     parameters: Endpoints["GET /projects/columns/{column_id}/cards"]["parameters"];
@@ -622,7 +666,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-project-collaborators
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-project-collaborators
    */
   "GET /projects/{project_id}/collaborators": {
     parameters: Endpoints["GET /projects/{project_id}/collaborators"]["parameters"];
@@ -630,7 +674,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-project-columns
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-project-columns
    */
   "GET /projects/{project_id}/columns": {
     parameters: Endpoints["GET /projects/{project_id}/columns"]["parameters"];
@@ -638,7 +682,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-artifacts-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-artifacts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/actions/artifacts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/artifacts"]["parameters"];
@@ -648,7 +692,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/actions/cache#list-github-actions-caches-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/actions/cache#list-github-actions-caches-for-a-repository
    */
   "GET /repos/{owner}/{repo}/actions/caches": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/caches"]["parameters"];
@@ -658,7 +702,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-self-hosted-runners-for-a-repository
    */
   "GET /repos/{owner}/{repo}/actions/runners": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/runners"]["parameters"];
@@ -668,7 +712,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-workflow-runs-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-workflow-runs-for-a-repository
    */
   "GET /repos/{owner}/{repo}/actions/runs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/runs"]["parameters"];
@@ -678,7 +722,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-workflow-run-artifacts
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-workflow-run-artifacts
    */
   "GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts"]["parameters"];
@@ -688,7 +732,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run-attempt
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-jobs-for-a-workflow-run-attempt
    */
   "GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/runs/{run_id}/attempts/{attempt_number}/jobs"]["parameters"];
@@ -698,7 +742,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-jobs-for-a-workflow-run
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-jobs-for-a-workflow-run
    */
   "GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs"]["parameters"];
@@ -708,7 +752,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-repository-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-repository-secrets
    */
   "GET /repos/{owner}/{repo}/actions/secrets": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/secrets"]["parameters"];
@@ -718,7 +762,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-repository-workflows
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-repository-workflows
    */
   "GET /repos/{owner}/{repo}/actions/workflows": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/workflows"]["parameters"];
@@ -728,7 +772,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-workflow-runs
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-workflow-runs
    */
   "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs"]["parameters"];
@@ -738,7 +782,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-assignees
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-assignees
    */
   "GET /repos/{owner}/{repo}/assignees": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/assignees"]["parameters"];
@@ -746,7 +790,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-branches
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-branches
    */
   "GET /repos/{owner}/{repo}/branches": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/branches"]["parameters"];
@@ -754,7 +798,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/checks#list-check-run-annotations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/checks#list-check-run-annotations
    */
   "GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations"]["parameters"];
@@ -762,7 +806,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/checks#list-check-runs-in-a-check-suite
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/checks#list-check-runs-in-a-check-suite
    */
   "GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs"]["parameters"];
@@ -772,7 +816,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/code-scanning#list-code-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/code-scanning/alerts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/alerts"]["parameters"];
@@ -780,7 +824,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/code-scanning#list-instances-of-a-code-scanning-alert
    */
   "GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/alerts/{alert_number}/instances"]["parameters"];
@@ -788,7 +832,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/code-scanning#list-code-scanning-analyses-for-a-repository
    */
   "GET /repos/{owner}/{repo}/code-scanning/analyses": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/code-scanning/analyses"]["parameters"];
@@ -796,7 +840,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-codespaces-in-a-repository-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-codespaces-in-a-repository-for-the-authenticated-user
    */
   "GET /repos/{owner}/{repo}/codespaces": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/codespaces"]["parameters"];
@@ -806,7 +850,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-devcontainers-in-a-repository-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-devcontainers-in-a-repository-for-the-authenticated-user
    */
   "GET /repos/{owner}/{repo}/codespaces/devcontainers": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/codespaces/devcontainers"]["parameters"];
@@ -816,7 +860,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-repository-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-repository-secrets
    */
   "GET /repos/{owner}/{repo}/codespaces/secrets": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/codespaces/secrets"]["parameters"];
@@ -826,7 +870,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/collaborators/collaborators#list-repository-collaborators
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/collaborators/collaborators#list-repository-collaborators
    */
   "GET /repos/{owner}/{repo}/collaborators": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/collaborators"]["parameters"];
@@ -834,7 +878,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/comments#list-commit-comments-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/comments#list-commit-comments-for-a-repository
    */
   "GET /repos/{owner}/{repo}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/comments"]["parameters"];
@@ -842,7 +886,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-commit-comment
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-a-commit-comment
    */
   "GET /repos/{owner}/{repo}/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/comments/{comment_id}/reactions"]["parameters"];
@@ -850,7 +894,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/commits#list-commits
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/commits#list-commits
    */
   "GET /repos/{owner}/{repo}/commits": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits"]["parameters"];
@@ -858,7 +902,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/comments#list-commit-comments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/comments#list-commit-comments
    */
   "GET /repos/{owner}/{repo}/commits/{commit_sha}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/comments"]["parameters"];
@@ -866,7 +910,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/commits#list-pull-requests-associated-with-a-commit
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/commits#list-pull-requests-associated-with-a-commit
    */
   "GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{commit_sha}/pulls"]["parameters"];
@@ -874,7 +918,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/checks#list-check-runs-for-a-git-reference
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/checks#list-check-runs-for-a-git-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/check-runs": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/check-runs"]["parameters"];
@@ -884,7 +928,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/checks#list-check-suites-for-a-git-reference
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/checks#list-check-suites-for-a-git-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/check-suites": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/check-suites"]["parameters"];
@@ -894,7 +938,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/statuses#get-the-combined-status-for-a-specific-reference
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/statuses#get-the-combined-status-for-a-specific-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/status": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/status"]["parameters"];
@@ -904,7 +948,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/commits/statuses#list-commit-statuses-for-a-reference
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/commits/statuses#list-commit-statuses-for-a-reference
    */
   "GET /repos/{owner}/{repo}/commits/{ref}/statuses": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/commits/{ref}/statuses"]["parameters"];
@@ -912,7 +956,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-contributors
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-repository-contributors
    */
   "GET /repos/{owner}/{repo}/contributors": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/contributors"]["parameters"];
@@ -920,7 +964,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/dependabot#list-dependabot-alerts-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/dependabot#list-dependabot-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/dependabot/alerts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/dependabot/alerts"]["parameters"];
@@ -928,7 +972,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/dependabot#list-repository-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/dependabot#list-repository-secrets
    */
   "GET /repos/{owner}/{repo}/dependabot/secrets": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/dependabot/secrets"]["parameters"];
@@ -938,7 +982,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-deployments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-deployments
    */
   "GET /repos/{owner}/{repo}/deployments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/deployments"]["parameters"];
@@ -946,7 +990,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-deployment-statuses
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-deployment-statuses
    */
   "GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses"]["parameters"];
@@ -954,7 +998,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/deployments/environments#list-environments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/deployments/environments#list-environments
    */
   "GET /repos/{owner}/{repo}/environments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/environments"]["parameters"];
@@ -964,7 +1008,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/deployments/branch-policies#list-deployment-branch-policies
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/deployments/branch-policies#list-deployment-branch-policies
    */
   "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies"]["parameters"];
@@ -974,7 +1018,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repository-events
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repository-events
    */
   "GET /repos/{owner}/{repo}/events": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/events"]["parameters"];
@@ -982,7 +1026,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-forks
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-forks
    */
   "GET /repos/{owner}/{repo}/forks": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/forks"]["parameters"];
@@ -990,7 +1034,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/webhooks/repos#list-repository-webhooks
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/webhooks/repos#list-repository-webhooks
    */
   "GET /repos/{owner}/{repo}/hooks": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks"]["parameters"];
@@ -998,7 +1042,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/webhooks/repo-deliveries#list-deliveries-for-a-repository-webhook
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/webhooks/repo-deliveries#list-deliveries-for-a-repository-webhook
    */
   "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries"]["parameters"];
@@ -1006,7 +1050,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/collaborators/invitations#list-repository-invitations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/collaborators/invitations#list-repository-invitations
    */
   "GET /repos/{owner}/{repo}/invitations": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/invitations"]["parameters"];
@@ -1014,7 +1058,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-repository-issues
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-repository-issues
    */
   "GET /repos/{owner}/{repo}/issues": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues"]["parameters"];
@@ -1022,7 +1066,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-issue-comments-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-issue-comments-for-a-repository
    */
   "GET /repos/{owner}/{repo}/issues/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/comments"]["parameters"];
@@ -1030,7 +1074,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue-comment
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-an-issue-comment
    */
   "GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions"]["parameters"];
@@ -1038,7 +1082,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-issue-events-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-issue-events-for-a-repository
    */
   "GET /repos/{owner}/{repo}/issues/events": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/events"]["parameters"];
@@ -1046,7 +1090,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-issue-comments
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-issue-comments
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/comments"]["parameters"];
@@ -1054,7 +1098,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-issue-events
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-issue-events
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/events": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/events"]["parameters"];
@@ -1062,7 +1106,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-labels-for-an-issue
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-labels-for-an-issue
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/labels": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/labels"]["parameters"];
@@ -1070,7 +1114,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-an-issue
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-an-issue
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/reactions"]["parameters"];
@@ -1078,7 +1122,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-timeline-events-for-an-issue
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-timeline-events-for-an-issue
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/timeline"]["parameters"];
@@ -1086,7 +1130,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-deploy-keys
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-deploy-keys
    */
   "GET /repos/{owner}/{repo}/keys": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/keys"]["parameters"];
@@ -1094,7 +1138,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-labels-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-labels-for-a-repository
    */
   "GET /repos/{owner}/{repo}/labels": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/labels"]["parameters"];
@@ -1102,7 +1146,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-milestones
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-milestones
    */
   "GET /repos/{owner}/{repo}/milestones": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/milestones"]["parameters"];
@@ -1110,7 +1154,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-labels-for-issues-in-a-milestone
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-labels-for-issues-in-a-milestone
    */
   "GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels"]["parameters"];
@@ -1118,7 +1162,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repository-notifications-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repository-notifications-for-the-authenticated-user
    */
   "GET /repos/{owner}/{repo}/notifications": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/notifications"]["parameters"];
@@ -1126,7 +1170,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/pages#list-github-pages-builds
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/pages#list-github-pages-builds
    */
   "GET /repos/{owner}/{repo}/pages/builds": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pages/builds"]["parameters"];
@@ -1134,7 +1178,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-repository-projects
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-repository-projects
    */
   "GET /repos/{owner}/{repo}/projects": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/projects"]["parameters"];
@@ -1142,7 +1186,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-pull-requests
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-pull-requests
    */
   "GET /repos/{owner}/{repo}/pulls": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls"]["parameters"];
@@ -1150,7 +1194,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-review-comments-in-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-review-comments-in-a-repository
    */
   "GET /repos/{owner}/{repo}/pulls/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/comments"]["parameters"];
@@ -1158,7 +1202,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions#list-reactions-for-a-pull-request-review-comment
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions#list-reactions-for-a-pull-request-review-comment
    */
   "GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions"]["parameters"];
@@ -1166,7 +1210,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-review-comments-on-a-pull-request
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-review-comments-on-a-pull-request
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/comments"]["parameters"];
@@ -1174,7 +1218,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-commits-on-a-pull-request
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-commits-on-a-pull-request
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/commits": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/commits"]["parameters"];
@@ -1182,7 +1226,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-pull-requests-files
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-pull-requests-files
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/files": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/files"]["parameters"];
@@ -1190,7 +1234,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-reviews-for-a-pull-request
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-reviews-for-a-pull-request
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews"]["parameters"];
@@ -1198,7 +1242,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/pulls#list-comments-for-a-pull-request-review
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/pulls#list-comments-for-a-pull-request-review
    */
   "GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews/{review_id}/comments"]["parameters"];
@@ -1206,7 +1250,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-releases
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-releases
    */
   "GET /repos/{owner}/{repo}/releases": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/releases"]["parameters"];
@@ -1214,7 +1258,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-release-assets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-release-assets
    */
   "GET /repos/{owner}/{repo}/releases/{release_id}/assets": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/releases/{release_id}/assets"]["parameters"];
@@ -1222,7 +1266,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-release
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions/#list-reactions-for-a-release
    */
   "GET /repos/{owner}/{repo}/releases/{release_id}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/releases/{release_id}/reactions"]["parameters"];
@@ -1230,7 +1274,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/secret-scanning/alerts": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/alerts"]["parameters"];
@@ -1238,7 +1282,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/secret-scanning#list-locations-for-a-secret-scanning-alert
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/secret-scanning#list-locations-for-a-secret-scanning-alert
    */
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations"]["parameters"];
@@ -1246,7 +1290,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-stargazers
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-stargazers
    */
   "GET /repos/{owner}/{repo}/stargazers": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/stargazers"]["parameters"];
@@ -1254,7 +1298,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-watchers
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-watchers
    */
   "GET /repos/{owner}/{repo}/subscribers": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/subscribers"]["parameters"];
@@ -1262,7 +1306,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-tags
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-repository-tags
    */
   "GET /repos/{owner}/{repo}/tags": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/tags"]["parameters"];
@@ -1270,7 +1314,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repository-teams
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-repository-teams
    */
   "GET /repos/{owner}/{repo}/teams": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/teams"]["parameters"];
@@ -1278,7 +1322,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#get-all-repository-topics
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#get-all-repository-topics
    */
   "GET /repos/{owner}/{repo}/topics": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/topics"]["parameters"];
@@ -1288,7 +1332,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-public-repositories
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-public-repositories
    */
   "GET /repositories": {
     parameters: Endpoints["GET /repositories"]["parameters"];
@@ -1296,7 +1340,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-environment-secrets
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/actions#list-environment-secrets
    */
   "GET /repositories/{repository_id}/environments/{environment_name}/secrets": {
     parameters: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/secrets"]["parameters"];
@@ -1306,7 +1350,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-code
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-code
    */
   "GET /search/code": {
     parameters: Endpoints["GET /search/code"]["parameters"];
@@ -1316,7 +1360,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-commits
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-commits
    */
   "GET /search/commits": {
     parameters: Endpoints["GET /search/commits"]["parameters"];
@@ -1326,7 +1370,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-issues-and-pull-requests
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-issues-and-pull-requests
    */
   "GET /search/issues": {
     parameters: Endpoints["GET /search/issues"]["parameters"];
@@ -1336,7 +1380,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-labels
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-labels
    */
   "GET /search/labels": {
     parameters: Endpoints["GET /search/labels"]["parameters"];
@@ -1346,7 +1390,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-repositories
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-repositories
    */
   "GET /search/repositories": {
     parameters: Endpoints["GET /search/repositories"]["parameters"];
@@ -1356,7 +1400,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-topics
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-topics
    */
   "GET /search/topics": {
     parameters: Endpoints["GET /search/topics"]["parameters"];
@@ -1366,7 +1410,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/search#search-users
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/search#search-users
    */
   "GET /search/users": {
     parameters: Endpoints["GET /search/users"]["parameters"];
@@ -1376,7 +1420,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-discussions-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-discussions-legacy
    */
   "GET /teams/{team_id}/discussions": {
     parameters: Endpoints["GET /teams/{team_id}/discussions"]["parameters"];
@@ -1384,7 +1428,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-discussion-comments-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-discussion-comments-legacy
    */
   "GET /teams/{team_id}/discussions/{discussion_number}/comments": {
     parameters: Endpoints["GET /teams/{team_id}/discussions/{discussion_number}/comments"]["parameters"];
@@ -1392,7 +1436,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions/#list-reactions-for-a-team-discussion-comment-legacy
    */
   "GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions": {
     parameters: Endpoints["GET /teams/{team_id}/discussions/{discussion_number}/comments/{comment_number}/reactions"]["parameters"];
@@ -1400,7 +1444,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/reactions/#list-reactions-for-a-team-discussion-legacy
    */
   "GET /teams/{team_id}/discussions/{discussion_number}/reactions": {
     parameters: Endpoints["GET /teams/{team_id}/discussions/{discussion_number}/reactions"]["parameters"];
@@ -1408,7 +1452,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-pending-team-invitations-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-pending-team-invitations-legacy
    */
   "GET /teams/{team_id}/invitations": {
     parameters: Endpoints["GET /teams/{team_id}/invitations"]["parameters"];
@@ -1416,7 +1460,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-team-members-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-team-members-legacy
    */
   "GET /teams/{team_id}/members": {
     parameters: Endpoints["GET /teams/{team_id}/members"]["parameters"];
@@ -1424,7 +1468,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-team-projects-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams/#list-team-projects-legacy
    */
   "GET /teams/{team_id}/projects": {
     parameters: Endpoints["GET /teams/{team_id}/projects"]["parameters"];
@@ -1432,7 +1476,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-team-repositories-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams/#list-team-repositories-legacy
    */
   "GET /teams/{team_id}/repos": {
     parameters: Endpoints["GET /teams/{team_id}/repos"]["parameters"];
@@ -1440,7 +1484,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams/#list-child-teams-legacy
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams/#list-child-teams-legacy
    */
   "GET /teams/{team_id}/teams": {
     parameters: Endpoints["GET /teams/{team_id}/teams"]["parameters"];
@@ -1448,7 +1492,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-users-blocked-by-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-users-blocked-by-the-authenticated-user
    */
   "GET /user/blocks": {
     parameters: Endpoints["GET /user/blocks"]["parameters"];
@@ -1456,7 +1500,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-codespaces-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-codespaces-for-the-authenticated-user
    */
   "GET /user/codespaces": {
     parameters: Endpoints["GET /user/codespaces"]["parameters"];
@@ -1466,7 +1510,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/codespaces#list-secrets-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/codespaces#list-secrets-for-the-authenticated-user
    */
   "GET /user/codespaces/secrets": {
     parameters: Endpoints["GET /user/codespaces/secrets"]["parameters"];
@@ -1476,7 +1520,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-email-addresses-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-email-addresses-for-the-authenticated-user
    */
   "GET /user/emails": {
     parameters: Endpoints["GET /user/emails"]["parameters"];
@@ -1484,7 +1528,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-followers-of-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-followers-of-the-authenticated-user
    */
   "GET /user/followers": {
     parameters: Endpoints["GET /user/followers"]["parameters"];
@@ -1492,7 +1536,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-the-people-the-authenticated-user-follows
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-the-people-the-authenticated-user-follows
    */
   "GET /user/following": {
     parameters: Endpoints["GET /user/following"]["parameters"];
@@ -1500,7 +1544,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-gpg-keys-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-gpg-keys-for-the-authenticated-user
    */
   "GET /user/gpg_keys": {
     parameters: Endpoints["GET /user/gpg_keys"]["parameters"];
@@ -1508,7 +1552,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-app-installations-accessible-to-the-user-access-token
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-app-installations-accessible-to-the-user-access-token
    */
   "GET /user/installations": {
     parameters: Endpoints["GET /user/installations"]["parameters"];
@@ -1518,7 +1562,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-repositories-accessible-to-the-user-access-token
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-repositories-accessible-to-the-user-access-token
    */
   "GET /user/installations/{installation_id}/repositories": {
     parameters: Endpoints["GET /user/installations/{installation_id}/repositories"]["parameters"];
@@ -1528,7 +1572,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/issues#list-user-account-issues-assigned-to-the-authenticated-user
    */
   "GET /user/issues": {
     parameters: Endpoints["GET /user/issues"]["parameters"];
@@ -1536,7 +1580,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-public-ssh-keys-for-the-authenticated-user
    */
   "GET /user/keys": {
     parameters: Endpoints["GET /user/keys"]["parameters"];
@@ -1544,7 +1588,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-subscriptions-for-the-authenticated-user
    */
   "GET /user/marketplace_purchases": {
     parameters: Endpoints["GET /user/marketplace_purchases"]["parameters"];
@@ -1552,7 +1596,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/apps#list-subscriptions-for-the-authenticated-user-stubbed
    */
   "GET /user/marketplace_purchases/stubbed": {
     parameters: Endpoints["GET /user/marketplace_purchases/stubbed"]["parameters"];
@@ -1560,7 +1604,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organization-memberships-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organization-memberships-for-the-authenticated-user
    */
   "GET /user/memberships/orgs": {
     parameters: Endpoints["GET /user/memberships/orgs"]["parameters"];
@@ -1568,7 +1612,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-user-migrations
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/migrations#list-user-migrations
    */
   "GET /user/migrations": {
     parameters: Endpoints["GET /user/migrations"]["parameters"];
@@ -1576,7 +1620,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/migrations#list-repositories-for-a-user-migration
    */
   "GET /user/migrations/{migration_id}/repositories": {
     parameters: Endpoints["GET /user/migrations/{migration_id}/repositories"]["parameters"];
@@ -1584,7 +1628,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organizations-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organizations-for-the-authenticated-user
    */
   "GET /user/orgs": {
     parameters: Endpoints["GET /user/orgs"]["parameters"];
@@ -1592,7 +1636,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#list-packages-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/packages#list-packages-for-the-authenticated-user
    */
   "GET /user/packages": {
     parameters: Endpoints["GET /user/packages"]["parameters"];
@@ -1600,7 +1644,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/packages#get-all-package-versions-for-a-package-owned-by-the-authenticated-user
    */
   "GET /user/packages/{package_type}/{package_name}/versions": {
     parameters: Endpoints["GET /user/packages/{package_type}/{package_name}/versions"]["parameters"];
@@ -1608,7 +1652,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-public-email-addresses-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-public-email-addresses-for-the-authenticated-user
    */
   "GET /user/public_emails": {
     parameters: Endpoints["GET /user/public_emails"]["parameters"];
@@ -1616,7 +1660,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repositories-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-repositories-for-the-authenticated-user
    */
   "GET /user/repos": {
     parameters: Endpoints["GET /user/repos"]["parameters"];
@@ -1624,7 +1668,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/collaborators/invitations#list-repository-invitations-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/collaborators/invitations#list-repository-invitations-for-the-authenticated-user
    */
   "GET /user/repository_invitations": {
     parameters: Endpoints["GET /user/repository_invitations"]["parameters"];
@@ -1632,7 +1676,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-public-ssh-signing-keys-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-public-ssh-signing-keys-for-the-authenticated-user
    */
   "GET /user/ssh_signing_keys": {
     parameters: Endpoints["GET /user/ssh_signing_keys"]["parameters"];
@@ -1640,7 +1684,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repositories-starred-by-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repositories-starred-by-the-authenticated-user
    */
   "GET /user/starred": {
     parameters: Endpoints["GET /user/starred"]["parameters"];
@@ -1648,7 +1692,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repositories-watched-by-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repositories-watched-by-the-authenticated-user
    */
   "GET /user/subscriptions": {
     parameters: Endpoints["GET /user/subscriptions"]["parameters"];
@@ -1656,7 +1700,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/teams#list-teams-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/teams#list-teams-for-the-authenticated-user
    */
   "GET /user/teams": {
     parameters: Endpoints["GET /user/teams"]["parameters"];
@@ -1664,7 +1708,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-users
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-users
    */
   "GET /users": {
     parameters: Endpoints["GET /users"]["parameters"];
@@ -1672,7 +1716,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-events-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-events-for-the-authenticated-user
    */
   "GET /users/{username}/events": {
     parameters: Endpoints["GET /users/{username}/events"]["parameters"];
@@ -1680,7 +1724,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-organization-events-for-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-organization-events-for-the-authenticated-user
    */
   "GET /users/{username}/events/orgs/{org}": {
     parameters: Endpoints["GET /users/{username}/events/orgs/{org}"]["parameters"];
@@ -1688,7 +1732,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-public-events-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-public-events-for-a-user
    */
   "GET /users/{username}/events/public": {
     parameters: Endpoints["GET /users/{username}/events/public"]["parameters"];
@@ -1696,7 +1740,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-followers-of-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-followers-of-a-user
    */
   "GET /users/{username}/followers": {
     parameters: Endpoints["GET /users/{username}/followers"]["parameters"];
@@ -1704,7 +1748,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-the-people-a-user-follows
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-the-people-a-user-follows
    */
   "GET /users/{username}/following": {
     parameters: Endpoints["GET /users/{username}/following"]["parameters"];
@@ -1712,7 +1756,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/gists#list-gists-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/gists#list-gists-for-a-user
    */
   "GET /users/{username}/gists": {
     parameters: Endpoints["GET /users/{username}/gists"]["parameters"];
@@ -1720,7 +1764,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-gpg-keys-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-gpg-keys-for-a-user
    */
   "GET /users/{username}/gpg_keys": {
     parameters: Endpoints["GET /users/{username}/gpg_keys"]["parameters"];
@@ -1728,7 +1772,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-public-keys-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-public-keys-for-a-user
    */
   "GET /users/{username}/keys": {
     parameters: Endpoints["GET /users/{username}/keys"]["parameters"];
@@ -1736,7 +1780,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/orgs#list-organizations-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/orgs#list-organizations-for-a-user
    */
   "GET /users/{username}/orgs": {
     parameters: Endpoints["GET /users/{username}/orgs"]["parameters"];
@@ -1744,7 +1788,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/packages#list-packages-for-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/packages#list-packages-for-user
    */
   "GET /users/{username}/packages": {
     parameters: Endpoints["GET /users/{username}/packages"]["parameters"];
@@ -1752,7 +1796,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/projects#list-user-projects
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/projects#list-user-projects
    */
   "GET /users/{username}/projects": {
     parameters: Endpoints["GET /users/{username}/projects"]["parameters"];
@@ -1760,7 +1804,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-events-received-by-the-authenticated-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-events-received-by-the-authenticated-user
    */
   "GET /users/{username}/received_events": {
     parameters: Endpoints["GET /users/{username}/received_events"]["parameters"];
@@ -1768,7 +1812,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-public-events-received-by-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-public-events-received-by-a-user
    */
   "GET /users/{username}/received_events/public": {
     parameters: Endpoints["GET /users/{username}/received_events/public"]["parameters"];
@@ -1776,7 +1820,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/repos#list-repositories-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/repos#list-repositories-for-a-user
    */
   "GET /users/{username}/repos": {
     parameters: Endpoints["GET /users/{username}/repos"]["parameters"];
@@ -1784,7 +1828,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/users#list-ssh-signing-keys-for-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/users#list-ssh-signing-keys-for-a-user
    */
   "GET /users/{username}/ssh_signing_keys": {
     parameters: Endpoints["GET /users/{username}/ssh_signing_keys"]["parameters"];
@@ -1792,7 +1836,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repositories-starred-by-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repositories-starred-by-a-user
    */
   "GET /users/{username}/starred": {
     parameters: Endpoints["GET /users/{username}/starred"]["parameters"];
@@ -1800,7 +1844,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/activity#list-repositories-watched-by-a-user
+   * @see https://docs.github.com/enterprise-cloud@latest//rest/reference/activity#list-repositories-watched-by-a-user
    */
   "GET /users/{username}/subscriptions": {
     parameters: Endpoints["GET /users/{username}/subscriptions"]["parameters"];
