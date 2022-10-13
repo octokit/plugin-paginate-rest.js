@@ -12,7 +12,7 @@ const version = process.env.VERSION.replace(/^v/, "");
 
 const QUERY = `
   query($version: String) {
-    endpoints(version: $version, ghecCompatibilityMode: true) {
+    endpoints(version: $version) {
       url
       id
       scope
