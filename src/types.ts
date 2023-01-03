@@ -69,7 +69,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using endpoint options and map each response to a custom array
    *
-   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <T, M>(
@@ -80,7 +80,7 @@ export interface PaginateInterface {
   /**
    * Paginate a request using endpoint options
    *
-   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <T>(options: OctokitTypes.EndpointOptions): Promise<PaginationResults<T>>;
 
@@ -101,7 +101,7 @@ export interface PaginateInterface {
    * Paginate a request using a known endpoint route string and parameters, and map each response to a custom array
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <R extends keyof PaginatingEndpoints, M extends unknown[]>(
@@ -114,7 +114,7 @@ export interface PaginateInterface {
    * Paginate a request using an known endpoint route string
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <R extends keyof PaginatingEndpoints>(
     route: R,
@@ -134,7 +134,7 @@ export interface PaginateInterface {
    * Paginate a request using an unknown endpoint route string
    *
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
     route: R,
@@ -163,7 +163,7 @@ export interface PaginateInterface {
    * Paginate a request using an endpoint method, parameters, and a map function
    *
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
-   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
   <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
@@ -179,7 +179,7 @@ export interface PaginateInterface {
    * Paginate a request using an endpoint method and parameters
    *
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <R extends OctokitTypes.RequestInterface>(
     request: R,
@@ -195,7 +195,7 @@ export interface PaginateInterface {
      * Get an async iterator to paginate a request using endpoint options
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
-     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <T>(options: OctokitTypes.EndpointOptions): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
@@ -208,7 +208,7 @@ export interface PaginateInterface {
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <R extends keyof PaginatingEndpoints>(
       route: R,
@@ -222,7 +222,7 @@ export interface PaginateInterface {
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
       route: R,
@@ -240,7 +240,7 @@ export interface PaginateInterface {
      *
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {string} request `@octokit/request` or `octokit.request` method
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <R extends OctokitTypes.RequestInterface>(
       request: R,
@@ -260,7 +260,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using endpoint options and map each response to a custom array
    *
    * @param {object} octokit Octokit instance
-   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <T, M>(
@@ -273,7 +273,7 @@ export interface ComposePaginateInterface {
    * Paginate a request using endpoint options
    *
    * @param {object} octokit Octokit instance
-   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <T>(octokit: Octokit, options: OctokitTypes.EndpointOptions): Promise<
     PaginationResults<T>
@@ -299,7 +299,7 @@ export interface ComposePaginateInterface {
    *
    * @param {object} octokit Octokit instance
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn Optional method to map each response to a custom array
    */
   <R extends keyof PaginatingEndpoints, M extends unknown[]>(
@@ -314,7 +314,7 @@ export interface ComposePaginateInterface {
    *
    * @param {object} octokit Octokit instance
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <R extends keyof PaginatingEndpoints>(
     octokit: Octokit,
@@ -336,7 +336,7 @@ export interface ComposePaginateInterface {
    *
    * @param {object} octokit Octokit instance
    * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
     octokit: Octokit,
@@ -369,7 +369,7 @@ export interface ComposePaginateInterface {
    *
    * @param {object} octokit Octokit instance
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
-   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    * @param {function} mapFn? Optional method to map each response to a custom array
    */
   <R extends OctokitTypes.RequestInterface, M extends unknown[]>(
@@ -387,7 +387,7 @@ export interface ComposePaginateInterface {
    *
    * @param {object} octokit Octokit instance
    * @param {string} request Request method (`octokit.request` or `@octokit/request`)
-   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+   * @param {object} parameters? URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
   <R extends OctokitTypes.RequestInterface>(
     octokit: Octokit,
@@ -406,7 +406,7 @@ export interface ComposePaginateInterface {
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      *
      * @param {object} octokit Octokit instance
-     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <T>(
       octokit: Octokit,
@@ -424,7 +424,7 @@ export interface ComposePaginateInterface {
      *
      * @param {object} octokit Octokit instance
      * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <R extends keyof PaginatingEndpoints>(
       octokit: Octokit,
@@ -441,7 +441,7 @@ export interface ComposePaginateInterface {
      *
      * @param {object} octokit Octokit instance
      * @param {string} route Request method + URL. Example: `'GET /orgs/{org}'`
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <T, R extends OctokitTypes.Route = OctokitTypes.Route>(
       octokit: Octokit,
@@ -462,7 +462,7 @@ export interface ComposePaginateInterface {
      *
      * @param {object} octokit Octokit instance
      * @param {string} request `@octokit/request` or `octokit.request` method
-     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.{format|previews}`, `request`, or `baseUrl`.
+     * @param {object} [parameters] URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
     <R extends OctokitTypes.RequestInterface>(
       octokit: Octokit,
