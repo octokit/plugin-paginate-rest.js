@@ -10,21 +10,19 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/reference/apps#list-installation-requests-for-the-authenticated-app
+   */
+  "GET /app/installation-requests": {
+    parameters: Endpoints["GET /app/installation-requests"]["parameters"];
+    response: Endpoints["GET /app/installation-requests"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
     response: Endpoints["GET /app/installations"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-enterprise
-   */
-  "GET /enterprises/{enterprise}/actions/runner-groups": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["response"] & {
-      data: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["response"]["data"]["runner_groups"];
-    };
   };
 
   /**
@@ -182,6 +180,38 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-requests-to-access-organization-resources-with-fine-grained-personal-access-tokens
+   */
+  "GET /organizations/{org}/personal-access-token-requests": {
+    parameters: Endpoints["GET /organizations/{org}/personal-access-token-requests"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/personal-access-token-requests"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-repositories-requested-to-be-accessed-by-a-fine-grained-personal-access-token
+   */
+  "GET /organizations/{org}/personal-access-token-requests/{pat_request_id}/repositories": {
+    parameters: Endpoints["GET /organizations/{org}/personal-access-token-requests/{pat_request_id}/repositories"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/personal-access-token-requests/{pat_request_id}/repositories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-fine-grained-personal-access-tokens-with-access-to-organization-resources
+   */
+  "GET /organizations/{org}/personal-access-tokens": {
+    parameters: Endpoints["GET /organizations/{org}/personal-access-tokens"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/personal-access-tokens"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-repositories-a-fine-grained-personal-access-token-has-access-to
+   */
+  "GET /organizations/{org}/personal-access-tokens/{pat_id}/repositories": {
+    parameters: Endpoints["GET /organizations/{org}/personal-access-tokens/{pat_id}/repositories"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/personal-access-tokens/{pat_id}/repositories"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/actions#list-repositories-with-github-actions-cache-usage-for-an-organization
    */
   "GET /orgs/{org}/actions/cache/usage-by-repository": {
@@ -208,36 +238,6 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/actions/required_workflows"]["parameters"];
     response: Endpoints["GET /orgs/{org}/actions/required_workflows"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/required_workflows"]["response"]["data"]["required_workflows"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"]["data"]["runner_groups"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"]["data"]["repositories"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"]["data"]["runners"];
     };
   };
 
@@ -300,7 +300,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-by-organization
+   * @see https://docs.github.com/rest/reference/code-scanning#list-code-scanning-alerts-for-an-organization
    */
   "GET /orgs/{org}/code-scanning/alerts": {
     parameters: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["parameters"];
@@ -450,7 +450,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-organization-migrations
+   * @see https://docs.github.com/rest/migrations/orgs#list-organization-migrations
    */
   "GET /orgs/{org}/migrations": {
     parameters: Endpoints["GET /orgs/{org}/migrations"]["parameters"];
@@ -458,7 +458,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-repositories-in-an-organization-migration
+   * @see https://docs.github.com/rest/migrations/orgs#list-repositories-in-an-organization-migration
    */
   "GET /orgs/{org}/migrations/{migration_id}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/migrations/{migration_id}/repositories"]["parameters"];
@@ -652,6 +652,26 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/caches"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/actions/caches"]["response"] & {
       data: Endpoints["GET /repos/{owner}/{repo}/actions/caches"]["response"]["data"]["actions_caches"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/secrets#list-repository-organization-secrets
+   */
+  "GET /repos/{owner}/{repo}/actions/organization-secrets": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/actions/organization-secrets"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/actions/organization-secrets"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/actions/organization-secrets"]["response"]["data"]["secrets"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/variables#list-repository-organization-variables
+   */
+  "GET /repos/{owner}/{repo}/actions/organization-variables": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["response"]["data"]["variables"];
     };
   };
 
@@ -1264,6 +1284,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/security-advisories/repository-advisories#list-repository-security-advisories
+   */
+  "GET /repos/{owner}/{repo}/security-advisories": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/security-advisories"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/security-advisories"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/activity#list-stargazers
    */
   "GET /repos/{owner}/{repo}/stargazers": {
@@ -1596,7 +1624,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-user-migrations
+   * @see https://docs.github.com/rest/migrations/users#list-user-migrations
    */
   "GET /user/migrations": {
     parameters: Endpoints["GET /user/migrations"]["parameters"];
@@ -1604,7 +1632,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/migrations#list-repositories-for-a-user-migration
+   * @see https://docs.github.com/rest/migrations/users#list-repositories-for-a-user-migration
    */
   "GET /user/migrations/{migration_id}/repositories": {
     parameters: Endpoints["GET /user/migrations/{migration_id}/repositories"]["parameters"];
@@ -1657,6 +1685,14 @@ export interface PaginatingEndpoints {
   "GET /user/repository_invitations": {
     parameters: Endpoints["GET /user/repository_invitations"]["parameters"];
     response: Endpoints["GET /user/repository_invitations"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/users/social-accounts#list-social-accounts-for-the-authenticated-user
+   */
+  "GET /user/social_accounts": {
+    parameters: Endpoints["GET /user/social_accounts"]["parameters"];
+    response: Endpoints["GET /user/social_accounts"]["response"];
   };
 
   /**
@@ -1812,6 +1848,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/users/social-accounts#list-social-accounts-for-a-user
+   */
+  "GET /users/{username}/social_accounts": {
+    parameters: Endpoints["GET /users/{username}/social_accounts"]["parameters"];
+    response: Endpoints["GET /users/{username}/social_accounts"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/users#list-ssh-signing-keys-for-a-user
    */
   "GET /users/{username}/ssh_signing_keys": {
@@ -1838,8 +1882,8 @@ export interface PaginatingEndpoints {
 
 export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /app/hook/deliveries",
+  "GET /app/installation-requests",
   "GET /app/installations",
-  "GET /enterprises/{enterprise}/actions/runner-groups",
   "GET /enterprises/{enterprise}/dependabot/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /events",
@@ -1859,12 +1903,13 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /networks/{owner}/{repo}/events",
   "GET /notifications",
   "GET /organizations",
+  "GET /organizations/{org}/personal-access-token-requests",
+  "GET /organizations/{org}/personal-access-token-requests/{pat_request_id}/repositories",
+  "GET /organizations/{org}/personal-access-tokens",
+  "GET /organizations/{org}/personal-access-tokens/{pat_id}/repositories",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/required_workflows",
-  "GET /orgs/{org}/actions/runner-groups",
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
   "GET /orgs/{org}/actions/runners",
   "GET /orgs/{org}/actions/secrets",
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
@@ -1913,6 +1958,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{org}/{repo}/actions/required_workflows",
   "GET /repos/{owner}/{repo}/actions/artifacts",
   "GET /repos/{owner}/{repo}/actions/caches",
+  "GET /repos/{owner}/{repo}/actions/organization-secrets",
+  "GET /repos/{owner}/{repo}/actions/organization-variables",
   "GET /repos/{owner}/{repo}/actions/required_workflows/{required_workflow_id_for_repo}/runs",
   "GET /repos/{owner}/{repo}/actions/runners",
   "GET /repos/{owner}/{repo}/actions/runs",
@@ -1984,6 +2031,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/releases/{release_id}/reactions",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations",
+  "GET /repos/{owner}/{repo}/security-advisories",
   "GET /repos/{owner}/{repo}/stargazers",
   "GET /repos/{owner}/{repo}/subscribers",
   "GET /repos/{owner}/{repo}/tags",
@@ -2030,6 +2078,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/public_emails",
   "GET /user/repos",
   "GET /user/repository_invitations",
+  "GET /user/social_accounts",
   "GET /user/ssh_signing_keys",
   "GET /user/starred",
   "GET /user/subscriptions",
@@ -2049,6 +2098,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/received_events",
   "GET /users/{username}/received_events/public",
   "GET /users/{username}/repos",
+  "GET /users/{username}/social_accounts",
   "GET /users/{username}/ssh_signing_keys",
   "GET /users/{username}/starred",
   "GET /users/{username}/subscriptions",
