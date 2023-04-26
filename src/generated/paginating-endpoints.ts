@@ -18,16 +18,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-enterprise
-   */
-  "GET /enterprises/{enterprise}/actions/runner-groups": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["response"] & {
-      data: Endpoints["GET /enterprises/{enterprise}/actions/runner-groups"]["response"]["data"]["runner_groups"];
-    };
-  };
-
-  /**
    * @see https://docs.github.com/rest/dependabot/alerts#list-dependabot-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/dependabot/alerts": {
@@ -208,36 +198,6 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/actions/required_workflows"]["parameters"];
     response: Endpoints["GET /orgs/{org}/actions/required_workflows"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/required_workflows"]["response"]["data"]["required_workflows"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runner-groups-for-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"]["data"]["runner_groups"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"]["data"]["repositories"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/reference/actions#list-self-hosted-runners-in-a-group-for-an-organization
-   */
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners": {
-    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"] & {
-      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"]["data"]["runners"];
     };
   };
 
@@ -1839,7 +1799,6 @@ export interface PaginatingEndpoints {
 export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /app/hook/deliveries",
   "GET /app/installations",
-  "GET /enterprises/{enterprise}/actions/runner-groups",
   "GET /enterprises/{enterprise}/dependabot/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /events",
@@ -1862,9 +1821,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/required_workflows",
-  "GET /orgs/{org}/actions/runner-groups",
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
-  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
   "GET /orgs/{org}/actions/runners",
   "GET /orgs/{org}/actions/secrets",
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
