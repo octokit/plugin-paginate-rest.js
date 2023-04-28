@@ -1012,6 +1012,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/deployments/protection-rules#list-custom-deployment-rule-integrations
+   */
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps"]["response"]["data"]["available_custom_deployment_protection_rule_integrations"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/activity#list-repository-events
    */
   "GET /repos/{owner}/{repo}/events": {
@@ -1997,6 +2007,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/deployments/{deployment_id}/statuses",
   "GET /repos/{owner}/{repo}/environments",
   "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies",
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps",
   "GET /repos/{owner}/{repo}/events",
   "GET /repos/{owner}/{repo}/forks",
   "GET /repos/{owner}/{repo}/hooks",
