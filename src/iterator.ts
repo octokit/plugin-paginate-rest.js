@@ -1,7 +1,7 @@
-import { Octokit } from "@octokit/core";
+import type { Octokit } from "@octokit/core";
 
 import { normalizePaginatedListResponse } from "./normalize-paginated-list-response";
-import {
+import type {
   EndpointOptions,
   RequestInterface,
   RequestParameters,
