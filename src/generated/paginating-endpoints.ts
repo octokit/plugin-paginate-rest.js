@@ -514,6 +514,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/repos/rules#get-organization-rulesets
+   */
+  "GET /orgs/{org}/rulesets": {
+    parameters: Endpoints["GET /orgs/{org}/rulesets"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/rulesets"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-an-organization
    */
   "GET /orgs/{org}/secret-scanning/alerts": {
@@ -1278,6 +1286,22 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/repos/rules#get-rules-for-a-branch
+   */
+  "GET /repos/{owner}/{repo}/rules/branches/{branch}": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/rules/branches/{branch}"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/rules/branches/{branch}"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/repos/rules#get-repository-rulesets
+   */
+  "GET /repos/{owner}/{repo}/rulesets": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/rulesets"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/rulesets"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/reference/secret-scanning#list-secret-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/secret-scanning/alerts": {
@@ -1951,6 +1975,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/projects",
   "GET /orgs/{org}/public_members",
   "GET /orgs/{org}/repos",
+  "GET /orgs/{org}/rulesets",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
@@ -2040,6 +2065,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/releases",
   "GET /repos/{owner}/{repo}/releases/{release_id}/assets",
   "GET /repos/{owner}/{repo}/releases/{release_id}/reactions",
+  "GET /repos/{owner}/{repo}/rules/branches/{branch}",
+  "GET /repos/{owner}/{repo}/rulesets",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations",
   "GET /repos/{owner}/{repo}/security-advisories",
