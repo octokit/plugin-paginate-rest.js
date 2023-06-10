@@ -127,7 +127,7 @@ function endpointToKey(endpoint) {
 writeFileSync(
   "./src/generated/paginating-endpoints.ts",
   prettier.format(
-    `import { Endpoints } from "@octokit/types";
+    `import type { Endpoints } from "@octokit/types";
 
     export interface PaginatingEndpoints {
       ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
