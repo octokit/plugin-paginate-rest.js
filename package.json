@@ -49,7 +49,6 @@
     "typescript": "^5.0.0"
   },
   "jest": {
-    "preset": "ts-jest",
     "coverageThreshold": {
       "global": {
         "statements": 100,
