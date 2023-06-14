@@ -1,5 +1,5 @@
 import {
-  PaginatingEndpoints,
+  type PaginatingEndpoints,
   paginatingEndpoints,
 } from "./generated/paginating-endpoints";
 
