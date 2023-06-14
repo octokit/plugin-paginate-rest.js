@@ -1,7 +1,7 @@
 import { Octokit } from "@octokit/core";
 import * as OctokitTypes from "@octokit/types";
 
-export {
+export type {
   EndpointOptions,
   RequestInterface,
   OctokitResponse,
@@ -9,9 +9,9 @@ export {
   Route,
 } from "@octokit/types";
 
-export { PaginatingEndpoints } from "./generated/paginating-endpoints";
+export type { PaginatingEndpoints } from "./generated/paginating-endpoints";
 
-import { PaginatingEndpoints } from "./generated/paginating-endpoints";
+import type { PaginatingEndpoints } from "./generated/paginating-endpoints";
 
 // // https://stackoverflow.com/a/52991061/206879
 // type RequiredKeys<T> = {
