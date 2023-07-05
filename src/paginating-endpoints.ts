@@ -6,7 +6,7 @@ import {
 export { paginatingEndpoints } from "./generated/paginating-endpoints";
 
 export function isPaginatingEndpoint(
-  arg: unknown
+  arg: unknown,
 ): arg is keyof PaginatingEndpoints {
   if (typeof arg === "string") {
     return paginatingEndpoints.includes(arg as keyof PaginatingEndpoints);

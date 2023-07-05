@@ -18,7 +18,7 @@
 import type { OctokitResponse } from "./types";
 
 export function normalizePaginatedListResponse(
-  response: OctokitResponse<any>
+  response: OctokitResponse<any>,
 ): OctokitResponse<any> {
   // endpoints can respond with 204 if repository is empty
   if (!response.data) {

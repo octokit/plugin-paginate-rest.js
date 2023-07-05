@@ -90,7 +90,7 @@ const issueTitles = await octokit.paginate(
     since: "2010-10-01",
     per_page: 100,
   },
-  (response) => response.data.map((issue) => issue.title)
+  (response) => response.data.map((issue) => issue.title),
 );
 ```
 
@@ -110,7 +110,7 @@ const issues = await octokit.paginate(
       done();
     }
     return response.data;
-  }
+  },
 );
 ```
 
@@ -138,7 +138,7 @@ const parameters = {
 };
 for await (const response of octokit.paginate.iterator(
   "GET /repos/{owner}/{repo}/issues",
-  parameters
+  parameters,
 )) {
   // do whatever you want with each response, break out of the loop, etc.
   const issues = response.data;
@@ -157,7 +157,7 @@ const parameters = {
 };
 for await (const response of octokit.paginate.iterator(
   octokit.rest.issues.listForRepo,
-  parameters
+  parameters,
 )) {
   // do whatever you want with each response, break out of the loop, etc.
   const issues = response.data;
@@ -235,7 +235,7 @@ type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 async function myPaginatePlugin<E extends keyof PaginatingEndpoints>(
   octokit: Octokit,
   endpoint: E,
-  parameters?: PaginatingEndpoints[E]["parameters"]
+  parameters?: PaginatingEndpoints[E]["parameters"],
 ): Promise<DataType<PaginatingEndpoints[E]["response"]>> {
   return await composePaginateRest(octokit, endpoint, parameters);
 }

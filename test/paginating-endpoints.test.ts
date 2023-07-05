@@ -8,7 +8,7 @@ describe("paginating endpoints", () => {
         expect.assertions(1);
         expect(isPaginatingEndpoint(arg)).toBe(true);
       });
-    }
+    },
   );
 
   describe.each([

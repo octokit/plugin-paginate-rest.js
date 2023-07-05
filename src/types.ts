@@ -56,7 +56,7 @@ type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
 export interface MapFunction<
   T = OctokitTypes.OctokitResponse<PaginationResults<unknown>>,
-  M = unknown[]
+  M = unknown[],
 > {
   (response: T, done: () => void): M;
 }
@@ -74,7 +74,7 @@ export interface PaginateInterface {
    */
   <T, M>(
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>,
   ): Promise<PaginationResults<M>>;
 
   /**
@@ -94,7 +94,7 @@ export interface PaginateInterface {
    */
   <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     route: R,
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>,
   ): Promise<M>;
 
   /**
@@ -107,7 +107,7 @@ export interface PaginateInterface {
   <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>,
   ): Promise<M>;
 
   /**
@@ -118,7 +118,7 @@ export interface PaginateInterface {
    */
   <R extends keyof PaginatingEndpoints>(
     route: R,
-    parameters?: PaginatingEndpoints[R]["parameters"]
+    parameters?: PaginatingEndpoints[R]["parameters"],
   ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   // I tried this version which would make the `parameters` argument required if the route has required parameters
@@ -140,7 +140,7 @@ export interface PaginateInterface {
     route: R,
     parameters?: R extends keyof PaginatingEndpoints
       ? PaginatingEndpoints[R]["parameters"]
-      : OctokitTypes.RequestParameters
+      : OctokitTypes.RequestParameters,
   ): Promise<T[]>;
 
   //  Using request method as first parameter
@@ -156,7 +156,7 @@ export interface PaginateInterface {
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
       M
-    >
+    >,
   ): Promise<M>;
 
   /**
@@ -172,7 +172,7 @@ export interface PaginateInterface {
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
       M
-    >
+    >,
   ): Promise<M>;
 
   /**
@@ -183,7 +183,7 @@ export interface PaginateInterface {
    */
   <R extends OctokitTypes.RequestInterface>(
     request: R,
-    parameters?: Parameters<R>[0]
+    parameters?: Parameters<R>[0],
   ): Promise<
     NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>["data"]
   >;
@@ -197,7 +197,9 @@ export interface PaginateInterface {
      * @see {link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for-await...of} for await...of
      * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
      */
-    <T>(options: OctokitTypes.EndpointOptions): AsyncIterableIterator<
+    <T>(
+      options: OctokitTypes.EndpointOptions,
+    ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -212,7 +214,7 @@ export interface PaginateInterface {
      */
     <R extends keyof PaginatingEndpoints>(
       route: R,
-      parameters?: PaginatingEndpoints[R]["parameters"]
+      parameters?: PaginatingEndpoints[R]["parameters"],
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
@@ -228,7 +230,7 @@ export interface PaginateInterface {
       route: R,
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
-        : OctokitTypes.RequestParameters
+        : OctokitTypes.RequestParameters,
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
@@ -244,7 +246,7 @@ export interface PaginateInterface {
      */
     <R extends OctokitTypes.RequestInterface>(
       request: R,
-      parameters?: Parameters<R>[0]
+      parameters?: Parameters<R>[0],
     ): AsyncIterableIterator<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
@@ -266,7 +268,7 @@ export interface ComposePaginateInterface {
   <T, M>(
     octokit: Octokit,
     options: OctokitTypes.EndpointOptions,
-    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>
+    mapFn: MapFunction<OctokitTypes.OctokitResponse<PaginationResults<T>>, M[]>,
   ): Promise<PaginationResults<M>>;
 
   /**
@@ -275,9 +277,10 @@ export interface ComposePaginateInterface {
    * @param {object} octokit Octokit instance
    * @param {object} options Must set `method` and `url`. Plus URL, query or body parameters, as well as `headers`, `mediaType.format`, `request`, or `baseUrl`.
    */
-  <T>(octokit: Octokit, options: OctokitTypes.EndpointOptions): Promise<
-    PaginationResults<T>
-  >;
+  <T>(
+    octokit: Octokit,
+    options: OctokitTypes.EndpointOptions,
+  ): Promise<PaginationResults<T>>;
 
   // Using route string as first parameter
 
@@ -291,7 +294,7 @@ export interface ComposePaginateInterface {
   <R extends keyof PaginatingEndpoints, M extends unknown[]>(
     octokit: Octokit,
     route: R,
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>,
   ): Promise<M>;
 
   /**
@@ -306,7 +309,7 @@ export interface ComposePaginateInterface {
     octokit: Octokit,
     route: R,
     parameters: PaginatingEndpoints[R]["parameters"],
-    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>
+    mapFn: MapFunction<PaginatingEndpoints[R]["response"], M>,
   ): Promise<M>;
 
   /**
@@ -319,7 +322,7 @@ export interface ComposePaginateInterface {
   <R extends keyof PaginatingEndpoints>(
     octokit: Octokit,
     route: R,
-    parameters?: PaginatingEndpoints[R]["parameters"]
+    parameters?: PaginatingEndpoints[R]["parameters"],
   ): Promise<DataType<PaginatingEndpoints[R]["response"]>>;
 
   // I tried this version which would make the `parameters` argument required if the route has required parameters
@@ -343,7 +346,7 @@ export interface ComposePaginateInterface {
     route: R,
     parameters?: R extends keyof PaginatingEndpoints
       ? PaginatingEndpoints[R]["parameters"]
-      : OctokitTypes.RequestParameters
+      : OctokitTypes.RequestParameters,
   ): Promise<T[]>;
 
   //  Using request method as first parameter
@@ -361,7 +364,7 @@ export interface ComposePaginateInterface {
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
       M
-    >
+    >,
   ): Promise<M>;
 
   /**
@@ -379,7 +382,7 @@ export interface ComposePaginateInterface {
     mapFn: MapFunction<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>,
       M
-    >
+    >,
   ): Promise<M>;
 
   /**
@@ -392,7 +395,7 @@ export interface ComposePaginateInterface {
   <R extends OctokitTypes.RequestInterface>(
     octokit: Octokit,
     request: R,
-    parameters?: Parameters<R>[0]
+    parameters?: Parameters<R>[0],
   ): Promise<
     NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>["data"]
   >;
@@ -410,7 +413,7 @@ export interface ComposePaginateInterface {
      */
     <T>(
       octokit: Octokit,
-      options: OctokitTypes.EndpointOptions
+      options: OctokitTypes.EndpointOptions,
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
@@ -429,7 +432,7 @@ export interface ComposePaginateInterface {
     <R extends keyof PaginatingEndpoints>(
       octokit: Octokit,
       route: R,
-      parameters?: PaginatingEndpoints[R]["parameters"]
+      parameters?: PaginatingEndpoints[R]["parameters"],
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
@@ -448,7 +451,7 @@ export interface ComposePaginateInterface {
       route: R,
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
-        : OctokitTypes.RequestParameters
+        : OctokitTypes.RequestParameters,
     ): AsyncIterableIterator<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
@@ -467,7 +470,7 @@ export interface ComposePaginateInterface {
     <R extends OctokitTypes.RequestInterface>(
       octokit: Octokit,
       request: R,
-      parameters?: Parameters<R>[0]
+      parameters?: Parameters<R>[0],
     ): AsyncIterableIterator<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;

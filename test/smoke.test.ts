@@ -22,7 +22,7 @@ describe("Smoke test", () => {
 
   it("isPaginatingEndpoint", () => {
     expect(isPaginatingEndpoint("GET /repos/{owner}/{repo}/releases")).toBe(
-      true
+      true,
     );
     expect(isPaginatingEndpoint(123)).toBe(false);
   });
