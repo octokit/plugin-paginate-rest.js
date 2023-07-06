@@ -40,7 +40,7 @@ describe("pagination", () => {
       .paginate(
         "GET /orgs/{org}/repos",
         { org: "octokit", per_page: 1 },
-        (response: any) => response.data.map((org: any) => org.id)
+        (response: any) => response.data.map((org: any) => org.id),
       )
       .then((organizations: any) => {
         expect(organizations).toStrictEqual([1, 2]);
@@ -53,7 +53,7 @@ describe("pagination", () => {
           org: "octokit",
           per_page: 1,
         },
-        (response) => response.data.map((org) => org.id)
+        (response) => response.data.map((org) => org.id),
       )
       .then((organizations) => {
         expect(organizations).toStrictEqual([1, 2]);
@@ -100,7 +100,7 @@ describe("pagination", () => {
         {
           body: [ORG2],
           headers: {},
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -114,7 +114,7 @@ describe("pagination", () => {
       {
         org: "octokit",
         per_page: 1,
-      }
+      },
     );
     expect(organizations.map((o) => o.id)).toStrictEqual([1, 2]);
   });
@@ -134,7 +134,7 @@ describe("pagination", () => {
         {
           body: [ORG2],
           headers: {},
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -149,7 +149,7 @@ describe("pagination", () => {
         org: "octokit",
         per_page: 1,
       },
-      (response) => response.data.map((org) => org.id)
+      (response) => response.data.map((org) => org.id),
     );
     expect(organizations).toStrictEqual([1, 2]);
   });
@@ -179,7 +179,7 @@ describe("pagination", () => {
       .paginate(
         "GET /orgs/{org}/repos",
         { org: "octokit", per_page: 1 },
-        () => [undefined]
+        () => [undefined],
       )
       .then((results) => {
         expect(results).toStrictEqual([undefined, undefined]);
@@ -214,7 +214,7 @@ describe("pagination", () => {
         (response, done) => {
           done();
           return response.data.map((org) => org.id);
-        }
+        },
       )
       .then((organizations) => {
         expect(organizations).toStrictEqual([1]);
@@ -491,7 +491,7 @@ describe("pagination", () => {
     };
 
     const query = encodeURIComponent(
-      "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26"
+      "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26",
     );
     const mock = fetchMock
       .sandbox()
@@ -510,7 +510,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/search/issues?q=${query}&per_page=1&page=1>; rel="prev", <https://api.github.com/search/issues?q=${query}&per_page=1&page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -570,7 +570,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/installation/repositories?per_page=1>; rel="prev", <https://api.github.com/installation/repositories?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -678,7 +678,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1&page=2`,
@@ -688,7 +688,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -743,7 +743,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1&page=2`,
@@ -753,7 +753,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -804,7 +804,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1&page=2`,
@@ -814,7 +814,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -867,7 +867,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1&page=2`,
@@ -877,7 +877,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -928,7 +928,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1&page=2`,
@@ -938,7 +938,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -992,7 +992,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1&page=2`,
@@ -1002,7 +1002,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -1076,7 +1076,7 @@ describe("pagination", () => {
         "https://api.github.com/repos/octokit/rest.js/commits/abc4567/status",
         {
           body: result,
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -1127,7 +1127,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repositories/1/actions/runs?per_page=1&page=2>; rel="next"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       )
       .get(
         `https://api.github.com/repositories/1/actions/runs?per_page=1&page=2`,
@@ -1137,7 +1137,7 @@ describe("pagination", () => {
             link: `<https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1>; rel="prev", <https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1>; rel="first"`,
             "X-GitHub-Media-Type": "github.v3; format=json",
           },
-        }
+        },
       );
 
     const octokit = new TestOctokit({
@@ -1186,7 +1186,7 @@ describe("pagination", () => {
         await octokit.paginate("GET /repos/{owner}/{repo}/issues", {
           owner: "owner",
           repo: "non-existing-repo",
-        })
+        }),
     ).rejects.toThrow("Not Found");
   });
 });

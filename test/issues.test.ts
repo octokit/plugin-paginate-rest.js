@@ -23,7 +23,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
       "GET /projects/columns/{column_id}/cards",
       {
         column_id: 123,
-      }
+      },
     );
 
     expect(result[0].id).toEqual(123);
@@ -71,7 +71,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => 
       {
         owner: "owner",
         repo: "empty-repo",
-      }
+      },
     );
 
     expect(result.length).toEqual(0);

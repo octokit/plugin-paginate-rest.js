@@ -13,7 +13,7 @@ export function paginate(
   octokit: Octokit,
   route: Route | RequestInterface,
   parameters?: RequestParameters,
-  mapFn?: MapFunction
+  mapFn?: MapFunction,
 ) {
   if (typeof parameters === "function") {
     mapFn = parameters;
@@ -26,7 +26,7 @@ export function paginate(
     iterator(octokit, route, parameters)[
       Symbol.asyncIterator
     ]() as AsyncIterableIterator<any>,
-    mapFn
+    mapFn,
   );
 }
 
@@ -34,7 +34,7 @@ function gather(
   octokit: Octokit,
   results: PaginationResults,
   iterator: AsyncIterableIterator<any>,
-  mapFn?: MapFunction
+  mapFn?: MapFunction,
 ): Promise<PaginationResults> {
   return iterator.next().then((result) => {
     if (result.done) {
@@ -47,7 +47,7 @@ function gather(
     }
 
     results = results.concat(
-      mapFn ? mapFn(result.value, done) : result.value.data
+      mapFn ? mapFn(result.value, done) : result.value.data,
     );
 
     if (earlyExit) {

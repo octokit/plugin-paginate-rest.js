@@ -51,7 +51,7 @@ export async function knownRouteWithParametersAndMapFunction() {
           },
         };
       });
-    }
+    },
   );
   for (const result of results) {
     console.log(result.foo.bar);
@@ -70,7 +70,7 @@ export async function unknownRouteWithParameters() {
     "GET /foo/bar/{baz}",
     {
       baz: "daz",
-    }
+    },
   );
   for (const result of results) {
     console.log(result.foo.bar);
@@ -87,7 +87,7 @@ export async function requestMethod() {
 export async function requestMethodAndMapFunction() {
   const results = await octokit.paginate(
     octokit.rest.repos.listPublic,
-    (response) => response.data.map((repository) => repository.owner)
+    (response) => response.data.map((repository) => repository.owner),
   );
   for (const result of results) {
     console.log(result.login);
@@ -100,7 +100,7 @@ export async function requestMethodWithParameters() {
     {
       owner: "owner",
       repo: "repo",
-    }
+    },
   );
   for (const result of results) {
     console.log(result.id);
@@ -115,7 +115,7 @@ export async function requestMethodWithParametersAndMapFunction() {
           bar: org.id,
         },
       };
-    })
+    }),
   );
   for (const result of results) {
     console.log(result.foo);
@@ -130,7 +130,7 @@ export async function knownRouteIterator() {
 
 export async function unknownRouteIterator() {
   for await (const response of octokit.paginate.iterator<{ id: number }>(
-    "GET /unknown"
+    "GET /unknown",
   )) {
     console.log(response.data[0].id);
   }
@@ -141,7 +141,7 @@ export async function knownRouteWithParametersIterator() {
     "GET /orgs/{org}/repos",
     {
       org: "yo",
-    }
+    },
   )) {
     console.log(response.data[0].owner.login);
   }
@@ -152,7 +152,7 @@ export async function unknownRouteWithParametersIterator() {
     "GET /foo/bar/{baz}",
     {
       baz: "daz",
-    }
+    },
   )) {
     console.log(response.data[0].id);
   }
@@ -164,7 +164,7 @@ export async function requestMethodWithParametersIterator() {
     {
       owner: "owner",
       repo: "repo",
-    }
+    },
   )) {
     console.log(response.data[0].id);
   }
@@ -180,7 +180,7 @@ export async function knownRouteWithNamespacedResponse() {
 
 export async function knownRouteWithNamespacedResponseIterator() {
   for await (const response of octokit.paginate.iterator(
-    "GET /installation/repositories"
+    "GET /installation/repositories",
   )) {
     console.log(response.data[0].owner.login);
   }
@@ -188,7 +188,7 @@ export async function knownRouteWithNamespacedResponseIterator() {
 
 export async function requestMethodWithNamespacedResponse() {
   const results = await octokit.paginate(
-    octokit.rest.apps.listReposAccessibleToInstallation
+    octokit.rest.apps.listReposAccessibleToInstallation,
   );
   for (const result of results) {
     console.log(result.owner.login);
@@ -196,7 +196,7 @@ export async function requestMethodWithNamespacedResponse() {
 }
 
 export async function paginatingEndpointKeyProvidedByUser<
-  R extends keyof PaginatingEndpoints
+  R extends keyof PaginatingEndpoints,
 >(route: R) {
   console.log(await octokit.paginate(route));
 }
