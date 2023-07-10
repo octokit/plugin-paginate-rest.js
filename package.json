@@ -25,14 +25,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@octokit/types": "^10.0.0"
+    "@octokit/types": "^11.0.0"
   },
   "peerDependencies": {
-    "@octokit/core": ">=4"
+    "@octokit/core": ">=5"
   },
   "devDependencies": {
-    "@octokit/core": "^4.0.0",
-    "@octokit/plugin-rest-endpoint-methods": "^7.2.1",
+    "@octokit/core": "^5.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^9.0.0",
     "@octokit/tsconfig": "^2.0.0",
     "@types/fetch-mock": "^7.3.1",
     "@types/jest": "^29.0.0",
