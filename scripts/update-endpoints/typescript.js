@@ -13,11 +13,11 @@ const endpoints = [];
 
 // All of these cases have been reported to the relevant team in GitHub.
 const ENDPOINTS_WITH_UNDOCUMENTED_PER_PAGE_ATTRIBUTE = [
-  { scope: 'users', id: 'list-blocked-by-authenticated-user' },
-  { scope: 'orgs', id: 'list-blocked-users' },
-  { scope: 'packages', id: 'list-packages-for-authenticated-user' },
-  { scope: 'packages', id: 'list-packages-for-user' },
-  { scope: 'packages', id: 'list-packages-for-organization' }
+  { scope: "users", id: "list-blocked-by-authenticated-user" },
+  { scope: "orgs", id: "list-blocked-users" },
+  { scope: "packages", id: "list-packages-for-authenticated-user" },
+  { scope: "packages", id: "list-packages-for-user" },
+  { scope: "packages", id: "list-packages-for-organization" },
 ];
 
 // Endpoints with a documented `per_page` query parameter that are, in fact,
@@ -25,30 +25,42 @@ const ENDPOINTS_WITH_UNDOCUMENTED_PER_PAGE_ATTRIBUTE = [
 const ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY = [
   // Only the `files` key inside the commit is paginated. The rest is duplicated across
   // all pages. Handling this case properly requires custom code.
-  { scope: 'repos', id: 'get-commit' },
+  { scope: "repos", id: "get-commit" },
   // The [docs](https://docs.github.com/en/rest/commits/commits#compare-two-commits) make
   // these ones sound like a special case too - they must be because they support pagination
   // but doesn't return an array.
-  { scope: 'repos', id: 'compare-commits' },
-  { scope: 'repos', id: 'compare-commits-with-basehead' }
-]
+  { scope: "repos", id: "compare-commits" },
+  { scope: "repos", id: "compare-commits-with-basehead" },
+];
 
-const hasMatchingEndpoint = (list, id, scope) => list.some(endpoint => endpoint.id === id && endpoint.scope === scope);
+const hasMatchingEndpoint = (list, id, scope) =>
+  list.some((endpoint) => endpoint.id === id && endpoint.scope === scope);
 
 const hasPerPageParameter = (endpoint) => {
-  const parameterNames = endpoint.parameters.map(parameter => parameter.name);
+  const parameterNames = endpoint.parameters.map((parameter) => parameter.name);
   return parameterNames.includes("per_page");
-}
+};
 
 const isPaginatedEndpoint = (endpoint) => {
   const { id, scope } = endpoint;
 
-  return (hasPerPageParameter(endpoint) && !hasMatchingEndpoint(ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY, id, scope)) ||
-    hasMatchingEndpoint(ENDPOINTS_WITH_UNDOCUMENTED_PER_PAGE_ATTRIBUTE, id, scope) ||
+  return (
+    (hasPerPageParameter(endpoint) &&
+      !hasMatchingEndpoint(
+        ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY,
+        id,
+        scope,
+      )) ||
+    hasMatchingEndpoint(
+      ENDPOINTS_WITH_UNDOCUMENTED_PER_PAGE_ATTRIBUTE,
+      id,
+      scope,
+    ) ||
     // The "List public repos" API paginates with the `since` parameter, but otherwise
     // behaves normally in its use of the `Link` header.
-    (endpoint.id === 'list-public' && endpoint.url === '/repositories')
-}
+    (endpoint.id === "list-public" && endpoint.url === "/repositories")
+  );
+};
 
 for (const endpoint of ENDPOINTS) {
   if (!isPaginatedEndpoint(endpoint)) {
@@ -60,7 +72,7 @@ for (const endpoint of ENDPOINTS) {
   }
 
   const successResponses = endpoint.responses.filter(
-    (response) => response.code < 300
+    (response) => response.code < 300,
   );
 
   if (successResponses.length === 0) {
@@ -123,22 +135,24 @@ function endpointToTypes(endpoint) {
 function endpointToKey(endpoint) {
   return `"GET ${endpoint.url}"`;
 }
+async function main() {
+  writeFileSync(
+    "./src/generated/paginating-endpoints.ts",
+    await prettier.format(
+      `import type { Endpoints } from "@octokit/types";
 
-writeFileSync(
-  "./src/generated/paginating-endpoints.ts",
-  prettier.format(
-    `import type { Endpoints } from "@octokit/types";
+      export interface PaginatingEndpoints {
+        ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
+      }
 
-    export interface PaginatingEndpoints {
-      ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
-    }
-
-    export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
-      ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
-    ]
-    `,
-    {
-      parser: "typescript",
-    }
-  )
-);
+      export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
+        ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
+      ]
+      `,
+      {
+        parser: "typescript",
+      },
+    ),
+  );
+}
+main();
