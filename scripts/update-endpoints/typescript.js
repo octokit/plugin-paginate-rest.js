@@ -123,22 +123,24 @@ function endpointToTypes(endpoint) {
 function endpointToKey(endpoint) {
   return `"GET ${endpoint.url}"`;
 }
+async function main() {
+  writeFileSync(
+    "./src/generated/paginating-endpoints.ts",
+    await prettier.format(
+      `import type { Endpoints } from "@octokit/types";
 
-writeFileSync(
-  "./src/generated/paginating-endpoints.ts",
-  prettier.format(
-    `import type { Endpoints } from "@octokit/types";
+      export interface PaginatingEndpoints {
+        ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
+      }
 
-    export interface PaginatingEndpoints {
-      ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
-    }
-
-    export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
-      ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
-    ]
-    `,
-    {
-      parser: "typescript",
-    }
-  )
-);
+      export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
+        ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
+      ]
+      `,
+      {
+        parser: "typescript",
+      }
+    )
+  );
+}
+main();
