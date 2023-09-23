@@ -45,7 +45,7 @@ async function main() {
       path.resolve(__dirname, "generated", "endpoints.json"),
       await prettier.format(JSON.stringify(endpoints), {
         parser: "json",
-      })
+      }),
     );
   } catch (error) {
     console.error(error);

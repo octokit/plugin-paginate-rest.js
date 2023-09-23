@@ -7,8 +7,8 @@
   "description": "Octokit plugin to paginate REST API endpoint responses",
   "scripts": {
     "build": "node scripts/build.mjs && tsc -p tsconfig.json",
-    "lint": "prettier --check '{src,test}/**/*' README.md package.json",
-    "lint:fix": "prettier --write '{src,test}/**/*' README.md package.json",
+    "lint": "prettier --check '{src,test,scripts}/**/*' '!scripts/generated/*' README.md package.json",
+    "lint:fix": "prettier --write '{src,test,scripts}/**/*' '!scripts/generated/*' README.md package.json",
     "pretest": "npm run -s lint",
     "test": "jest --coverage",
     "test:ts": "npx tsc --noEmit --declaration --noUnusedLocals test/validate-typescript.ts",
