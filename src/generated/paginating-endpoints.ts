@@ -530,6 +530,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/orgs/properties#list-custom-property-values-for-organization-repositories
+   */
+  "GET /orgs/{org}/properties/values": {
+    parameters: Endpoints["GET /orgs/{org}/properties/values"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/properties/values"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/orgs/members#list-public-organization-members
    */
   "GET /orgs/{org}/public_members": {
@@ -551,6 +559,14 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/rulesets": {
     parameters: Endpoints["GET /orgs/{org}/rulesets"]["parameters"];
     response: Endpoints["GET /orgs/{org}/rulesets"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/rule-suites#list-organization-rule-suites
+   */
+  "GET /orgs/{org}/rulesets/rule-suites": {
+    parameters: Endpoints["GET /orgs/{org}/rulesets/rule-suites"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/rulesets/rule-suites"]["response"];
   };
 
   /**
@@ -1330,6 +1346,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/repos/rule-suites#list-repository-rule-suites
+   */
+  "GET /repos/{owner}/{repo}/rulesets/rule-suites": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/rulesets/rule-suites"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/rulesets/rule-suites"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/secret-scanning/alerts": {
@@ -2005,9 +2029,11 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/personal-access-tokens",
   "GET /orgs/{org}/personal-access-tokens/{pat_id}/repositories",
   "GET /orgs/{org}/projects",
+  "GET /orgs/{org}/properties/values",
   "GET /orgs/{org}/public_members",
   "GET /orgs/{org}/repos",
   "GET /orgs/{org}/rulesets",
+  "GET /orgs/{org}/rulesets/rule-suites",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/security-advisories",
   "GET /orgs/{org}/teams",
@@ -2099,6 +2125,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/releases/{release_id}/reactions",
   "GET /repos/{owner}/{repo}/rules/branches/{branch}",
   "GET /repos/{owner}/{repo}/rulesets",
+  "GET /repos/{owner}/{repo}/rulesets/rule-suites",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations",
   "GET /repos/{owner}/{repo}/security-advisories",
