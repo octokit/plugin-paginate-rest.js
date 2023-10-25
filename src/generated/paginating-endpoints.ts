@@ -1090,7 +1090,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/webhooks/repos#list-repository-webhooks
+   * @see https://docs.github.com/rest/repos/webhooks#list-repository-webhooks
    */
   "GET /repos/{owner}/{repo}/hooks": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks"]["parameters"];
@@ -1098,7 +1098,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/webhooks/repo-deliveries#list-deliveries-for-a-repository-webhook
+   * @see https://docs.github.com/rest/repos/webhooks#list-deliveries-for-a-repository-webhook
    */
   "GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/hooks/{hook_id}/deliveries"]["parameters"];
