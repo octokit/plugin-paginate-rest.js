@@ -47,8 +47,8 @@ type KnownKeysMatching<T, V> = KeysMatching<Pick<T, KnownKeys<T>>, V>;
 type GetResultsType<T> = T extends { data: any[] }
   ? T["data"]
   : T extends { data: object }
-  ? T["data"][KnownKeysMatching<T["data"], any[]>]
-  : never;
+    ? T["data"][KnownKeysMatching<T["data"], any[]>]
+    : never;
 
 type NormalizeResponse<T> = T & { data: GetResultsType<T> };
 
