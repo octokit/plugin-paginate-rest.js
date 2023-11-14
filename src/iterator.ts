@@ -40,7 +40,7 @@ export function iterator(
 
           return { value: normalizedResponse };
         } catch (error: any) {
-          // `GET /repos/{owner}/{repo}/commits` and throws a `409 Conflict` error for empty repositories
+          // `GET /repos/{owner}/{repo}/commits` throws a `409 Conflict` error for empty repositories
           // See https://github.com/github/rest-api-description/issues/385
           if (error.status !== 409) throw error;
 
