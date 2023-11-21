@@ -530,7 +530,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/orgs/properties#list-custom-property-values-for-organization-repositories
+   * @see https://docs.github.com/rest/orgs/custom-properties#list-custom-property-values-for-organization-repositories
    */
   "GET /orgs/{org}/properties/values": {
     parameters: Endpoints["GET /orgs/{org}/properties/values"]["parameters"];
