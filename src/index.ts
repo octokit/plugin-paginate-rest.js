@@ -1,16 +1,16 @@
 import type { Octokit } from "@octokit/core";
 
-import { VERSION } from "./version";
-import { paginate } from "./paginate";
-import { iterator } from "./iterator";
-import type { PaginateInterface } from "./types";
+import { VERSION } from "./version.js";
+import { paginate } from "./paginate.js";
+import { iterator } from "./iterator.js";
+import type { PaginateInterface } from "./types.js";
 
-export type { PaginateInterface, PaginatingEndpoints } from "./types";
-export { composePaginateRest } from "./compose-paginate";
+export type { PaginateInterface, PaginatingEndpoints } from "./types.js";
+export { composePaginateRest } from "./compose-paginate.js";
 export {
   isPaginatingEndpoint,
   paginatingEndpoints,
-} from "./paginating-endpoints";
+} from "./paginating-endpoints.js";
 
 /**
  * @param octokit Octokit instance

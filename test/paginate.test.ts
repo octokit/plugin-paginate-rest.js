@@ -2,7 +2,7 @@ import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
-import { paginateRest } from "../src";
+import { paginateRest } from "../src/index.ts";
 
 const ORG1 = { id: 1 };
 const ORG2 = { id: 2 };

@@ -1,12 +1,12 @@
 import type { Octokit } from "@octokit/core";
 
-import { normalizePaginatedListResponse } from "./normalize-paginated-list-response";
+import { normalizePaginatedListResponse } from "./normalize-paginated-list-response.js";
 import type {
   EndpointOptions,
   RequestInterface,
   RequestParameters,
   Route,
-} from "./types";
+} from "./types.js";
 
 export function iterator(
   octokit: Octokit,

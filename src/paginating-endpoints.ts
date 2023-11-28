@@ -1,9 +1,9 @@
 import {
   type PaginatingEndpoints,
   paginatingEndpoints,
-} from "./generated/paginating-endpoints";
+} from "./generated/paginating-endpoints.js";
 
-export { paginatingEndpoints } from "./generated/paginating-endpoints";
+export { paginatingEndpoints } from "./generated/paginating-endpoints.js";
 
 export function isPaginatingEndpoint(
   arg: unknown,

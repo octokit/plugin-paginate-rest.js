@@ -1,4 +1,4 @@
-import { paginatingEndpoints, isPaginatingEndpoint } from "../src";
+import { paginatingEndpoints, isPaginatingEndpoint } from "../src/index.ts";
 
 describe("paginating endpoints", () => {
   describe.each(paginatingEndpoints.map((arg) => [arg]))(
