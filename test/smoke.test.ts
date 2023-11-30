@@ -5,7 +5,7 @@ import {
   composePaginateRest,
   isPaginatingEndpoint,
   paginatingEndpoints,
-} from "../src";
+} from "../src/index.ts";
 
 describe("Smoke test", () => {
   it("paginateRest", () => {

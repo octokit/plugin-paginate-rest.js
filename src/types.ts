@@ -9,9 +9,9 @@ export type {
   Route,
 } from "@octokit/types";
 
-export type { PaginatingEndpoints } from "./generated/paginating-endpoints";
+export type { PaginatingEndpoints } from "./generated/paginating-endpoints.js";
 
-import type { PaginatingEndpoints } from "./generated/paginating-endpoints";
+import type { PaginatingEndpoints } from "./generated/paginating-endpoints.js";
 
 // // https://stackoverflow.com/a/52991061/206879
 // type RequiredKeys<T> = {

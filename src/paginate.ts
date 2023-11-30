@@ -1,6 +1,6 @@
 import type { Octokit } from "@octokit/core";
 
-import { iterator } from "./iterator";
+import { iterator } from "./iterator.js";
 import type {
   MapFunction,
   PaginationResults,

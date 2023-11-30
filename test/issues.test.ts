@@ -2,7 +2,7 @@ import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
-import { paginateRest } from "../src";
+import { paginateRest } from "../src/index.ts";
 
 describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
   it("octokit.paginate('GET /projects/columns/{column}/cards', { column })", async () => {

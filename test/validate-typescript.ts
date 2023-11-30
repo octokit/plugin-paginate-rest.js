@@ -3,7 +3,7 @@
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
 
-import { paginateRest, PaginatingEndpoints } from "../src";
+import { paginateRest, PaginatingEndpoints } from "../src/index.ts";
 
 const MyOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
 const octokit = new MyOctokit();

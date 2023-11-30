@@ -1,7 +1,7 @@
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 
-import { composePaginateRest } from "../src";
+import { composePaginateRest } from "../src/index.ts";
 
 const ORG1 = { id: 1 };
 const ORG2 = { id: 2 };
