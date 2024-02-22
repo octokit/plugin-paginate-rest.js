@@ -328,7 +328,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/copilot/copilot-for-business#list-all-copilot-for-business-seat-assignments-for-an-organization
+   * @see https://docs.github.com/rest/copilot/copilot-user-management#list-all-copilot-seat-assignments-for-an-organization
    */
   "GET /orgs/{org}/copilot/billing/seats": {
     parameters: Endpoints["GET /orgs/{org}/copilot/billing/seats"]["parameters"];
@@ -463,6 +463,22 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/migrations/{migration_id}/repositories": {
     parameters: Endpoints["GET /orgs/{org}/migrations/{migration_id}/repositories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/migrations/{migration_id}/repositories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/organization-roles#list-teams-that-are-assigned-to-an-organization-role
+   */
+  "GET /orgs/{org}/organization-roles/{role_id}/teams": {
+    parameters: Endpoints["GET /orgs/{org}/organization-roles/{role_id}/teams"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/organization-roles/{role_id}/teams"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/organization-roles#list-users-that-are-assigned-to-an-organization-role
+   */
+  "GET /orgs/{org}/organization-roles/{role_id}/users": {
+    parameters: Endpoints["GET /orgs/{org}/organization-roles/{role_id}/users"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/organization-roles/{role_id}/users"]["response"];
   };
 
   /**
@@ -2021,6 +2037,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/members/{username}/codespaces",
   "GET /orgs/{org}/migrations",
   "GET /orgs/{org}/migrations/{migration_id}/repositories",
+  "GET /orgs/{org}/organization-roles/{role_id}/teams",
+  "GET /orgs/{org}/organization-roles/{role_id}/users",
   "GET /orgs/{org}/outside_collaborators",
   "GET /orgs/{org}/packages",
   "GET /orgs/{org}/packages/{package_type}/{package_name}/versions",
