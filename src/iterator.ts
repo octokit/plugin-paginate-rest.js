@@ -17,7 +17,9 @@ export function iterator(
     typeof route === "function"
       ? route.endpoint(parameters as EndpointOptions)
       : octokit.request.endpoint(route, parameters);
-  const requestMethod = typeof route === "function" ? route : octokit.request;
+  const requestMethod = (
+    typeof route === "function" ? route : octokit.request
+  ) as RequestInterface;
   const method = options.method;
   const headers = options.headers;
   let url = options.url;
