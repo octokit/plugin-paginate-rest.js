@@ -12,6 +12,7 @@ const sharedOptions = {
   minify: false,
   allowOverwrite: true,
   packages: "external",
+  format: "esm",
 };
 
 async function main() {
@@ -23,7 +24,6 @@ async function main() {
     outdir: "pkg/dist-src",
     bundle: false,
     platform: "neutral",
-    format: "esm",
     ...sharedOptions,
     sourcemap: false,
   });
@@ -46,8 +46,7 @@ async function main() {
       outdir: "pkg/dist-node",
       bundle: true,
       platform: "node",
-      target: "node14",
-      format: "cjs",
+      target: "node18",
       ...sharedOptions,
     }),
     // Build an ESM browser bundle
@@ -56,7 +55,6 @@ async function main() {
       outdir: "pkg/dist-web",
       bundle: true,
       platform: "browser",
-      format: "esm",
       ...sharedOptions,
     }),
   ]);
