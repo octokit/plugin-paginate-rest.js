@@ -50,6 +50,9 @@
     "typescript": "^5.0.0"
   },
   "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
     "transform": {
       "^.+\\.(ts|tsx)$": [
         "ts-jest",
