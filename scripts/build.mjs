@@ -76,10 +76,14 @@ async function main() {
       {
         ...pkg,
         files: ["dist-*/**", "bin/**"],
-        main: "dist-node/index.js",
-        module: "dist-web/index.js",
+        main: "dist-bundle/index.js",
         types: "dist-types/index.d.ts",
-        source: "dist-src/index.js",
+        exports: {
+          ".": {
+            types: "./dist-types/index.d.ts",
+            import: "./dist-bundle/index.js",
+          },
+        },
         sideEffects: false,
       },
       null,
