@@ -14,7 +14,7 @@ const sharedOptions = {
   packages: "external",
   format: "esm",
   target: "es2022",
-  platform: "neutral"
+  platform: "neutral",
 };
 
 async function main() {
@@ -62,6 +62,8 @@ async function main() {
       {
         ...pkg,
         files: ["dist-*/**", "bin/**"],
+        // Tooling currently are having issues with the "exports" field, ex: TypeScript, eslint
+        // We add a `main` and `types` field to the package.json for the time being
         main: "dist-bundle/index.js",
         types: "dist-types/index.d.ts",
         exports: {
