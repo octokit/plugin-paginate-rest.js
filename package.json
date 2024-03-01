@@ -28,12 +28,12 @@
     "@octokit/types": "^12.6.0"
   },
   "peerDependencies": {
-    "@octokit/core": "5"
+    "@octokit/core": "6"
   },
   "devDependencies": {
-    "@octokit/core": "^5.1.0",
-    "@octokit/plugin-rest-endpoint-methods": "^10.4.0",
-    "@octokit/tsconfig": "^2.0.0",
+    "@octokit/core": "^6.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^11.0.0",
+    "@octokit/tsconfig": "^3.0.0",
     "@types/fetch-mock": "^7.3.1",
     "@types/jest": "^29.0.0",
     "@types/node": "^20.0.0",
