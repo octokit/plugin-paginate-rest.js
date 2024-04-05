@@ -4,12 +4,12 @@
  * trigger notifications. So instead we automatically generate a file that
  * only contains these paths when @octokit/openapi has a new release.
  */
-import { writeFileSync } from "node:fs";
+import { writeFileSync, readFileSync } from "node:fs";
 
 import prettier from "prettier";
 
 const ENDPOINTS = JSON.parse(
-  readFileSync("./generated/endpoints.json", "utf-8"),
+  readFileSync(new URL("./generated/endpoints.json", import.meta.url), "utf-8"),
 );
 const endpoints = [];
 
@@ -139,7 +139,7 @@ function endpointToKey(endpoint) {
 }
 async function main() {
   writeFileSync(
-    new URL("./src/generated/paginating-endpoints.ts", import.meta.url),
+    new URL("../../src/generated/paginating-endpoints.ts", import.meta.url),
     await prettier.format(
       `import type { Endpoints } from "@octokit/types";
 
