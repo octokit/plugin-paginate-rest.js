@@ -1090,6 +1090,26 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/actions/secrets#list-environment-secrets
+   */
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/secrets": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/secrets"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/secrets"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/secrets"]["response"]["data"]["secrets"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/variables#list-environment-variables
+   */
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/variables": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/variables"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/variables"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/environments/{environment_name}/variables"]["response"]["data"]["variables"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/activity/events#list-repository-events
    */
   "GET /repos/{owner}/{repo}/events": {
@@ -1441,26 +1461,6 @@ export interface PaginatingEndpoints {
   "GET /repositories": {
     parameters: Endpoints["GET /repositories"]["parameters"];
     response: Endpoints["GET /repositories"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/actions/secrets#list-environment-secrets
-   */
-  "GET /repositories/{repository_id}/environments/{environment_name}/secrets": {
-    parameters: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/secrets"]["parameters"];
-    response: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/secrets"]["response"] & {
-      data: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/secrets"]["response"]["data"]["secrets"];
-    };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/actions/variables#list-environment-variables
-   */
-  "GET /repositories/{repository_id}/environments/{environment_name}/variables": {
-    parameters: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/variables"]["parameters"];
-    response: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/variables"]["response"] & {
-      data: Endpoints["GET /repositories/{repository_id}/environments/{environment_name}/variables"]["response"]["data"]["variables"];
-    };
   };
 
   /**
@@ -2109,6 +2109,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/environments",
   "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment-branch-policies",
   "GET /repos/{owner}/{repo}/environments/{environment_name}/deployment_protection_rules/apps",
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/secrets",
+  "GET /repos/{owner}/{repo}/environments/{environment_name}/variables",
   "GET /repos/{owner}/{repo}/events",
   "GET /repos/{owner}/{repo}/forks",
   "GET /repos/{owner}/{repo}/hooks",
@@ -2153,8 +2155,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/teams",
   "GET /repos/{owner}/{repo}/topics",
   "GET /repositories",
-  "GET /repositories/{repository_id}/environments/{environment_name}/secrets",
-  "GET /repositories/{repository_id}/environments/{environment_name}/variables",
   "GET /search/code",
   "GET /search/commits",
   "GET /search/issues",
