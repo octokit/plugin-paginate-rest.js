@@ -68,11 +68,11 @@ async function main() {
             types: "./dist-types/index.d.ts",
             import: "./dist-bundle/index.js",
             // Tooling currently are having issues with the "exports" field when there is no "default", ex: TypeScript, eslint
-            default: "./dist-bundle/index.js"
+            default: "./dist-bundle/index.js",
           },
           "./types": {
             types: "./dist-types/.d.ts",
-          }
+          },
         },
         sideEffects: false,
       },
