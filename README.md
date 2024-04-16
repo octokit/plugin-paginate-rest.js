@@ -73,6 +73,9 @@ function myPlugin(octokit, options) {
 }
 ```
 
+> [!IMPORTANT]
+> As we use [conditional exports](https://nodejs.org/api/packages.html#conditional-exports), you will need to adapt your `tsconfig.json`. See the TypeScript docs on [package.json "exports"](https://www.typescriptlang.org/docs/handbook/modules/reference.html#packagejson-exports).
+
 ## `octokit.paginate()`
 
 The `paginateRest` plugin adds a new `octokit.paginate()` method which accepts the same parameters as [`octokit.request`](https://github.com/octokit/request.js#request). Only "List ..." endpoints such as [List issues for a repository](https://developer.github.com/v3/issues/#list-issues-for-a-repository) are supporting pagination. Their [response includes a Link header](https://developer.github.com/v3/issues/#response-1). For other endpoints, `octokit.paginate()` behaves the same as `octokit.request()`.
