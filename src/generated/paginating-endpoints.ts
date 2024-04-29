@@ -58,6 +58,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-enterprise-members
+   */
+  "GET /enterprises/{enterprise}/copilot/usage": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/copilot/usage"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/copilot/usage"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/dependabot/alerts#list-dependabot-alerts-for-an-enterprise
    */
   "GET /enterprises/{enterprise}/dependabot/alerts": {
@@ -338,6 +346,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-organization-members
+   */
+  "GET /orgs/{org}/copilot/usage": {
+    parameters: Endpoints["GET /orgs/{org}/copilot/usage"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/copilot/usage"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/dependabot/alerts#list-dependabot-alerts-for-an-organization
    */
   "GET /orgs/{org}/dependabot/alerts": {
@@ -599,6 +615,14 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/security-advisories": {
     parameters: Endpoints["GET /orgs/{org}/security-advisories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/security-advisories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-a-team
+   */
+  "GET /orgs/{org}/team/{team_slug}/copilot/usage": {
+    parameters: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/usage"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/usage"]["response"];
   };
 
   /**
@@ -1990,6 +2014,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /assignments/{assignment_id}/accepted_assignments",
   "GET /classrooms",
   "GET /classrooms/{classroom_id}/assignments",
+  "GET /enterprises/{enterprise}/copilot/usage",
   "GET /enterprises/{enterprise}/dependabot/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /events",
@@ -2022,6 +2047,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/codespaces/secrets",
   "GET /orgs/{org}/codespaces/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/copilot/billing/seats",
+  "GET /orgs/{org}/copilot/usage",
   "GET /orgs/{org}/dependabot/alerts",
   "GET /orgs/{org}/dependabot/secrets",
   "GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories",
@@ -2054,6 +2080,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/rulesets/rule-suites",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/security-advisories",
+  "GET /orgs/{org}/team/{team_slug}/copilot/usage",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments",
