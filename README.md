@@ -33,11 +33,11 @@ Node
 Install with `npm install @octokit/core @octokit/plugin-paginate-rest`. Optionally replace `@octokit/core` with a core-compatible module
 
 ```js
-import { Octokit } from "@octokit/core";
-import {
+const { Octokit } = require("@octokit/core");
+const {
   paginateRest,
   composePaginateRest,
-} from "@octokit/plugin-paginate-rest";
+} = require("@octokit/plugin-paginate-rest");
 ```
 
 </td></tr>
