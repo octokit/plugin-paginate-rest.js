@@ -78,6 +78,10 @@
       {
         "name": "beta",
         "prerelease": true
+      },
+      {
+        "name": "cjs",
+        "channel": "cjs"
       }
     ],
     "plugins": [
