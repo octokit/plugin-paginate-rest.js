@@ -7,7 +7,7 @@ import type {
   RequestParameters,
   Route,
   RequestInterface,
-} from "./types.js";
+} from "./types";
 
 export function paginate(
   octokit: Octokit,

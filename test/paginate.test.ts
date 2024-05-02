@@ -288,7 +288,7 @@ describe("pagination", () => {
       })
       .then((organizations) => {
         // @ts-ignore
-        expect(organizations).toEqual([{ id: 1 }, { id: 2 }]);
+        expect(organizations).toStrictEqual([{ id: 1 }, { id: 2 }]);
       });
   });
 
@@ -312,7 +312,7 @@ describe("pagination", () => {
       [Symbol.asyncIterator]();
 
     return iterator.next().then((result) => {
-      expect(result.value.data).toEqual(ORG1);
+      expect(result.value.data).toStrictEqual(ORG1);
     });
   });
 
@@ -530,7 +530,7 @@ describe("pagination", () => {
         },
       })
       .then((results) => {
-        expect(results).toEqual([...result1.items, ...result2.items]);
+        expect(results).toStrictEqual([...result1.items, ...result2.items]);
       });
   });
 
@@ -586,7 +586,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
+        expect(results).toStrictEqual([
           ...result1.repositories,
           ...result2.repositories,
         ]);
@@ -642,7 +642,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
+        expect(results).toStrictEqual([
           ...result1.repositories,
           ...result2.repositories,
         ]);
@@ -707,7 +707,10 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([...result1.artifacts, ...result2.artifacts]);
+        expect(results).toStrictEqual([
+          ...result1.artifacts,
+          ...result2.artifacts,
+        ]);
       });
   });
 
@@ -768,7 +771,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([...result1.secrets, ...result2.secrets]);
+        expect(results).toStrictEqual([...result1.secrets, ...result2.secrets]);
       });
   });
 
@@ -829,7 +832,10 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([...result1.workflows, ...result2.workflows]);
+        expect(results).toStrictEqual([
+          ...result1.workflows,
+          ...result2.workflows,
+        ]);
       });
   });
   it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/runs/{run_id}/jobs)", () => {
@@ -890,7 +896,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([...result1.jobs, ...result2.jobs]);
+        expect(results).toStrictEqual([...result1.jobs, ...result2.jobs]);
       });
   });
   it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs)", () => {
@@ -951,7 +957,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
+        expect(results).toStrictEqual([
           ...result1.workflow_runs,
           ...result2.workflow_runs,
         ]);
@@ -1014,7 +1020,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
+        expect(results).toStrictEqual([
           ...result1.workflow_runs,
           ...result2.workflow_runs,
         ]);
@@ -1050,7 +1056,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([...result.repositories]);
+        expect(results).toStrictEqual([...result.repositories]);
       });
   });
 
@@ -1149,7 +1155,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
+        expect(results).toStrictEqual([
           ...result1.workflow_runs,
           ...result2.workflow_runs,
         ]);

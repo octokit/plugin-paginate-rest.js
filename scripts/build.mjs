@@ -12,9 +12,6 @@ const sharedOptions = {
   minify: false,
   allowOverwrite: true,
   packages: "external",
-  format: "esm",
-  target: "es2022",
-  platform: "neutral",
 };
 
 async function main() {
@@ -25,6 +22,8 @@ async function main() {
     entryPoints: await glob(["./src/*.ts", "./src/**/*.ts"]),
     outdir: "pkg/dist-src",
     bundle: false,
+    platform: "neutral",
+    format: "esm",
     ...sharedOptions,
     sourcemap: false,
   });
@@ -38,12 +37,29 @@ async function main() {
     await rm(typeFile);
   }
 
-  await esbuild.build({
-    entryPoints: ["./pkg/dist-src/index.js"],
-    outdir: "pkg/dist-bundle",
-    bundle: true,
-    ...sharedOptions,
-  });
+  const entryPoints = ["./pkg/dist-src/index.js"];
+
+  await Promise.all([
+    // Build the a CJS Node.js bundle
+    esbuild.build({
+      entryPoints,
+      outdir: "pkg/dist-node",
+      bundle: true,
+      platform: "node",
+      target: "node14",
+      format: "cjs",
+      ...sharedOptions,
+    }),
+    // Build an ESM browser bundle
+    esbuild.build({
+      entryPoints,
+      outdir: "pkg/dist-web",
+      bundle: true,
+      platform: "browser",
+      format: "esm",
+      ...sharedOptions,
+    }),
+  ]);
 
   // Copy the README, LICENSE to the pkg folder
   await copyFile("LICENSE", "pkg/LICENSE");
@@ -62,16 +78,10 @@ async function main() {
       {
         ...pkg,
         files: ["dist-*/**", "bin/**"],
-        // Tooling currently are having issues with the "exports" field, ex: TypeScript, eslint
-        // We add a `main` and `types` field to the package.json for the time being
-        main: "dist-bundle/index.js",
+        main: "dist-node/index.js",
+        module: "dist-web/index.js",
         types: "dist-types/index.d.ts",
-        exports: {
-          ".": {
-            types: "./dist-types/index.d.ts",
-            import: "./dist-bundle/index.js",
-          },
-        },
+        source: "dist-src/index.js",
         sideEffects: false,
       },
       null,
