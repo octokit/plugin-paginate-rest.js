@@ -1,5 +1,5 @@
-import { Octokit } from "@octokit/core";
-import * as OctokitTypes from "@octokit/types";
+import type { Octokit } from "@octokit/core";
+import type * as OctokitTypes from "@octokit/types";
 
 export type {
   EndpointOptions,

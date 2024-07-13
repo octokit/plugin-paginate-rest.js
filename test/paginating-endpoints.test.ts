@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import { paginatingEndpoints, isPaginatingEndpoint } from "../src/index.ts";
 
 describe("paginating endpoints", () => {
