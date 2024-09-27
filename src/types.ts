@@ -199,7 +199,7 @@ export interface PaginateInterface {
      */
     <T>(
       options: OctokitTypes.EndpointOptions,
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -215,7 +215,7 @@ export interface PaginateInterface {
     <R extends keyof PaginatingEndpoints>(
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
@@ -231,7 +231,7 @@ export interface PaginateInterface {
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
         : OctokitTypes.RequestParameters,
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -247,7 +247,7 @@ export interface PaginateInterface {
     <R extends OctokitTypes.RequestInterface>(
       request: R,
       parameters?: Parameters<R>[0],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
   };
@@ -414,7 +414,7 @@ export interface ComposePaginateInterface {
     <T>(
       octokit: Octokit,
       options: OctokitTypes.EndpointOptions,
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -433,7 +433,7 @@ export interface ComposePaginateInterface {
       octokit: Octokit,
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
@@ -452,7 +452,7 @@ export interface ComposePaginateInterface {
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
         : OctokitTypes.RequestParameters,
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<PaginationResults<T>>
     >;
 
@@ -471,7 +471,7 @@ export interface ComposePaginateInterface {
       octokit: Octokit,
       request: R,
       parameters?: Parameters<R>[0],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
   };
