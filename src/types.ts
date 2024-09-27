@@ -35,7 +35,10 @@ type KnownKeys<T> = Extract<
   } extends { [_ in keyof T]: infer U }
     ? U
     : never,
-  keyof T
+  Exclude<
+    keyof T,
+    "repository_selection" | "total_count" | "incomplete_results"
+  >
 >;
 type KeysMatching<T, V> = {
   [K in keyof T]: T[K] extends V ? K : never;
