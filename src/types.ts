@@ -35,6 +35,7 @@ type KnownKeys<T> = Extract<
   } extends { [_ in keyof T]: infer U }
     ? U
     : never,
+  // Exclude keys that are known to not contain the data
   Exclude<
     keyof T,
     "repository_selection" | "total_count" | "incomplete_results"
