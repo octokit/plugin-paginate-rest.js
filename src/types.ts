@@ -54,7 +54,8 @@ type GetResultsType<T> = T extends { data: any[] }
     ? T["data"][KnownKeysMatching<T["data"], any[]>]
     : never;
 
-type NormalizeResponse<T> = T & { data: GetResultsType<T> };
+// Ensure that the type always returns the paginated results and not a mix of paginated results and the response object
+type NormalizeResponse<T> = Omit<T, 'data'> & { data: GetResultsType<T> };
 
 type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
