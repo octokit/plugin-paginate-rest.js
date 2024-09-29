@@ -35,7 +35,11 @@ type KnownKeys<T> = Extract<
   } extends { [_ in keyof T]: infer U }
     ? U
     : never,
-  keyof T
+  // Exclude keys that are known to not contain the data
+  Exclude<
+    keyof T,
+    "repository_selection" | "total_count" | "incomplete_results"
+  >
 >;
 type KeysMatching<T, V> = {
   [K in keyof T]: T[K] extends V ? K : never;
@@ -50,7 +54,8 @@ type GetResultsType<T> = T extends { data: any[] }
     ? T["data"][KnownKeysMatching<T["data"], any[]>]
     : never;
 
-type NormalizeResponse<T> = T & { data: GetResultsType<T> };
+// Ensure that the type always returns the paginated results and not a mix of paginated results and the response object
+type NormalizeResponse<T> = Omit<T, "data"> & { data: GetResultsType<T> };
 
 type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
@@ -199,9 +204,7 @@ export interface PaginateInterface {
      */
     <T>(
       options: OctokitTypes.EndpointOptions,
-    ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginationResults<T>>
-    >;
+    ): AsyncIterable<OctokitTypes.OctokitResponse<PaginationResults<T>>>;
 
     // Using route string as first parameter
 
@@ -215,7 +218,7 @@ export interface PaginateInterface {
     <R extends keyof PaginatingEndpoints>(
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
@@ -231,9 +234,7 @@ export interface PaginateInterface {
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
         : OctokitTypes.RequestParameters,
-    ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginationResults<T>>
-    >;
+    ): AsyncIterable<OctokitTypes.OctokitResponse<PaginationResults<T>>>;
 
     // Using request method as first parameter
 
@@ -247,7 +248,7 @@ export interface PaginateInterface {
     <R extends OctokitTypes.RequestInterface>(
       request: R,
       parameters?: Parameters<R>[0],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
   };
@@ -414,9 +415,7 @@ export interface ComposePaginateInterface {
     <T>(
       octokit: Octokit,
       options: OctokitTypes.EndpointOptions,
-    ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginationResults<T>>
-    >;
+    ): AsyncIterable<OctokitTypes.OctokitResponse<PaginationResults<T>>>;
 
     // Using route string as first parameter
 
@@ -433,7 +432,7 @@ export interface ComposePaginateInterface {
       octokit: Octokit,
       route: R,
       parameters?: PaginatingEndpoints[R]["parameters"],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       OctokitTypes.OctokitResponse<DataType<PaginatingEndpoints[R]["response"]>>
     >;
 
@@ -452,9 +451,7 @@ export interface ComposePaginateInterface {
       parameters?: R extends keyof PaginatingEndpoints
         ? PaginatingEndpoints[R]["parameters"]
         : OctokitTypes.RequestParameters,
-    ): AsyncIterableIterator<
-      OctokitTypes.OctokitResponse<PaginationResults<T>>
-    >;
+    ): AsyncIterable<OctokitTypes.OctokitResponse<PaginationResults<T>>>;
 
     // Using request method as first parameter
 
@@ -471,7 +468,7 @@ export interface ComposePaginateInterface {
       octokit: Octokit,
       request: R,
       parameters?: Parameters<R>[0],
-    ): AsyncIterableIterator<
+    ): AsyncIterable<
       NormalizeResponse<OctokitTypes.GetResponseTypeFromEndpointMethod<R>>
     >;
   };
