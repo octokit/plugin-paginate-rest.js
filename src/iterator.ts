@@ -58,5 +58,5 @@ export function iterator(
         }
       },
     }),
-  };
+  } as AsyncIterable<any>;
 }
