@@ -37,7 +37,7 @@
     "@octokit/plugin-rest-endpoint-methods": "^13.0.0",
     "@octokit/tsconfig": "^4.0.0",
     "@types/fetch-mock": "^7.3.1",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@vitest/coverage-v8": "^2.0.2",
     "esbuild": "^0.24.0",
     "fetch-mock": "^11.0.0",
