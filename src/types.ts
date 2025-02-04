@@ -54,9 +54,23 @@ type GetResultsType<T> = T extends { data: any[] }
     ? T["data"][KnownKeysMatching<T["data"], any[]>]
     : never;
 
-// Ensure that the type always returns the paginated results and not a mix of paginated results and the response object
-type NormalizeResponse<T> = Omit<T, "data"> & { data: GetResultsType<T> };
+// Extract the pagination keys from the response object in order to return them alongside the paginated results
+type GetPaginationKeys<T> = T extends { data: any[] }
+  ? T
+  : T extends { data: object }
+    ? Pick<
+        T["data"],
+        Extract<
+          keyof T["data"],
+          "repository_selection" | "total_count" | "incomplete_results"
+        >
+      >
+    : never;
 
+// Ensure that the type always returns the paginated results and not a mix of paginated results and the response object
+type NormalizeResponse<T> = Omit<T, "data"> & {
+  data: GetResultsType<T> & GetPaginationKeys<T>;
+};
 type DataType<T> = "data" extends keyof T ? T["data"] : unknown;
 
 export interface MapFunction<
