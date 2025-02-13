@@ -27,18 +27,22 @@ describe("pagination", () => {
     const startTime = performance.now();
     try {
       for await (const normalizedResponse of octokit.paginate.iterator(
-        "GET /repos/{owner}/{repo}/issues", { owner: "DayShift", repo: "ReDos", per_page: 100 }
-      )) {}
+        "GET /repos/{owner}/{repo}/issues",
+        { owner: "DayShift", repo: "ReDos", per_page: 100 },
+      )) {
+      }
     } catch (error) {
       // pass
     }
     const endTime = performance.now();
     const elapsedTime = endTime - startTime;
-    const reDosThreshold = 2000; 
-    
+    const reDosThreshold = 2000;
+
     expect(elapsedTime).toBeLessThanOrEqual(reDosThreshold);
     if (elapsedTime > reDosThreshold) {
-      console.warn(`🚨 Potential ReDoS Attack! getDuration method took ${elapsedTime.toFixed(2)} ms, exceeding threshold of ${reDosThreshold} ms.`);
+      console.warn(
+        `🚨 Potential ReDoS Attack! getDuration method took ${elapsedTime.toFixed(2)} ms, exceeding threshold of ${reDosThreshold} ms.`,
+      );
     }
   });
 
