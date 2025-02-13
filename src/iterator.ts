@@ -37,7 +37,7 @@ export function iterator(
           // '<https://api.github.com/users/aseemk/followers?page=2>; rel="next", <https://api.github.com/users/aseemk/followers?page=2>; rel="last"'
           // sets `url` to undefined if "next" URL is not present or `link` header is not set
           url = ((normalizedResponse.headers.link || "").match(
-            /<([^>]+)>;\s*rel="next"/,
+            /<([^<>]+)>;\s*rel="next"/,
           ) || [])[1];
 
           return { value: normalizedResponse };
