@@ -31,6 +31,7 @@ describe("pagination", () => {
         "GET /repos/{owner}/{repo}/issues",
         { owner: "DayShift", repo: "ReDos", per_page: 100 },
       )) {
+        normalizedResponse;
       }
     } catch (error) {
       // pass
