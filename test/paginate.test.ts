@@ -14,13 +14,15 @@ describe("pagination", () => {
     const octokit = new ReDosOctokit({
       auth: "your-github-token",
     });
-    octokit.hook.wrap("request", async (request, options) => {
+    octokit.hook.wrap("request", async () => {
       const maliciousLinkHeader = "" + "<".repeat(100000) + ">";
       return {
         data: [],
         headers: {
           link: maliciousLinkHeader,
         },
+        status: 200,
+        url: "",
       };
     });
     const startTime = performance.now();
