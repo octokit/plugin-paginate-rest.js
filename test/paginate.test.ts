@@ -9,6 +9,44 @@ const ORG2 = { id: 2 };
 
 const TestOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
 describe("pagination", () => {
+  it("Test ReDoS - attack string", async () => {
+    const ReDosOctokit = Octokit.plugin(paginateRest);
+    const octokit = new ReDosOctokit({
+      auth: "your-github-token",
+    });
+    octokit.hook.wrap("request", async () => {
+      const maliciousLinkHeader = "" + "<".repeat(100000) + ">";
+      return {
+        data: [],
+        headers: {
+          link: maliciousLinkHeader,
+        },
+        status: 200,
+        url: "",
+      };
+    });
+    const startTime = performance.now();
+    try {
+      for await (const normalizedResponse of octokit.paginate.iterator(
+        "GET /repos/{owner}/{repo}/issues",
+        { owner: "DayShift", repo: "ReDos", per_page: 100 },
+      )) {
+        normalizedResponse;
+      }
+    } catch (error) {
+      // pass
+    }
+    const endTime = performance.now();
+    const elapsedTime = endTime - startTime;
+    const reDosThreshold = 2000;
+
+    expect(elapsedTime).toBeLessThanOrEqual(reDosThreshold);
+    if (elapsedTime > reDosThreshold) {
+      console.warn(
+        `🚨 Potential ReDoS Attack! getDuration method took ${elapsedTime.toFixed(2)} ms, exceeding threshold of ${reDosThreshold} ms.`,
+      );
+    }
+  });
   it(".paginate()", async () => {
     const mock = fetchMock
       .sandbox()
