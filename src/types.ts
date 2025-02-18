@@ -28,7 +28,10 @@ import type { PaginatingEndpoints } from "./generated/paginating-endpoints.js";
 //     : never
 //   : never;
 
-type PaginationMetadataKeys = "repository_selection" | "total_count" | "incomplete_results";
+type PaginationMetadataKeys =
+  | "repository_selection"
+  | "total_count"
+  | "incomplete_results";
 
 // https://stackoverflow.com/a/58980331/206879
 type KnownKeys<T> = Extract<
@@ -38,10 +41,7 @@ type KnownKeys<T> = Extract<
     ? U
     : never,
   // Exclude keys that are known to not contain the data
-  Exclude<
-    keyof T,
-    PaginationMetadataKeys
-  >
+  Exclude<keyof T, PaginationMetadataKeys>
 >;
 type KeysMatching<T, V> = {
   [K in keyof T]: T[K] extends V ? K : never;
@@ -60,13 +60,7 @@ type GetResultsType<T> = T extends { data: any[] }
 type GetPaginationKeys<T> = T extends { data: any[] }
   ? {}
   : T extends { data: object }
-    ? Pick<
-        T["data"],
-        Extract<
-          keyof T["data"],
-          PaginationMetadataKeys
-        >
-      >
+    ? Pick<T["data"], Extract<keyof T["data"], PaginationMetadataKeys>>
     : never;
 
 // Ensure that the type always returns the paginated results and not a mix of paginated results and the response object

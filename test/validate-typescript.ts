@@ -197,9 +197,12 @@ export async function requestMethodWithNamespacedResponse() {
 
 // https://github.com/octokit/plugin-paginate-rest.js/issues/661
 // Ensure the endpoints that return an array don't have an extra `OctokitResponse` in the data
-type Package = PaginatingEndpoints["GET /orgs/{org}/packages/{package_type}/{package_name}/versions"]["response"]["data"][0];
+type Package =
+  PaginatingEndpoints["GET /orgs/{org}/packages/{package_type}/{package_name}/versions"]["response"]["data"][0];
 export async function requestWithArrayResponse() {
-  const results = await octokit.paginate("GET /orgs/{org}/packages/{package_type}/{package_name}/versions");
+  const results = await octokit.paginate(
+    "GET /orgs/{org}/packages/{package_type}/{package_name}/versions",
+  );
   for (const result of results) {
     const pkg: Package = result;
     console.log(pkg.name);
