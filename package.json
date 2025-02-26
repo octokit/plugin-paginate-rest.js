@@ -81,7 +81,8 @@
       },
       {
         "name": "cjs",
-        "channel": "cjs"
+        "channel": "cjs",
+        "prerelease": true
       }
     ],
     "plugins": [
