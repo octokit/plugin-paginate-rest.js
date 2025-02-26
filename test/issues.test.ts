@@ -1,3 +1,4 @@
+import { describe, it, test, expect } from "vitest";
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
@@ -7,7 +8,7 @@ import { paginateRest } from "../src/index.ts";
 describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
   it("octokit.paginate('GET /projects/columns/{column}/cards', { column })", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/projects/columns/123/cards", {
         body: [{ id: 123 }],
       });
@@ -15,7 +16,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
     const TestOctokit = Octokit.plugin(paginateRest);
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -31,7 +32,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
 
   it("octokit.paginate(octokit.projects.listCards, { column })", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/projects/columns/123/cards", {
         body: [{ id: 123 }],
       });
@@ -39,7 +40,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
     const TestOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -54,7 +55,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/46", () => {
 describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => {
   test("handle 204 response for `GET /repos/{owner}/{repo}/contributors` if repository is empty", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/repos/owner/empty-repo/contributors", {
         status: 204,
       });
@@ -62,7 +63,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => 
     const TestOctokit = Octokit.plugin(paginateRest);
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -79,7 +80,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => 
 
   test("handle 409 response for `GET /repos/{owner}/{repo}/commits` if repository is empty", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/repos/owner/empty-repo/commits", {
         status: 409,
         body: {
@@ -92,7 +93,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => 
     const TestOctokit = Octokit.plugin(paginateRest);
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 

@@ -23,9 +23,7 @@ export function paginate(
   return gather(
     octokit,
     [],
-    iterator(octokit, route, parameters)[
-      Symbol.asyncIterator
-    ]() as AsyncIterableIterator<any>,
+    iterator(octokit, route, parameters)[Symbol.asyncIterator](),
     mapFn,
   );
 }
@@ -33,7 +31,7 @@ export function paginate(
 function gather(
   octokit: Octokit,
   results: PaginationResults,
-  iterator: AsyncIterableIterator<any>,
+  iterator: AsyncIterator<any>,
   mapFn?: MapFunction,
 ): Promise<PaginationResults> {
   return iterator.next().then((result) => {

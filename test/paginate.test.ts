@@ -1,3 +1,4 @@
+import { describe, it, expect } from "vitest";
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 import { restEndpointMethods } from "@octokit/plugin-rest-endpoint-methods";
@@ -9,9 +10,45 @@ const ORG2 = { id: 2 };
 
 const TestOctokit = Octokit.plugin(paginateRest, restEndpointMethods);
 describe("pagination", () => {
+  it("Test ReDoS - attack string", async () => {
+    const ReDosOctokit = Octokit.plugin(paginateRest);
+    const octokit = new ReDosOctokit({
+      auth: "your-github-token",
+    });
+    octokit.hook.wrap("request", async (request, options) => {
+      const maliciousLinkHeader = "" + "<".repeat(100000) + ">";
+      return {
+        data: [],
+        headers: {
+          link: maliciousLinkHeader,
+        },
+      };
+    });
+    const startTime = performance.now();
+    try {
+      for await (const normalizedResponse of octokit.paginate.iterator(
+        "GET /repos/{owner}/{repo}/issues",
+        { owner: "DayShift", repo: "ReDos", per_page: 100 },
+      )) {
+      }
+    } catch (error) {
+      // pass
+    }
+    const endTime = performance.now();
+    const elapsedTime = endTime - startTime;
+    const reDosThreshold = 2000;
+
+    expect(elapsedTime).toBeLessThanOrEqual(reDosThreshold);
+    if (elapsedTime > reDosThreshold) {
+      console.warn(
+        `🚨 Potential ReDoS Attack! getDuration method took ${elapsedTime.toFixed(2)} ms, exceeding threshold of ${reDosThreshold} ms.`,
+      );
+    }
+  });
+
   it(".paginate()", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -26,7 +63,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -62,7 +99,7 @@ describe("pagination", () => {
 
   it(".paginate(request)", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
@@ -77,7 +114,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -87,7 +124,7 @@ describe("pagination", () => {
 
   it(".paginate(request, options)", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -105,7 +142,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -121,7 +158,7 @@ describe("pagination", () => {
 
   it(".paginate(request, options, mapFunction)", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -139,7 +176,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -156,7 +193,7 @@ describe("pagination", () => {
 
   it(".paginate() with map function returning undefined", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -171,7 +208,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -188,7 +225,7 @@ describe("pagination", () => {
 
   it(".paginate() with early exit", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -203,7 +240,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -223,7 +260,7 @@ describe("pagination", () => {
 
   it(".paginate() with Link header pointing to different path", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [{ id: 1 }],
         headers: {
@@ -238,7 +275,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -251,7 +288,7 @@ describe("pagination", () => {
 
   it("autopagination", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [{ id: 1 }],
         headers: {
@@ -266,7 +303,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -293,13 +330,15 @@ describe("pagination", () => {
   });
 
   it(".paginate.iterator for endpoints that don’t paginate", () => {
-    const mock = fetchMock.sandbox().get("https://api.github.com/orgs/myorg", {
-      body: ORG1,
-    });
+    const mock = fetchMock
+      .createInstance()
+      .get("https://api.github.com/orgs/myorg", {
+        body: ORG1,
+      });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -318,7 +357,7 @@ describe("pagination", () => {
 
   it("paginate.iterator(route)", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
@@ -333,7 +372,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -355,7 +394,7 @@ describe("pagination", () => {
 
   it("paginate.iterator(route, parameters)", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
         body: [ORG1],
         headers: {
@@ -370,7 +409,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -395,7 +434,7 @@ describe("pagination", () => {
 
   it("paginate.iterator(options)", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
@@ -410,7 +449,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -435,7 +474,7 @@ describe("pagination", () => {
 
   it("paginate.iterator(request)", () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .getOnce("https://api.github.com/organizations", {
         body: [ORG1],
         headers: {
@@ -450,7 +489,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -494,7 +533,7 @@ describe("pagination", () => {
       "repo:web-platform-tests/wpt is:pr is:open updated:>2019-02-26",
     );
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(`https://api.github.com/search/issues?q=${query}&per_page=1`, {
         body: result1,
         headers: {
@@ -515,7 +554,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -554,7 +593,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(`https://api.github.com/installation/repositories?per_page=1`, {
         body: result1,
         headers: {
@@ -575,7 +614,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -613,7 +652,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(`https://api.github.com/user/installations?per_page=1`, {
         body: result1,
         headers: {
@@ -631,7 +670,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -669,7 +708,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs/123/artifacts?per_page=1`,
         {
@@ -693,7 +732,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -734,7 +773,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/secrets?per_page=1`,
         {
@@ -758,7 +797,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -795,7 +834,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/workflows?per_page=1`,
         {
@@ -819,7 +858,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -858,7 +897,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs/123/jobs?per_page=1`,
         {
@@ -882,7 +921,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -919,7 +958,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/workflows/123/runs?per_page=1`,
         {
@@ -943,7 +982,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -983,7 +1022,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1`,
         {
@@ -1007,7 +1046,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -1038,14 +1077,14 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(`https://api.github.com/installation/repositories?per_page=1`, {
         body: result,
       });
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -1071,7 +1110,7 @@ describe("pagination", () => {
       sha: "sha123",
     };
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         "https://api.github.com/repos/octokit/rest.js/commits/abc4567/status",
         {
@@ -1081,7 +1120,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -1118,7 +1157,7 @@ describe("pagination", () => {
     };
 
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get(
         `https://api.github.com/repos/octocat/hello-world/actions/runs?per_page=1`,
         {
@@ -1142,7 +1181,7 @@ describe("pagination", () => {
 
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 
@@ -1164,7 +1203,7 @@ describe("pagination", () => {
 
   it("404 error", async () => {
     const mock = fetchMock
-      .sandbox()
+      .createInstance()
       .get("https://api.github.com/repos/owner/non-existing-repo/issues", {
         status: 404,
         body: {
@@ -1177,7 +1216,7 @@ describe("pagination", () => {
     const TestOctokit = Octokit.plugin(paginateRest);
     const octokit = new TestOctokit({
       request: {
-        fetch: mock,
+        fetch: mock.fetchHandler,
       },
     });
 

@@ -1,3 +1,4 @@
+import { test, expect } from "vitest";
 import fetchMock from "fetch-mock";
 import { Octokit } from "@octokit/core";
 
@@ -8,7 +9,7 @@ const ORG2 = { id: 2 };
 
 test("composePaginateRest(octokit, route)", async () => {
   const mock = fetchMock
-    .sandbox()
+    .createInstance()
     .get("https://api.github.com/orgs/octokit/repos?per_page=1", {
       body: [ORG1],
       headers: {
@@ -23,7 +24,7 @@ test("composePaginateRest(octokit, route)", async () => {
 
   const octokit = new Octokit({
     request: {
-      fetch: mock,
+      fetch: mock.fetchHandler,
     },
   });
 
@@ -40,7 +41,7 @@ test("composePaginateRest(octokit, route)", async () => {
 
 test("composePaginateRest.iterator(octokit, route)", () => {
   const mock = fetchMock
-    .sandbox()
+    .createInstance()
     .getOnce("https://api.github.com/organizations", {
       body: [ORG1],
       headers: {
@@ -55,7 +56,7 @@ test("composePaginateRest.iterator(octokit, route)", () => {
 
   const octokit = new Octokit({
     request: {
-      fetch: mock,
+      fetch: mock.fetchHandler,
     },
   });
 

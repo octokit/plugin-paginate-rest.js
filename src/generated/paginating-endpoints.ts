@@ -58,11 +58,19 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-enterprise-members
+   * @see https://docs.github.com/rest/code-security/configurations#get-code-security-configurations-for-an-enterprise
    */
-  "GET /enterprises/{enterprise}/copilot/usage": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/copilot/usage"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/copilot/usage"]["response"];
+  "GET /enterprises/{enterprise}/code-security/configurations": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/code-security/configurations"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/code-security/configurations"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/code-security/configurations#get-repositories-associated-with-an-enterprise-code-security-configuration
+   */
+  "GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories"]["response"];
   };
 
   /**
@@ -240,6 +248,36 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/actions/self-hosted-runner-groups#list-self-hosted-runner-groups-for-an-organization
+   */
+  "GET /orgs/{org}/actions/runner-groups": {
+    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"]["data"]["runner_groups"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/self-hosted-runner-groups#list-repository-access-to-a-self-hosted-runner-group-in-an-organization
+   */
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories": {
+    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/self-hosted-runner-groups#list-self-hosted-runners-in-a-group-for-an-organization
+   */
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners": {
+    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners"]["response"]["data"]["runners"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/actions/self-hosted-runners#list-self-hosted-runners-for-an-organization
    */
   "GET /orgs/{org}/actions/runners": {
@@ -290,6 +328,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-attestations
+   */
+  "GET /orgs/{org}/attestations/{subject_digest}": {
+    parameters: Endpoints["GET /orgs/{org}/attestations/{subject_digest}"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/attestations/{subject_digest}"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/attestations/{subject_digest}"]["response"]["data"]["attestations"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/orgs/blocking#list-users-blocked-by-an-organization
    */
   "GET /orgs/{org}/blocks": {
@@ -303,6 +351,22 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/code-scanning/alerts": {
     parameters: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["parameters"];
     response: Endpoints["GET /orgs/{org}/code-scanning/alerts"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/code-security/configurations#get-code-security-configurations-for-an-organization
+   */
+  "GET /orgs/{org}/code-security/configurations": {
+    parameters: Endpoints["GET /orgs/{org}/code-security/configurations"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/code-security/configurations"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/code-security/configurations#get-repositories-associated-with-a-code-security-configuration
+   */
+  "GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories": {
+    parameters: Endpoints["GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories"]["response"];
   };
 
   /**
@@ -343,6 +407,14 @@ export interface PaginatingEndpoints {
     response: Endpoints["GET /orgs/{org}/copilot/billing/seats"]["response"] & {
       data: Endpoints["GET /orgs/{org}/copilot/billing/seats"]["response"]["data"]["seats"];
     };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/copilot/copilot-metrics#get-copilot-metrics-for-an-organization
+   */
+  "GET /orgs/{org}/copilot/metrics": {
+    parameters: Endpoints["GET /orgs/{org}/copilot/metrics"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/copilot/metrics"]["response"];
   };
 
   /**
@@ -411,6 +483,30 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/hooks/{hook_id}/deliveries": {
     parameters: Endpoints["GET /orgs/{org}/hooks/{hook_id}/deliveries"]["parameters"];
     response: Endpoints["GET /orgs/{org}/hooks/{hook_id}/deliveries"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/api-insights#get-route-stats-by-actor
+   */
+  "GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}": {
+    parameters: Endpoints["GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/api-insights#get-subject-stats
+   */
+  "GET /orgs/{org}/insights/api/subject-stats": {
+    parameters: Endpoints["GET /orgs/{org}/insights/api/subject-stats"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/insights/api/subject-stats"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/api-insights#get-user-stats
+   */
+  "GET /orgs/{org}/insights/api/user-stats/{user_id}": {
+    parameters: Endpoints["GET /orgs/{org}/insights/api/user-stats/{user_id}"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/insights/api/user-stats/{user_id}"]["response"];
   };
 
   /**
@@ -554,6 +650,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/private-registries/organization-configurations#list-private-registries-for-an-organization
+   */
+  "GET /orgs/{org}/private-registries": {
+    parameters: Endpoints["GET /orgs/{org}/private-registries"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/private-registries"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/private-registries"]["response"]["data"]["configurations"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/projects/projects#list-organization-projects
    */
   "GET /orgs/{org}/projects": {
@@ -615,6 +721,14 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/security-advisories": {
     parameters: Endpoints["GET /orgs/{org}/security-advisories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/security-advisories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/copilot/copilot-metrics#get-copilot-metrics-for-a-team
+   */
+  "GET /orgs/{org}/team/{team_slug}/copilot/metrics": {
+    parameters: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/metrics"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/metrics"]["response"];
   };
 
   /**
@@ -873,6 +987,16 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/assignees": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/assignees"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/assignees"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/repos/repos#list-attestations
+   */
+  "GET /repos/{owner}/{repo}/attestations/{subject_digest}": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/attestations/{subject_digest}"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/attestations/{subject_digest}"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/attestations/{subject_digest}"]["response"]["data"]["attestations"];
+    };
   };
 
   /**
@@ -1235,6 +1359,14 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/reactions"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/reactions"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/issues/sub-issues#list-sub-issues
+   */
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues"]["response"];
   };
 
   /**
@@ -1862,6 +1994,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/users/attestations#list-attestations
+   */
+  "GET /users/{username}/attestations/{subject_digest}": {
+    parameters: Endpoints["GET /users/{username}/attestations/{subject_digest}"]["parameters"];
+    response: Endpoints["GET /users/{username}/attestations/{subject_digest}"]["response"] & {
+      data: Endpoints["GET /users/{username}/attestations/{subject_digest}"]["response"]["data"]["attestations"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/activity/events#list-events-for-the-authenticated-user
    */
   "GET /users/{username}/events": {
@@ -2014,7 +2156,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /assignments/{assignment_id}/accepted_assignments",
   "GET /classrooms",
   "GET /classrooms/{classroom_id}/assignments",
-  "GET /enterprises/{enterprise}/copilot/usage",
+  "GET /enterprises/{enterprise}/code-security/configurations",
+  "GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories",
   "GET /enterprises/{enterprise}/dependabot/alerts",
   "GET /enterprises/{enterprise}/secret-scanning/alerts",
   "GET /events",
@@ -2036,17 +2179,24 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /organizations",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/permissions/repositories",
+  "GET /orgs/{org}/actions/runner-groups",
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
   "GET /orgs/{org}/actions/runners",
   "GET /orgs/{org}/actions/secrets",
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/actions/variables",
   "GET /orgs/{org}/actions/variables/{name}/repositories",
+  "GET /orgs/{org}/attestations/{subject_digest}",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/code-scanning/alerts",
+  "GET /orgs/{org}/code-security/configurations",
+  "GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories",
   "GET /orgs/{org}/codespaces",
   "GET /orgs/{org}/codespaces/secrets",
   "GET /orgs/{org}/codespaces/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/copilot/billing/seats",
+  "GET /orgs/{org}/copilot/metrics",
   "GET /orgs/{org}/copilot/usage",
   "GET /orgs/{org}/dependabot/alerts",
   "GET /orgs/{org}/dependabot/secrets",
@@ -2055,6 +2205,9 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/failed_invitations",
   "GET /orgs/{org}/hooks",
   "GET /orgs/{org}/hooks/{hook_id}/deliveries",
+  "GET /orgs/{org}/insights/api/route-stats/{actor_type}/{actor_id}",
+  "GET /orgs/{org}/insights/api/subject-stats",
+  "GET /orgs/{org}/insights/api/user-stats/{user_id}",
   "GET /orgs/{org}/installations",
   "GET /orgs/{org}/invitations",
   "GET /orgs/{org}/invitations/{invitation_id}/teams",
@@ -2072,6 +2225,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/personal-access-token-requests/{pat_request_id}/repositories",
   "GET /orgs/{org}/personal-access-tokens",
   "GET /orgs/{org}/personal-access-tokens/{pat_id}/repositories",
+  "GET /orgs/{org}/private-registries",
   "GET /orgs/{org}/projects",
   "GET /orgs/{org}/properties/values",
   "GET /orgs/{org}/public_members",
@@ -2080,6 +2234,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/rulesets/rule-suites",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/security-advisories",
+  "GET /orgs/{org}/team/{team_slug}/copilot/metrics",
   "GET /orgs/{org}/team/{team_slug}/copilot/usage",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
@@ -2109,6 +2264,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs",
   "GET /repos/{owner}/{repo}/activity",
   "GET /repos/{owner}/{repo}/assignees",
+  "GET /repos/{owner}/{repo}/attestations/{subject_digest}",
   "GET /repos/{owner}/{repo}/branches",
   "GET /repos/{owner}/{repo}/check-runs/{check_run_id}/annotations",
   "GET /repos/{owner}/{repo}/check-suites/{check_suite_id}/check-runs",
@@ -2151,6 +2307,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/issues/{issue_number}/events",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/labels",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions",
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
   "GET /repos/{owner}/{repo}/keys",
   "GET /repos/{owner}/{repo}/labels",
@@ -2226,6 +2383,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/subscriptions",
   "GET /user/teams",
   "GET /users",
+  "GET /users/{username}/attestations/{subject_digest}",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",
   "GET /users/{username}/events/public",
