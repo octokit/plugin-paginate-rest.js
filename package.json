@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@octokit/core": "^5.1.0",
-    "@octokit/plugin-rest-endpoint-methods": "13.2.2",
+    "@octokit/plugin-rest-endpoint-methods": "13.3.2-cjs.1",
     "@octokit/tsconfig": "^2.0.0",
     "@types/jest": "^29.0.0",
     "@types/node": "^20.0.0",
