@@ -238,6 +238,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/actions/hosted-runners#list-github-hosted-runners-for-an-organization
+   */
+  "GET /orgs/{org}/actions/hosted-runners": {
+    parameters: Endpoints["GET /orgs/{org}/actions/hosted-runners"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/hosted-runners"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/hosted-runners"]["response"]["data"]["runners"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/actions/permissions#list-selected-repositories-enabled-for-github-actions-in-an-organization
    */
   "GET /orgs/{org}/actions/permissions/repositories": {
@@ -254,6 +264,16 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/actions/runner-groups"]["parameters"];
     response: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/runner-groups"]["response"]["data"]["runner_groups"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/self-hosted-runner-groups#list-github-hosted-runners-in-a-group-for-an-organization
+   */
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners": {
+    parameters: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners"]["response"]["data"]["runners"];
     };
   };
 
@@ -708,6 +728,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/orgs/rules#get-organization-ruleset-history
+   */
+  "GET /orgs/{org}/rulesets/{ruleset_id}/history": {
+    parameters: Endpoints["GET /orgs/{org}/rulesets/{ruleset_id}/history"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/rulesets/{ruleset_id}/history"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-an-organization
    */
   "GET /orgs/{org}/secret-scanning/alerts": {
@@ -721,6 +749,16 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/security-advisories": {
     parameters: Endpoints["GET /orgs/{org}/security-advisories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/security-advisories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/network-configurations#list-hosted-compute-network-configurations-for-an-organization
+   */
+  "GET /orgs/{org}/settings/network-configurations": {
+    parameters: Endpoints["GET /orgs/{org}/settings/network-configurations"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/settings/network-configurations"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/settings/network-configurations"]["response"]["data"]["network_configurations"];
+    };
   };
 
   /**
@@ -1546,6 +1584,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/repos/rules#get-repository-ruleset-history
+   */
+  "GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-a-repository
    */
   "GET /repos/{owner}/{repo}/secret-scanning/alerts": {
@@ -2178,8 +2224,10 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /notifications",
   "GET /organizations",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
+  "GET /orgs/{org}/actions/hosted-runners",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/runner-groups",
+  "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/runners",
   "GET /orgs/{org}/actions/runners",
@@ -2232,8 +2280,10 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/repos",
   "GET /orgs/{org}/rulesets",
   "GET /orgs/{org}/rulesets/rule-suites",
+  "GET /orgs/{org}/rulesets/{ruleset_id}/history",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/security-advisories",
+  "GET /orgs/{org}/settings/network-configurations",
   "GET /orgs/{org}/team/{team_slug}/copilot/metrics",
   "GET /orgs/{org}/team/{team_slug}/copilot/usage",
   "GET /orgs/{org}/teams",
@@ -2330,6 +2380,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/rules/branches/{branch}",
   "GET /repos/{owner}/{repo}/rulesets",
   "GET /repos/{owner}/{repo}/rulesets/rule-suites",
+  "GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations",
   "GET /repos/{owner}/{repo}/security-advisories",
