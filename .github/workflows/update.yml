@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: npm
-          node-version: 16
+          node-version: lts/*
       - run: git checkout routes-update || true
       - run: npm install @octokit/types@latest
         if: >-
