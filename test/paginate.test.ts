@@ -23,7 +23,7 @@ describe("pagination", () => {
           link: maliciousLinkHeader,
         },
         status: 200,
-        url: ''
+        url: "",
       };
     });
     const startTime = performance.now();
