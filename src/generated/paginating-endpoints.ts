@@ -366,6 +366,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/campaigns/campaigns#list-campaigns-for-an-organization
+   */
+  "GET /orgs/{org}/campaigns": {
+    parameters: Endpoints["GET /orgs/{org}/campaigns"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/campaigns"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/code-scanning/code-scanning#list-code-scanning-alerts-for-an-organization
    */
   "GET /orgs/{org}/code-scanning/alerts": {
@@ -435,14 +443,6 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/copilot/metrics": {
     parameters: Endpoints["GET /orgs/{org}/copilot/metrics"]["parameters"];
     response: Endpoints["GET /orgs/{org}/copilot/metrics"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-organization-members
-   */
-  "GET /orgs/{org}/copilot/usage": {
-    parameters: Endpoints["GET /orgs/{org}/copilot/usage"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/copilot/usage"]["response"];
   };
 
   /**
@@ -767,14 +767,6 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/team/{team_slug}/copilot/metrics": {
     parameters: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/metrics"]["parameters"];
     response: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/metrics"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/copilot/copilot-usage#get-a-summary-of-copilot-usage-for-a-team
-   */
-  "GET /orgs/{org}/team/{team_slug}/copilot/usage": {
-    parameters: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/usage"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/team/{team_slug}/copilot/usage"]["response"];
   };
 
   /**
@@ -2237,6 +2229,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/variables/{name}/repositories",
   "GET /orgs/{org}/attestations/{subject_digest}",
   "GET /orgs/{org}/blocks",
+  "GET /orgs/{org}/campaigns",
   "GET /orgs/{org}/code-scanning/alerts",
   "GET /orgs/{org}/code-security/configurations",
   "GET /orgs/{org}/code-security/configurations/{configuration_id}/repositories",
@@ -2245,7 +2238,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/codespaces/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/copilot/billing/seats",
   "GET /orgs/{org}/copilot/metrics",
-  "GET /orgs/{org}/copilot/usage",
   "GET /orgs/{org}/dependabot/alerts",
   "GET /orgs/{org}/dependabot/secrets",
   "GET /orgs/{org}/dependabot/secrets/{secret_name}/repositories",
@@ -2285,7 +2277,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/security-advisories",
   "GET /orgs/{org}/settings/network-configurations",
   "GET /orgs/{org}/team/{team_slug}/copilot/metrics",
-  "GET /orgs/{org}/team/{team_slug}/copilot/usage",
   "GET /orgs/{org}/teams",
   "GET /orgs/{org}/teams/{team_slug}/discussions",
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/comments",
