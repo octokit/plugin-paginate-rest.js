@@ -31,6 +31,7 @@ import type { PaginatingEndpoints } from "./generated/paginating-endpoints.js";
 type PaginationMetadataKeys =
   | "repository_selection"
   | "total_count"
+  | "total_commits"
   | "incomplete_results";
 
 // https://stackoverflow.com/a/58980331/206879

@@ -28,7 +28,7 @@ export function normalizePaginatedListResponse(
     };
   }
   const responseNeedsNormalization =
-    "total_count" in response.data && !("url" in response.data);
+      ("total_count" in response.data && !("url" in response.data)) || "total_commits" in response.data;
   if (!responseNeedsNormalization) return response;
 
   // keep the additional properties intact as there is currently no other way
@@ -36,9 +36,11 @@ export function normalizePaginatedListResponse(
   const incompleteResults = response.data.incomplete_results;
   const repositorySelection = response.data.repository_selection;
   const totalCount = response.data.total_count;
+  const totalCommits = response.data.total_commits;
   delete response.data.incomplete_results;
   delete response.data.repository_selection;
   delete response.data.total_count;
+  delete response.data.total_commits;
 
   const namespaceKey = Object.keys(response.data)[0];
   const data = response.data[namespaceKey];
@@ -53,5 +55,6 @@ export function normalizePaginatedListResponse(
   }
 
   response.data.total_count = totalCount;
+  response.data.total_commits = totalCommits;
   return response;
 }

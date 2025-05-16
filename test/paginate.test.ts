@@ -998,6 +998,63 @@ describe("pagination", () => {
         ]);
       });
   });
+
+  it(".paginate() with results namespace (GET /repos/{owner}/{repo}/compare/{basehead})", () => {
+    const result1 = {
+      total_commits: 2,
+      commits: [
+        {
+          sha: "f3b573e4d60a079d154018d2e2d04aff4d26fc41",
+        },
+      ],
+    };
+    const result2 = {
+      total_commits: 2,
+      commits: [
+        {
+          sha: "a740e83052aea45a4cbcdf2954a3a9e47b5d530d",
+        },
+      ],
+    };
+
+    const mock = fetchMock
+      .createInstance()
+      .get(
+        'https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1',
+        {
+          body: result1,
+        },
+      )
+      .get(
+          'https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1&page=2',
+        {
+          body: result2,
+        },
+      );
+
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock.fetchHandler,
+      },
+    });
+
+    return octokit
+      .paginate({
+        method: "GET",
+        url: "/repos/{owner}/{repo}/compare/{basehead}",
+        owner: "octocat",
+        repo: "hello-world",
+        basehead: "1.0.0...1.0.1",
+        per_page: 1,
+      })
+      .then((results) => {
+        expect(results).toEqual([
+          ...result1.commits,
+          ...result2.commits,
+        ]);
+      });
+  });
+
   it(".paginate() with results namespace (GET /repos/{owner}/{repo}/actions/runs)", () => {
     const result1 = {
       total_count: 2,

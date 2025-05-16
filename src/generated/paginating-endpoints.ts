@@ -1196,6 +1196,26 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/commits/commits#compare-two-commits
+   */
+  "GET /repos/{owner}/{repo}/compare/{basehead}": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/compare/{basehead}"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/compare/{basehead}"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/compare/{basehead}"]["response"]["data"]["commits"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/reference/repos#compare-two-commits
+   */
+  "GET /repos/{owner}/{repo}/compare/{base}...{head}": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/compare/{base}...{head}"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/compare/{base}...{head}"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/compare/{base}...{head}"]["response"]["data"]["commits"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/repos/repos#list-repository-contributors
    */
   "GET /repos/{owner}/{repo}/contributors": {
@@ -2325,6 +2345,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/commits/{ref}/check-suites",
   "GET /repos/{owner}/{repo}/commits/{ref}/status",
   "GET /repos/{owner}/{repo}/commits/{ref}/statuses",
+  "GET /repos/{owner}/{repo}/compare/{basehead}",
+  "GET /repos/{owner}/{repo}/compare/{base}...{head}",
   "GET /repos/{owner}/{repo}/contributors",
   "GET /repos/{owner}/{repo}/dependabot/alerts",
   "GET /repos/{owner}/{repo}/dependabot/secrets",
