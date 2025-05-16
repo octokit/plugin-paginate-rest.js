@@ -28,11 +28,6 @@ const ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY = [
   // Only the `files` key inside the commit is paginated. The rest is duplicated across
   // all pages. Handling this case properly requires custom code.
   { scope: "repos", id: "get-commit" },
-  // The [docs](https://docs.github.com/en/rest/commits/commits#compare-two-commits) make
-  // these ones sound like a special case too - they must be because they support pagination
-  // but doesn't return an array.
-  { scope: "repos", id: "compare-commits" },
-  { scope: "repos", id: "compare-commits-with-basehead" },
 ];
 
 const hasMatchingEndpoint = (list, id, scope) =>
