@@ -27,14 +27,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@octokit/types": "^14.0.0"
+    "@octokit/types": "^14.1.0"
   },
   "peerDependencies": {
     "@octokit/core": ">=6"
   },
   "devDependencies": {
     "@octokit/core": "^7.0.0",
-    "@octokit/plugin-rest-endpoint-methods": "^15.0.0",
+    "@octokit/plugin-rest-endpoint-methods": "^16.0.0",
     "@octokit/tsconfig": "^4.0.0",
     "@types/node": "^22.0.0",
     "@vitest/coverage-v8": "^3.0.0",
