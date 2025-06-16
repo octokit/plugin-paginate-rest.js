@@ -40,6 +40,18 @@ export function iterator(
             /<([^<>]+)>;\s*rel="next"/,
           ) || [])[1];
 
+          if (!url && "total_commits" in normalizedResponse.data) {
+            const parsedUrl = new URL(normalizedResponse.url);
+            const params = parsedUrl.searchParams;
+            const page = parseInt(params.get("page") || "1", 10);
+            /* v8 ignore next */
+            const per_page = parseInt(params.get("per_page") || "250", 10);
+            if (page * per_page < normalizedResponse.data.total_commits) {
+              params.set("page", String(page + 1));
+              url = parsedUrl.toString();
+            }
+          }
+
           return { value: normalizedResponse };
         } catch (error: any) {
           // `GET /repos/{owner}/{repo}/commits` throws a `409 Conflict` error for empty repositories

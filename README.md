@@ -183,6 +183,7 @@ Most of GitHub's paginating REST API endpoints return an array, but there are a 
 - [List check suites for a specific ref](https://developer.github.com/v3/checks/suites/#response-1) (key: `check_suites`)
 - [List repositories](https://developer.github.com/v3/apps/installations/#list-repositories) for an installation (key: `repositories`)
 - [List installations for a user](https://developer.github.com/v3/apps/installations/#response-1) (key `installations`)
+- [Compare commits](https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28#compare-two-commits) (key `commits`)
 
 `octokit.paginate()` is working around these inconsistencies so you don't have to worry about it.
 
