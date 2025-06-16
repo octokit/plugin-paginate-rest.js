@@ -63,21 +63,45 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/647", () => 
     const mock = fetchMock
       .createInstance()
       .get(
-        "https://api.github.com/repos/owner/repo/compare/base...head?per_page=2",
+        "https://api.github.com/repos/owner/repo/compare/main...feature?per_page=1",
         {
           body: {
-            commits: [{ sha: "commit1" }, { sha: "commit2" }],
+            total_commits: 3,
+            commits: [
+              {
+                sha: "abc123",
+              },
+            ],
           },
-          headers: {}, // omit link header
+          headers: {}, // missing link header
         },
       )
       .get(
-        "https://api.github.com/repos/owner/repo/compare/base...head?per_page=2&page=2",
+        "https://api.github.com/repos/owner/repo/compare/main...feature?per_page=1&page=2",
         {
           body: {
-            commits: [{ sha: "commit3" }],
+            total_commits: 3,
+            commits: [
+              {
+                sha: "def456",
+              },
+            ],
           },
-          headers: {}, // omit link header
+          headers: {},
+        },
+      )
+      .get(
+        "https://api.github.com/repos/owner/repo/compare/main...feature?per_page=1&page=3",
+        {
+          body: {
+            total_commits: 3,
+            commits: [
+              {
+                sha: "ghi789",
+              },
+            ],
+          },
+          headers: {},
         },
       );
 
@@ -88,22 +112,19 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/647", () => 
       },
     });
 
-    const allCommits = await octokit.paginate(
+    const result = await octokit.paginate(
       "GET /repos/{owner}/{repo}/compare/{basehead}",
       {
         owner: "owner",
         repo: "repo",
-        basehead: "base...head",
-        per_page: 2,
+        basehead: "main...feature",
+        per_page: 1,
       },
     );
 
-    // Should contain 3 commits despite missing link headers
-    expect(allCommits).toHaveLength(3);
-    expect(allCommits.map((c) => c.sha)).toEqual([
-      "commit1",
-      "commit2",
-      "commit3",
-    ]);
+    expect(result.length).toEqual(3);
+    expect(result[0].sha).toEqual("abc123");
+    expect(result[1].sha).toEqual("def456");
+    expect(result[2].sha).toEqual("ghi789");
   });
 });
