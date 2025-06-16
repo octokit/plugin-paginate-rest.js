@@ -77,7 +77,7 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/647", () => 
           body: {
             commits: [{ sha: "commit3" }],
           },
-          headers: {}, // omit link header  
+          headers: {}, // omit link header
         },
       );
 
