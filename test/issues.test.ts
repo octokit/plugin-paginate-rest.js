@@ -57,3 +57,53 @@ describe("https://github.com/octokit/plugin-paginate-rest.js/issues/158", () => 
     expect(result.length).toEqual(0);
   });
 });
+
+describe("https://github.com/octokit/plugin-paginate-rest.js/issues/647", () => {
+  test("paginate compareCommits when link header is missing", async () => {
+    const mock = fetchMock
+      .createInstance()
+      .get(
+        "https://api.github.com/repos/owner/repo/compare/base...head?per_page=2",
+        {
+          body: {
+            commits: [{ sha: "commit1" }, { sha: "commit2" }],
+          },
+          headers: {}, // omit link header
+        },
+      )
+      .get(
+        "https://api.github.com/repos/owner/repo/compare/base...head?per_page=2&page=2",
+        {
+          body: {
+            commits: [{ sha: "commit3" }],
+          },
+          headers: {}, // omit link header  
+        },
+      );
+
+    const TestOctokit = Octokit.plugin(paginateRest);
+    const octokit = new TestOctokit({
+      request: {
+        fetch: mock.fetchHandler,
+      },
+    });
+
+    const allCommits = await octokit.paginate(
+      "GET /repos/{owner}/{repo}/compare/{basehead}",
+      {
+        owner: "owner",
+        repo: "repo",
+        basehead: "base...head",
+        per_page: 2,
+      },
+    );
+
+    // Should contain 3 commits despite missing link headers
+    expect(allCommits).toHaveLength(3);
+    expect(allCommits.map((c) => c.sha)).toEqual([
+      "commit1",
+      "commit2",
+      "commit3",
+    ]);
+  });
+});
