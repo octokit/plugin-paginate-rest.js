@@ -43,10 +43,10 @@ export function iterator(
           if (!url && "total_commits" in normalizedResponse.data) {
             const parsedUrl = new URL(normalizedResponse.url);
             const params = parsedUrl.searchParams;
-            const page = parseInt(params.get('page') || '1', 10)
-            const per_page = parseInt(params.get('per_page') || '250', 10);
+            const page = parseInt(params.get("page") || "1", 10);
+            const per_page = parseInt(params.get("per_page") || "250", 10);
             if (page * per_page < normalizedResponse.data.total_commits) {
-              params.set('page', String(page + 1));
+              params.set("page", String(page + 1));
               url = parsedUrl.toString();
             }
           }

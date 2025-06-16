@@ -28,7 +28,8 @@ export function normalizePaginatedListResponse(
     };
   }
   const responseNeedsNormalization =
-      ("total_count" in response.data && !("url" in response.data)) || "total_commits" in response.data;
+    ("total_count" in response.data && !("url" in response.data)) ||
+    "total_commits" in response.data;
   if (!responseNeedsNormalization) return response;
 
   // keep the additional properties intact as there is currently no other way

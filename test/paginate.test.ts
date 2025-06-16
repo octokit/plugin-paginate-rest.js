@@ -1020,13 +1020,13 @@ describe("pagination", () => {
     const mock = fetchMock
       .createInstance()
       .get(
-        'https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1',
+        "https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1",
         {
           body: result1,
         },
       )
       .get(
-          'https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1&page=2',
+        "https://api.github.com/repos/octocat/hello-world/compare/1.0.0...1.0.1?per_page=1&page=2",
         {
           body: result2,
         },
@@ -1048,10 +1048,7 @@ describe("pagination", () => {
         per_page: 1,
       })
       .then((results) => {
-        expect(results).toEqual([
-          ...result1.commits,
-          ...result2.commits,
-        ]);
+        expect(results).toEqual([...result1.commits, ...result2.commits]);
       });
   });
 
