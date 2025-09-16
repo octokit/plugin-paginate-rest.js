@@ -228,6 +228,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/dependabot/repository-access#lists-the-repositories-dependabot-can-access-in-an-organization
+   */
+  "GET /organizations/{org}/dependabot/repository-access": {
+    parameters: Endpoints["GET /organizations/{org}/dependabot/repository-access"]["parameters"];
+    response: Endpoints["GET /organizations/{org}/dependabot/repository-access"]["response"] & {
+      data: Endpoints["GET /organizations/{org}/dependabot/repository-access"]["response"]["data"]["accessible_repositories"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/actions/cache#list-repositories-with-github-actions-cache-usage-for-an-organization
    */
   "GET /orgs/{org}/actions/cache/usage-by-repository": {
@@ -254,6 +264,16 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/actions/permissions/repositories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/actions/permissions/repositories"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/permissions/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/permissions#list-repositories-allowed-to-use-self-hosted-runners-in-an-organization
+   */
+  "GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories": {
+    parameters: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["response"]["data"]["repositories"];
     };
   };
 
@@ -345,6 +365,14 @@ export interface PaginatingEndpoints {
     response: Endpoints["GET /orgs/{org}/actions/variables/{name}/repositories"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/variables/{name}/repositories"]["response"]["data"]["repositories"];
     };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-attestations-by-bulk-subject-digests
+   */
+  "GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}": {
+    parameters: Endpoints["GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}"]["response"];
   };
 
   /**
@@ -680,11 +708,35 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/projects#list-organization-projects
+   * @see https://docs.github.com/rest/projects-classic/projects#list-organization-projects
    */
   "GET /orgs/{org}/projects": {
     parameters: Endpoints["GET /orgs/{org}/projects"]["parameters"];
     response: Endpoints["GET /orgs/{org}/projects"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/projects#list-projects-for-organization
+   */
+  "GET /orgs/{org}/projectsV2": {
+    parameters: Endpoints["GET /orgs/{org}/projectsV2"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/projectsV2"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/fields#list-project-fields-for-organization
+   */
+  "GET /orgs/{org}/projectsV2/{project_number}/fields": {
+    parameters: Endpoints["GET /orgs/{org}/projectsV2/{project_number}/fields"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/projectsV2/{project_number}/fields"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/items#list-items-for-an-organization-owned-project
+   */
+  "GET /orgs/{org}/projectsV2/{project_number}/items": {
+    parameters: Endpoints["GET /orgs/{org}/projectsV2/{project_number}/items"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/projectsV2/{project_number}/items"]["response"];
   };
 
   /**
@@ -850,15 +902,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/cards#list-project-cards
-   */
-  "GET /projects/columns/{column_id}/cards": {
-    parameters: Endpoints["GET /projects/columns/{column_id}/cards"]["parameters"];
-    response: Endpoints["GET /projects/columns/{column_id}/cards"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/projects/collaborators#list-project-collaborators
+   * @see https://docs.github.com/rest/projects-classic/collaborators#list-project-collaborators
    */
   "GET /projects/{project_id}/collaborators": {
     parameters: Endpoints["GET /projects/{project_id}/collaborators"]["parameters"];
@@ -866,7 +910,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/columns#list-project-columns
+   * @see https://docs.github.com/rest/projects-classic/columns#list-project-columns
    */
   "GET /projects/{project_id}/columns": {
     parameters: Endpoints["GET /projects/{project_id}/columns"]["parameters"];
@@ -1388,6 +1432,22 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/issues/issue-dependencies#list-dependencies-an-issue-is-blocked-by
+   */
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/issues/issue-dependencies#list-dependencies-an-issue-is-blocking
+   */
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/issues/events#list-issue-events
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/events": {
@@ -1476,7 +1536,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/projects#list-repository-projects
+   * @see https://docs.github.com/rest/projects-classic/projects#list-repository-projects
    */
   "GET /repos/{owner}/{repo}/projects": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/projects"]["parameters"];
@@ -2052,6 +2112,30 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/projects/fields#list-project-fields-for-user
+   */
+  "GET /users/{user_id}/projectsV2/{project_number}/fields": {
+    parameters: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/fields"]["parameters"];
+    response: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/fields"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/items#list-items-for-a-user-owned-project
+   */
+  "GET /users/{user_id}/projectsV2/{project_number}/items": {
+    parameters: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/items"]["parameters"];
+    response: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/items"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/users/attestations#list-attestations-by-bulk-subject-digests
+   */
+  "GET /users/{username}/attestations/bulk-list{?per_page,before,after}": {
+    parameters: Endpoints["GET /users/{username}/attestations/bulk-list{?per_page,before,after}"]["parameters"];
+    response: Endpoints["GET /users/{username}/attestations/bulk-list{?per_page,before,after}"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/users/attestations#list-attestations
    */
   "GET /users/{username}/attestations/{subject_digest}": {
@@ -2142,11 +2226,19 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/projects#list-user-projects
+   * @see https://docs.github.com/rest/projects-classic/projects#list-user-projects
    */
   "GET /users/{username}/projects": {
     parameters: Endpoints["GET /users/{username}/projects"]["parameters"];
     response: Endpoints["GET /users/{username}/projects"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/projects#list-projects-for-user
+   */
+  "GET /users/{username}/projectsV2": {
+    parameters: Endpoints["GET /users/{username}/projectsV2"]["parameters"];
+    response: Endpoints["GET /users/{username}/projectsV2"]["response"];
   };
 
   /**
@@ -2235,9 +2327,11 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /networks/{owner}/{repo}/events",
   "GET /notifications",
   "GET /organizations",
+  "GET /organizations/{org}/dependabot/repository-access",
   "GET /orgs/{org}/actions/cache/usage-by-repository",
   "GET /orgs/{org}/actions/hosted-runners",
   "GET /orgs/{org}/actions/permissions/repositories",
+  "GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories",
   "GET /orgs/{org}/actions/runner-groups",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
@@ -2247,6 +2341,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/actions/variables",
   "GET /orgs/{org}/actions/variables/{name}/repositories",
+  "GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}",
   "GET /orgs/{org}/attestations/{subject_digest}",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/campaigns",
@@ -2287,6 +2382,9 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/personal-access-tokens/{pat_id}/repositories",
   "GET /orgs/{org}/private-registries",
   "GET /orgs/{org}/projects",
+  "GET /orgs/{org}/projectsV2",
+  "GET /orgs/{org}/projectsV2/{project_number}/fields",
+  "GET /orgs/{org}/projectsV2/{project_number}/items",
   "GET /orgs/{org}/properties/values",
   "GET /orgs/{org}/public_members",
   "GET /orgs/{org}/repos",
@@ -2307,7 +2405,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/teams/{team_slug}/projects",
   "GET /orgs/{org}/teams/{team_slug}/repos",
   "GET /orgs/{org}/teams/{team_slug}/teams",
-  "GET /projects/columns/{column_id}/cards",
   "GET /projects/{project_id}/collaborators",
   "GET /projects/{project_id}/columns",
   "GET /repos/{owner}/{repo}/actions/artifacts",
@@ -2367,6 +2464,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/issues/comments/{comment_id}/reactions",
   "GET /repos/{owner}/{repo}/issues/events",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/comments",
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocked_by",
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/dependencies/blocking",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/events",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/labels",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions",
@@ -2447,6 +2546,9 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/subscriptions",
   "GET /user/teams",
   "GET /users",
+  "GET /users/{user_id}/projectsV2/{project_number}/fields",
+  "GET /users/{user_id}/projectsV2/{project_number}/items",
+  "GET /users/{username}/attestations/bulk-list{?per_page,before,after}",
   "GET /users/{username}/attestations/{subject_digest}",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",
@@ -2459,6 +2561,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/orgs",
   "GET /users/{username}/packages",
   "GET /users/{username}/projects",
+  "GET /users/{username}/projectsV2",
   "GET /users/{username}/received_events",
   "GET /users/{username}/received_events/public",
   "GET /users/{username}/repos",
