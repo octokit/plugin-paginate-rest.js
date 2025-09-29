@@ -2120,14 +2120,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/users/attestations#list-attestations-by-bulk-subject-digests
-   */
-  "GET /users/{username}/attestations/bulk-list{?per_page,before,after}": {
-    parameters: Endpoints["GET /users/{username}/attestations/bulk-list{?per_page,before,after}"]["parameters"];
-    response: Endpoints["GET /users/{username}/attestations/bulk-list{?per_page,before,after}"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/users/attestations#list-attestations
    */
   "GET /users/{username}/attestations/{subject_digest}": {
@@ -2539,7 +2531,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users",
   "GET /users/{user_id}/projectsV2/{project_number}/fields",
   "GET /users/{user_id}/projectsV2/{project_number}/items",
-  "GET /users/{username}/attestations/bulk-list{?per_page,before,after}",
   "GET /users/{username}/attestations/{subject_digest}",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",

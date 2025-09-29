@@ -28,9 +28,10 @@ const ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY = [
   // Only the `files` key inside the commit is paginated. The rest is duplicated across
   // all pages. Handling this case properly requires custom code.
   { scope: "repos", id: "get-commit" },
-  // This endpoint uses `POST` instead of `GET` and requires a request body.
+  // These endpoints use `POST` instead of `GET` and requires a request body.
   // Handling this case properly requires custom code.
   { scope: "orgs", id: "list-attestations-bulk" },
+  { scope: "users", id: "list-attestations-bulk" },
 ];
 
 const hasMatchingEndpoint = (list, id, scope) =>
@@ -136,17 +137,18 @@ function endpointToKey(endpoint) {
   return `"GET ${endpoint.url}"`;
 }
 async function main() {
+  const sortedEndpoints = sortEndpoints(endpoints);
   writeFileSync(
     new URL("../../src/generated/paginating-endpoints.ts", import.meta.url),
     await prettier.format(
       `import type { Endpoints } from "@octokit/types";
 
       export interface PaginatingEndpoints {
-        ${sortEndpoints(endpoints).map(endpointToTypes).join("\n\n")}
+        ${sortedEndpoints.map(endpointToTypes).join("\n\n")}
       }
 
       export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
-        ${sortEndpoints(endpoints).map(endpointToKey).join(",\n")}
+        ${sortedEndpoints.map(endpointToKey).join(",\n")}
       ]
       `,
       {
