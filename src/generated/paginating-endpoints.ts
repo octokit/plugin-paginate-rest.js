@@ -368,14 +368,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/orgs/orgs#list-attestations-by-bulk-subject-digests
-   */
-  "GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}": {
-    parameters: Endpoints["GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/orgs/orgs#list-attestations
    */
   "GET /orgs/{org}/attestations/{subject_digest}": {
@@ -2341,7 +2333,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/actions/variables",
   "GET /orgs/{org}/actions/variables/{name}/repositories",
-  "GET /orgs/{org}/attestations/bulk-list{?per_page,before,after}",
   "GET /orgs/{org}/attestations/{subject_digest}",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/campaigns",

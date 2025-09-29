@@ -28,6 +28,9 @@ const ENDPOINTS_WITH_PER_PAGE_ATTRIBUTE_THAT_BEHAVE_DIFFERENTLY = [
   // Only the `files` key inside the commit is paginated. The rest is duplicated across
   // all pages. Handling this case properly requires custom code.
   { scope: "repos", id: "get-commit" },
+  // This endpoint uses `POST` instead of `GET` and requires a request body.
+  // Handling this case properly requires custom code.
+  { scope: "orgs", id: "list-attestations-bulk" },
 ];
 
 const hasMatchingEndpoint = (list, id, scope) =>
