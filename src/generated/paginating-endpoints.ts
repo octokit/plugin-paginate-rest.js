@@ -82,11 +82,27 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/secret-scanning/secret-scanning#list-secret-scanning-alerts-for-an-enterprise
+   * @see https://docs.github.com/rest/enterprise-teams/enterprise-teams#list-enterprise-teams
    */
-  "GET /enterprises/{enterprise}/secret-scanning/alerts": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/secret-scanning/alerts"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/secret-scanning/alerts"]["response"];
+  "GET /enterprises/{enterprise}/teams": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/teams"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/teams"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/enterprise-teams/enterprise-team-members#list-members-in-an-enterprise-team
+   */
+  "GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#get-organization-assignments
+   */
+  "GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations": {
+    parameters: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations"]["parameters"];
+    response: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations"]["response"];
   };
 
   /**
@@ -368,7 +384,15 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/orgs/orgs#list-attestations
+   * @see https://docs.github.com/rest/orgs/attestations#list-attestation-repositories
+   */
+  "GET /orgs/{org}/attestations/repositories": {
+    parameters: Endpoints["GET /orgs/{org}/attestations/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/attestations/repositories"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/orgs/attestations#list-attestations
    */
   "GET /orgs/{org}/attestations/{subject_digest}": {
     parameters: Endpoints["GET /orgs/{org}/attestations/{subject_digest}"]["parameters"];
@@ -796,6 +820,16 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/orgs/orgs#list-selected-repositories-for-immutable-releases-enforcement
+   */
+  "GET /orgs/{org}/settings/immutable-releases/repositories": {
+    parameters: Endpoints["GET /orgs/{org}/settings/immutable-releases/repositories"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/settings/immutable-releases/repositories"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/settings/immutable-releases/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
    * @see https://docs.github.com/rest/orgs/network-configurations#list-hosted-compute-network-configurations-for-an-organization
    */
   "GET /orgs/{org}/settings/network-configurations": {
@@ -899,14 +933,6 @@ export interface PaginatingEndpoints {
   "GET /projects/{project_id}/collaborators": {
     parameters: Endpoints["GET /projects/{project_id}/collaborators"]["parameters"];
     response: Endpoints["GET /projects/{project_id}/collaborators"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/projects-classic/columns#list-project-columns
-   */
-  "GET /projects/{project_id}/columns": {
-    parameters: Endpoints["GET /projects/{project_id}/columns"]["parameters"];
-    response: Endpoints["GET /projects/{project_id}/columns"]["response"];
   };
 
   /**
@@ -2104,22 +2130,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects/fields#list-project-fields-for-user
-   */
-  "GET /users/{user_id}/projectsV2/{project_number}/fields": {
-    parameters: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/fields"]["parameters"];
-    response: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/fields"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/projects/items#list-items-for-a-user-owned-project
-   */
-  "GET /users/{user_id}/projectsV2/{project_number}/items": {
-    parameters: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/items"]["parameters"];
-    response: Endpoints["GET /users/{user_id}/projectsV2/{project_number}/items"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/users/attestations#list-attestations
    */
   "GET /users/{username}/attestations/{subject_digest}": {
@@ -2226,6 +2236,22 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/projects/fields#list-project-fields-for-user
+   */
+  "GET /users/{username}/projectsV2/{project_number}/fields": {
+    parameters: Endpoints["GET /users/{username}/projectsV2/{project_number}/fields"]["parameters"];
+    response: Endpoints["GET /users/{username}/projectsV2/{project_number}/fields"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/projects/items#list-items-for-a-user-owned-project
+   */
+  "GET /users/{username}/projectsV2/{project_number}/items": {
+    parameters: Endpoints["GET /users/{username}/projectsV2/{project_number}/items"]["parameters"];
+    response: Endpoints["GET /users/{username}/projectsV2/{project_number}/items"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/activity/events#list-events-received-by-the-authenticated-user
    */
   "GET /users/{username}/received_events": {
@@ -2293,7 +2319,9 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /enterprises/{enterprise}/code-security/configurations",
   "GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories",
   "GET /enterprises/{enterprise}/dependabot/alerts",
-  "GET /enterprises/{enterprise}/secret-scanning/alerts",
+  "GET /enterprises/{enterprise}/teams",
+  "GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships",
+  "GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations",
   "GET /events",
   "GET /gists",
   "GET /gists/public",
@@ -2325,6 +2353,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/secrets/{secret_name}/repositories",
   "GET /orgs/{org}/actions/variables",
   "GET /orgs/{org}/actions/variables/{name}/repositories",
+  "GET /orgs/{org}/attestations/repositories",
   "GET /orgs/{org}/attestations/{subject_digest}",
   "GET /orgs/{org}/blocks",
   "GET /orgs/{org}/campaigns",
@@ -2376,6 +2405,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/rulesets/{ruleset_id}/history",
   "GET /orgs/{org}/secret-scanning/alerts",
   "GET /orgs/{org}/security-advisories",
+  "GET /orgs/{org}/settings/immutable-releases/repositories",
   "GET /orgs/{org}/settings/network-configurations",
   "GET /orgs/{org}/team/{team_slug}/copilot/metrics",
   "GET /orgs/{org}/teams",
@@ -2389,7 +2419,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/teams/{team_slug}/repos",
   "GET /orgs/{org}/teams/{team_slug}/teams",
   "GET /projects/{project_id}/collaborators",
-  "GET /projects/{project_id}/columns",
   "GET /repos/{owner}/{repo}/actions/artifacts",
   "GET /repos/{owner}/{repo}/actions/caches",
   "GET /repos/{owner}/{repo}/actions/organization-secrets",
@@ -2529,8 +2558,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /user/subscriptions",
   "GET /user/teams",
   "GET /users",
-  "GET /users/{user_id}/projectsV2/{project_number}/fields",
-  "GET /users/{user_id}/projectsV2/{project_number}/items",
   "GET /users/{username}/attestations/{subject_digest}",
   "GET /users/{username}/events",
   "GET /users/{username}/events/orgs/{org}",
@@ -2544,6 +2571,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/packages",
   "GET /users/{username}/projects",
   "GET /users/{username}/projectsV2",
+  "GET /users/{username}/projectsV2/{project_number}/fields",
+  "GET /users/{username}/projectsV2/{project_number}/items",
   "GET /users/{username}/received_events",
   "GET /users/{username}/received_events/public",
   "GET /users/{username}/repos",
