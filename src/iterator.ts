@@ -44,7 +44,7 @@ export function iterator(
             const parsedUrl = new URL(normalizedResponse.url);
             const params = parsedUrl.searchParams;
             const page = parseInt(params.get("page") || "1", 10);
-            /* v8 ignore next */
+            /* v8 ignore next -- @preserve */
             const per_page = parseInt(params.get("per_page") || "250", 10);
             if (page * per_page < normalizedResponse.data.total_commits) {
               params.set("page", String(page + 1));
