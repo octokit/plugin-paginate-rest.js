@@ -724,14 +724,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects-classic/projects#list-organization-projects
-   */
-  "GET /orgs/{org}/projects": {
-    parameters: Endpoints["GET /orgs/{org}/projects"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/projects"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/projects/projects#list-projects-for-organization
    */
   "GET /orgs/{org}/projectsV2": {
@@ -904,14 +896,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/teams/teams#list-team-projects
-   */
-  "GET /orgs/{org}/teams/{team_slug}/projects": {
-    parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/projects"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/teams/{team_slug}/projects"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/teams/teams#list-team-repositories
    */
   "GET /orgs/{org}/teams/{team_slug}/repos": {
@@ -925,14 +909,6 @@ export interface PaginatingEndpoints {
   "GET /orgs/{org}/teams/{team_slug}/teams": {
     parameters: Endpoints["GET /orgs/{org}/teams/{team_slug}/teams"]["parameters"];
     response: Endpoints["GET /orgs/{org}/teams/{team_slug}/teams"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/projects-classic/collaborators#list-project-collaborators
-   */
-  "GET /projects/{project_id}/collaborators": {
-    parameters: Endpoints["GET /projects/{project_id}/collaborators"]["parameters"];
-    response: Endpoints["GET /projects/{project_id}/collaborators"]["response"];
   };
 
   /**
@@ -1082,7 +1058,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/repos/repos#list-attestations
+   * @see https://docs.github.com/rest/repos/attestations#list-attestations
    */
   "GET /repos/{owner}/{repo}/attestations/{subject_digest}": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/attestations/{subject_digest}"]["parameters"];
@@ -1554,14 +1530,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects-classic/projects#list-repository-projects
-   */
-  "GET /repos/{owner}/{repo}/projects": {
-    parameters: Endpoints["GET /repos/{owner}/{repo}/projects"]["parameters"];
-    response: Endpoints["GET /repos/{owner}/{repo}/projects"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/pulls/pulls#list-pull-requests
    */
   "GET /repos/{owner}/{repo}/pulls": {
@@ -1871,14 +1839,6 @@ export interface PaginatingEndpoints {
   "GET /teams/{team_id}/members": {
     parameters: Endpoints["GET /teams/{team_id}/members"]["parameters"];
     response: Endpoints["GET /teams/{team_id}/members"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/teams/teams#list-team-projects-legacy
-   */
-  "GET /teams/{team_id}/projects": {
-    parameters: Endpoints["GET /teams/{team_id}/projects"]["parameters"];
-    response: Endpoints["GET /teams/{team_id}/projects"]["response"];
   };
 
   /**
@@ -2220,14 +2180,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/projects-classic/projects#list-user-projects
-   */
-  "GET /users/{username}/projects": {
-    parameters: Endpoints["GET /users/{username}/projects"]["parameters"];
-    response: Endpoints["GET /users/{username}/projects"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/projects/projects#list-projects-for-user
    */
   "GET /users/{username}/projectsV2": {
@@ -2393,7 +2345,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/personal-access-tokens",
   "GET /orgs/{org}/personal-access-tokens/{pat_id}/repositories",
   "GET /orgs/{org}/private-registries",
-  "GET /orgs/{org}/projects",
   "GET /orgs/{org}/projectsV2",
   "GET /orgs/{org}/projectsV2/{project_number}/fields",
   "GET /orgs/{org}/projectsV2/{project_number}/items",
@@ -2415,10 +2366,8 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/teams/{team_slug}/discussions/{discussion_number}/reactions",
   "GET /orgs/{org}/teams/{team_slug}/invitations",
   "GET /orgs/{org}/teams/{team_slug}/members",
-  "GET /orgs/{org}/teams/{team_slug}/projects",
   "GET /orgs/{org}/teams/{team_slug}/repos",
   "GET /orgs/{org}/teams/{team_slug}/teams",
-  "GET /projects/{project_id}/collaborators",
   "GET /repos/{owner}/{repo}/actions/artifacts",
   "GET /repos/{owner}/{repo}/actions/caches",
   "GET /repos/{owner}/{repo}/actions/organization-secrets",
@@ -2489,7 +2438,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/milestones/{milestone_number}/labels",
   "GET /repos/{owner}/{repo}/notifications",
   "GET /repos/{owner}/{repo}/pages/builds",
-  "GET /repos/{owner}/{repo}/projects",
   "GET /repos/{owner}/{repo}/pulls",
   "GET /repos/{owner}/{repo}/pulls/comments",
   "GET /repos/{owner}/{repo}/pulls/comments/{comment_id}/reactions",
@@ -2527,7 +2475,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /teams/{team_id}/discussions/{discussion_number}/reactions",
   "GET /teams/{team_id}/invitations",
   "GET /teams/{team_id}/members",
-  "GET /teams/{team_id}/projects",
   "GET /teams/{team_id}/repos",
   "GET /teams/{team_id}/teams",
   "GET /user/blocks",
@@ -2569,7 +2516,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /users/{username}/keys",
   "GET /users/{username}/orgs",
   "GET /users/{username}/packages",
-  "GET /users/{username}/projects",
   "GET /users/{username}/projectsV2",
   "GET /users/{username}/projectsV2/{project_number}/fields",
   "GET /users/{username}/projectsV2/{project_number}/items",
