@@ -46,35 +46,11 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/enterprise-server@3.9/rest/apps/apps#list-installations-for-the-authenticated-app
+   * @see https://docs.github.com/rest/apps/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
     response: Endpoints["GET /app/installations"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/classroom/classroom#closing-down---list-accepted-assignments-for-an-assignment
-   */
-  "GET /assignments/{assignment_id}/accepted_assignments": {
-    parameters: Endpoints["GET /assignments/{assignment_id}/accepted_assignments"]["parameters"];
-    response: Endpoints["GET /assignments/{assignment_id}/accepted_assignments"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/classroom/classroom#closing-down---list-classrooms
-   */
-  "GET /classrooms": {
-    parameters: Endpoints["GET /classrooms"]["parameters"];
-    response: Endpoints["GET /classrooms"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/classroom/classroom#closing-down---list-assignments-for-a-classroom
-   */
-  "GET /classrooms/{classroom_id}/assignments": {
-    parameters: Endpoints["GET /classrooms/{classroom_id}/assignments"]["parameters"];
-    response: Endpoints["GET /classrooms/{classroom_id}/assignments"]["response"];
   };
 
   /**
@@ -109,30 +85,6 @@ export interface PaginatingEndpoints {
     response: Endpoints["GET /enterprises/{enterprise}/dependabot/repository-access"]["response"] & {
       data: Endpoints["GET /enterprises/{enterprise}/dependabot/repository-access"]["response"]["data"]["accessible_repositories"];
     };
-  };
-
-  /**
-   * @see https://docs.github.com/rest/enterprise-teams/enterprise-teams#list-enterprise-teams
-   */
-  "GET /enterprises/{enterprise}/teams": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/teams"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/teams"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/enterprise-teams/enterprise-team-members#list-members-in-an-enterprise-team
-   */
-  "GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships"]["response"];
-  };
-
-  /**
-   * @see https://docs.github.com/rest/enterprise-teams/enterprise-team-organizations#get-organization-assignments
-   */
-  "GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations": {
-    parameters: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations"]["parameters"];
-    response: Endpoints["GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations"]["response"];
   };
 
   /**
@@ -320,6 +272,16 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["parameters"];
     response: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["response"] & {
       data: Endpoints["GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories"]["response"]["data"]["repositories"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/policies#list-organization-actions-policies
+   */
+  "GET /orgs/{org}/actions/policies": {
+    parameters: Endpoints["GET /orgs/{org}/actions/policies"]["parameters"];
+    response: Endpoints["GET /orgs/{org}/actions/policies"]["response"] & {
+      data: Endpoints["GET /orgs/{org}/actions/policies"]["response"]["data"]["policies"];
     };
   };
 
@@ -904,14 +866,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/secret-scanning/custom-patterns#list-organization-custom-patterns
-   */
-  "GET /orgs/{org}/secret-scanning/custom-patterns": {
-    parameters: Endpoints["GET /orgs/{org}/secret-scanning/custom-patterns"]["parameters"];
-    response: Endpoints["GET /orgs/{org}/secret-scanning/custom-patterns"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/security-advisories/repository-advisories#list-repository-security-advisories-for-an-organization
    */
   "GET /orgs/{org}/security-advisories": {
@@ -1026,6 +980,16 @@ export interface PaginatingEndpoints {
     parameters: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["response"] & {
       data: Endpoints["GET /repos/{owner}/{repo}/actions/organization-variables"]["response"]["data"]["variables"];
+    };
+  };
+
+  /**
+   * @see https://docs.github.com/rest/actions/policies#list-repository-actions-policies
+   */
+  "GET /repos/{owner}/{repo}/actions/policies": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/actions/policies"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/actions/policies"]["response"] & {
+      data: Endpoints["GET /repos/{owner}/{repo}/actions/policies"]["response"]["data"]["policies"];
     };
   };
 
@@ -1610,6 +1574,14 @@ export interface PaginatingEndpoints {
   };
 
   /**
+   * @see https://docs.github.com/rest/issues/issues#list-issues-related-to-an-issue
+   */
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/relates_to": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/relates_to"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/issues/{issue_number}/relates_to"]["response"];
+  };
+
+  /**
    * @see https://docs.github.com/rest/issues/sub-issues#list-sub-issues
    */
   "GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues": {
@@ -1818,14 +1790,6 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/rest/secret-scanning/custom-patterns#list-repository-custom-patterns
-   */
-  "GET /repos/{owner}/{repo}/secret-scanning/custom-patterns": {
-    parameters: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/custom-patterns"]["parameters"];
-    response: Endpoints["GET /repos/{owner}/{repo}/secret-scanning/custom-patterns"]["response"];
-  };
-
-  /**
    * @see https://docs.github.com/rest/security-advisories/repository-advisories#list-repository-security-advisories
    */
   "GET /repos/{owner}/{repo}/security-advisories": {
@@ -1847,6 +1811,14 @@ export interface PaginatingEndpoints {
   "GET /repos/{owner}/{repo}/stargazers": {
     parameters: Endpoints["GET /repos/{owner}/{repo}/stargazers"]["parameters"];
     response: Endpoints["GET /repos/{owner}/{repo}/stargazers"]["response"];
+  };
+
+  /**
+   * @see https://docs.github.com/rest/activity/starring#get-repository-star-history
+   */
+  "GET /repos/{owner}/{repo}/stargazers/history": {
+    parameters: Endpoints["GET /repos/{owner}/{repo}/stargazers/history"]["parameters"];
+    response: Endpoints["GET /repos/{owner}/{repo}/stargazers/history"]["response"];
   };
 
   /**
@@ -2421,16 +2393,10 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /app/hook/deliveries",
   "GET /app/installation-requests",
   "GET /app/installations",
-  "GET /assignments/{assignment_id}/accepted_assignments",
-  "GET /classrooms",
-  "GET /classrooms/{classroom_id}/assignments",
   "GET /enterprises/{enterprise}/code-security/configurations",
   "GET /enterprises/{enterprise}/code-security/configurations/{configuration_id}/repositories",
   "GET /enterprises/{enterprise}/dependabot/alerts",
   "GET /enterprises/{enterprise}/dependabot/repository-access",
-  "GET /enterprises/{enterprise}/teams",
-  "GET /enterprises/{enterprise}/teams/{enterprise-team}/memberships",
-  "GET /enterprises/{enterprise}/teams/{enterprise-team}/organizations",
   "GET /events",
   "GET /gists",
   "GET /gists/public",
@@ -2453,6 +2419,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/actions/hosted-runners",
   "GET /orgs/{org}/actions/permissions/repositories",
   "GET /orgs/{org}/actions/permissions/self-hosted-runners/repositories",
+  "GET /orgs/{org}/actions/policies",
   "GET /orgs/{org}/actions/runner-groups",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/hosted-runners",
   "GET /orgs/{org}/actions/runner-groups/{runner_group_id}/repositories",
@@ -2519,7 +2486,6 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /orgs/{org}/rulesets/rule-suites",
   "GET /orgs/{org}/rulesets/{ruleset_id}/history",
   "GET /orgs/{org}/secret-scanning/alerts",
-  "GET /orgs/{org}/secret-scanning/custom-patterns",
   "GET /orgs/{org}/security-advisories",
   "GET /orgs/{org}/settings/immutable-releases/repositories",
   "GET /orgs/{org}/settings/network-configurations",
@@ -2533,6 +2499,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/actions/concurrency_groups",
   "GET /repos/{owner}/{repo}/actions/organization-secrets",
   "GET /repos/{owner}/{repo}/actions/organization-variables",
+  "GET /repos/{owner}/{repo}/actions/policies",
   "GET /repos/{owner}/{repo}/actions/runners",
   "GET /repos/{owner}/{repo}/actions/runs",
   "GET /repos/{owner}/{repo}/actions/runs/{run_id}/artifacts",
@@ -2598,6 +2565,7 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/issues/{issue_number}/issue-field-values",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/labels",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/reactions",
+  "GET /repos/{owner}/{repo}/issues/{issue_number}/relates_to",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/sub_issues",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/suggestions",
   "GET /repos/{owner}/{repo}/issues/{issue_number}/timeline",
@@ -2624,10 +2592,10 @@ export const paginatingEndpoints: (keyof PaginatingEndpoints)[] = [
   "GET /repos/{owner}/{repo}/rulesets/{ruleset_id}/history",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts",
   "GET /repos/{owner}/{repo}/secret-scanning/alerts/{alert_number}/locations",
-  "GET /repos/{owner}/{repo}/secret-scanning/custom-patterns",
   "GET /repos/{owner}/{repo}/security-advisories",
   "GET /repos/{owner}/{repo}/stacks",
   "GET /repos/{owner}/{repo}/stargazers",
+  "GET /repos/{owner}/{repo}/stargazers/history",
   "GET /repos/{owner}/{repo}/subscribers",
   "GET /repos/{owner}/{repo}/tags",
   "GET /repos/{owner}/{repo}/teams",
