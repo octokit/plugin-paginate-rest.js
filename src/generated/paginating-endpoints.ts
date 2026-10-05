@@ -46,7 +46,7 @@ export interface PaginatingEndpoints {
   };
 
   /**
-   * @see https://docs.github.com/enterprise-server@3.9/rest/apps/apps#list-installations-for-the-authenticated-app
+   * @see https://docs.github.com/rest/apps/apps#list-installations-for-the-authenticated-app
    */
   "GET /app/installations": {
     parameters: Endpoints["GET /app/installations"]["parameters"];
